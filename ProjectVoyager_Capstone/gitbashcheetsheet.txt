@@ -1,0 +1,21 @@
+Git Bash Cheat Sheet
+
+How the github is interacted with is not neccessarily that important
+This is just a quick cheat sheet if anyone prefers to use git bash instead
+of a git manager on Visual Studio or Rider
+
+Assuming that you have git installed ( with bash ), to open a git terminal:
+	- Enter the folder that contains the subfolder ".git"
+	- Right-click within that root folder and click "Open Git Bash Here"
+	- A new Console window should now open, and state what branch you are currently operating in:
+		Username@ComputerName MINGW64 ~/FolderPath (branchName)
+		For example, on my laptop it states:
+		Brandon@DESKTOP-V05GQ53 MINGW64 ~/Desktop/capstone (brandon/playercontroller)
+		
+Lets say that you have just saved your unity scene / have made changes within unity
+
+git add .    |  adds all changed files to the current commit
+git commit -m "[INSERT MESSAGE]"   | Adds the commit message
+git push -u origin [BRANCHNAME]    | pushes the current commit to the specified branch
+
+note: if you are working in a branch, you must use the branch name you are working in when using git push -u origin []
