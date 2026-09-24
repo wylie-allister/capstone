@@ -178,6 +178,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         // Slides only applicable on ground state 
         if (motor.GroundingStatus.IsStableOnGround)
         {
+            //HandleGroundVelocity()
             // Reset last ground tracker for coyote time
             _timeSinceLastGround = 0.0f;
             _ungroundedDueToJump = false;
@@ -187,43 +188,8 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
             
             // Start sliding
-            {
-                var moving = groundedMovement.sqrMagnitude > 0.0f;
-                var crouching = _state.Stance is Stance.Crouch;
-                var wasStanding = _lastState.Stance is Stance.Stand;
-                var wasInAir = _lastState.Grounded;
-                
-                if (moving && crouching && (wasStanding || wasInAir))
-                {
-                    //Debug.DrawRay(transform.position, currentVelocity, Color.red, 5.0f);
-                    //Debug.DrawRay(transform.position, _lastState.Velocity, Color.green, 5.0f);
-                    _state.Stance = Stance.Slide;
-                    
-                    // if landing on stable ground, vel is projected onto a flat plane
-                    // KinematicCharacterMotor.HandleVelocityProjection()
-                    // 
-
-                    if (wasInAir)
-                    {
-                        currentVelocity =
-                            Vector3.ProjectOnPlane(_lastState.Velocity, motor.GroundingStatus.GroundNormal);
-                    }
-
-
-                    var effectiveSlideStartSpeed = slideStartSpeed;
-                    if (!_lastState.Grounded && !_requestedCrouchInAir)
-                    {
-                        effectiveSlideStartSpeed = 0.0f;
-                        _requestedCrouchInAir = false;
-                    }
-                    
-                    var slideSpeed = Mathf.Max(slideStartSpeed, currentVelocity.magnitude);
-                    currentVelocity = motor.GetDirectionTangentToSurface(
-                        direction: currentVelocity,
-                        surfaceNormal: motor.GroundingStatus.GroundNormal) * slideSpeed; 
-
-                }
-            }
+            HandleSlideVelocity(ref currentVelocity, groundedMovement, deltaTime);
+            
             // Move
             
             if (_state.Stance is Stance.Stand or Stance.Crouch)
@@ -243,7 +209,6 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                 
                 currentVelocity = moveVelocity;
             }
-            // Sliding
             else
             {
                 // Friction
@@ -376,6 +341,45 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                 // deny jump - no jump for you
                 _requestedJump = canJumpLater;
             }
+
+        }
+    }
+
+    public void HandleSlideVelocity(ref Vector3 currentVel, Vector3 movement, float deltaTime)
+    {
+        var moving = movement.sqrMagnitude > 0.0f;
+        var crouching = _state.Stance is Stance.Crouch;
+        var wasStanding = _lastState.Stance is Stance.Stand;
+        var wasInAir = _lastState.Grounded;
+                
+        if (moving && crouching && (wasStanding || wasInAir))
+        {
+            //Debug.DrawRay(transform.position, currentVelocity, Color.red, 5.0f);
+            //Debug.DrawRay(transform.position, _lastState.Velocity, Color.green, 5.0f);
+            _state.Stance = Stance.Slide;
+                    
+            // if landing on stable ground, vel is projected onto a flat plane
+            // KinematicCharacterMotor.HandleVelocityProjection()
+            // 
+
+            if (wasInAir)
+            {
+                currentVel =
+                    Vector3.ProjectOnPlane(_lastState.Velocity, motor.GroundingStatus.GroundNormal);
+            }
+
+
+            var effectiveSlideStartSpeed = slideStartSpeed;
+            if (!_lastState.Grounded && !_requestedCrouchInAir)
+            {
+                effectiveSlideStartSpeed = 0.0f;
+                _requestedCrouchInAir = false;
+            }
+                    
+            var slideSpeed = Mathf.Max(slideStartSpeed, currentVel.magnitude);
+            currentVel = motor.GetDirectionTangentToSurface(
+                direction: currentVel,
+                surfaceNormal: motor.GroundingStatus.GroundNormal) * slideSpeed; 
 
         }
     }
