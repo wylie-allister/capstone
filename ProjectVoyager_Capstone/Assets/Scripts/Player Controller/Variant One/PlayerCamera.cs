@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public struct CameraInput
 {
@@ -10,7 +11,11 @@ public class PlayerCamera : MonoBehaviour
     [SerializeField] private float sensitivity = 0.1f;
     [SerializeField] private float maxY = 90.0f;
     [SerializeField] private float minY = -90.0f;
+    [SerializeField] private float controllerSensitivityScalar = 10.0f;
+
     private Vector3 _eulerAngles;
+    public bool isGamepadActive = false;
+    private float _currentSensitivity;
     
     public void Initialize(Transform target)
     {
@@ -18,11 +23,17 @@ public class PlayerCamera : MonoBehaviour
         transform.rotation = target.rotation;
 
         transform.eulerAngles = _eulerAngles = target.eulerAngles;
+
+        _currentSensitivity = sensitivity;
     }
 
     public void UpdateRotation(CameraInput input)
     {
-        _eulerAngles += new Vector3(-input.Look.y, input.Look.x) * sensitivity;
+
+        // Update current sensitivity appropriately 
+        _currentSensitivity = isGamepadActive ? sensitivity * controllerSensitivityScalar : sensitivity;
+        
+        _eulerAngles += new Vector3(-input.Look.y, input.Look.x) * _currentSensitivity;
 
         // I think this is an alright way of doing this lmao
         // eulerangles scare me

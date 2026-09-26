@@ -25,6 +25,9 @@ public class Player : MonoBehaviour
         
         cameraSpring.Initialize();
         cameraLean.Initialize();
+
+        // Toggle gameplayactive var on camera to adjust joystick sens for camera
+        playerCamera.isGamepadActive = Gamepad.current != null;
     }
 
     // Destroy input actions on destroy call
@@ -37,9 +40,9 @@ public class Player : MonoBehaviour
     void Update()
     {
         var input = _inputActions.Gameplay;
-        var deltaTime = Time.deltaTime;
+        float deltaTime = Time.deltaTime;
 
-        var cameraInput = new CameraInput { Look = input.Look.ReadValue<Vector2>() };
+        CameraInput cameraInput = new CameraInput { Look = input.Look.ReadValue<Vector2>() };
         playerCamera.UpdateRotation(cameraInput);
 
         var characterInput = new CharacterInput
@@ -72,9 +75,9 @@ public class Player : MonoBehaviour
     void LateUpdate()
     {
         // Get dt, camera target and current player state
-        var deltaTime = Time.deltaTime;
-        var cameraTarget = playerCharacter.GetCameraTarget();
-        var state = playerCharacter.GetState();
+        float deltaTime = Time.deltaTime;
+        Transform cameraTarget = playerCharacter.GetCameraTarget();
+        CharacterState state = playerCharacter.GetState();
         
         // Update method calls with given params
         playerCamera.UpdatePosition(cameraTarget);
