@@ -32,7 +32,7 @@ public struct CharacterInput
     public CrouchInput Crouch;
 }
 
-// Player character, Inherits from ICharacterController
+// Player character, Inherits from ICharacterController, requires overloaded methods to be created
 public class PlayerCharacter : MonoBehaviour, ICharacterController
 {
     [SerializeField] private KinematicCharacterMotor motor;
@@ -191,51 +191,24 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             // Start sliding
             HandleSlideVelocity(ref currentVelocity, groundedMovement, deltaTime);
             
-            // Move
-            
+            // Standing / Crouching movement
             if (_state.Stance is Stance.Stand or Stance.Crouch)
             {
-
-                float speed = _state.Stance is Stance.Stand ? walkSpeed : crouchSpeed;
-
-                float response = _state.Stance is Stance.Stand ? walkResponse : crouchResponse;
-            
-                // move along that dir
-                Vector3 targetVelocity = _requestedMovement * speed;
-                Vector3 moveVelocity = Vector3.Lerp(
-                    a: currentVelocity,
-                    b: targetVelocity,
-                    t: 1f - Mathf.Exp(-response * deltaTime)); 
-                _state.Acceleration = moveVelocity - currentVelocity;
-                
-                currentVelocity = moveVelocity;
+                HandleGroundMovement(ref currentVelocity, deltaTime);
             }
+            // Sliding movement
             else
             {
                 // Friction
                 currentVelocity -= currentVelocity * (slideFriction * deltaTime);
                 
                 // Slope 
-                {
-                    Vector3 force = Vector3.ProjectOnPlane(-motor.CharacterUp, motor.GroundingStatus.GroundNormal) *
-                                slideGravity;
-
-                    currentVelocity -= force * deltaTime;
-                }
+                HandleSlideSlope(ref currentVelocity, deltaTime);
+                
                 // Steering
-                {
-                    float currentSpeed = currentVelocity.magnitude;
-                    Vector3 targetVelocity = groundedMovement * currentSpeed;
-                    Vector3 steerVelocity = currentVelocity;
-                    Vector3 steerForce = (targetVelocity - steerVelocity) * slideSteerAcceleration * deltaTime;
-                    // add steer force and clamp
-                    steerVelocity += steerForce;
-                    steerVelocity = Vector3.ClampMagnitude(steerVelocity, currentSpeed);
-                    
-                    _state.Acceleration = (steerVelocity - currentVelocity) / deltaTime;
-                    currentVelocity = steerVelocity;
-                }
-                // stop
+                HandleSlideSteering(ref currentVelocity, groundedMovement, deltaTime);
+                
+                // Stop - This is what is responsible for the slide boosting bug | possible feature :D 
                 if (currentVelocity.magnitude < slideEndSpeed)
                 {
                     _state.Stance = Stance.Crouch;
@@ -345,6 +318,45 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             }
 
         }
+    }
+
+    public void HandleGroundMovement(ref Vector3 currentVel, float deltaTime)
+    {
+        float speed = _state.Stance is Stance.Stand ? walkSpeed : crouchSpeed;
+
+        float response = _state.Stance is Stance.Stand ? walkResponse : crouchResponse;
+            
+        // move along that dir
+        Vector3 targetVelocity = _requestedMovement * speed;
+        Vector3 moveVelocity = Vector3.Lerp(
+            a: currentVel,
+            b: targetVelocity,
+            t: 1f - Mathf.Exp(-response * deltaTime)); 
+        _state.Acceleration = moveVelocity - currentVel;
+                
+        currentVel = moveVelocity;
+    }
+
+    public void HandleSlideSteering(ref Vector3 currentVel, Vector3 movement, float deltaTime)
+    {
+        float currentSpeed = currentVel.magnitude;
+        Vector3 targetVelocity = movement * currentSpeed;
+        Vector3 steerVelocity = currentVel;
+        Vector3 steerForce = (targetVelocity - steerVelocity) * slideSteerAcceleration * deltaTime;
+        // add steer force and clamp
+        steerVelocity += steerForce;
+        steerVelocity = Vector3.ClampMagnitude(steerVelocity, currentSpeed);
+                    
+        _state.Acceleration = (steerVelocity - currentVel) / deltaTime;
+        currentVel = steerVelocity;
+    }
+    
+    public void HandleSlideSlope(ref Vector3 currentVel, float deltaTime)
+    {
+        Vector3 force = Vector3.ProjectOnPlane(-motor.CharacterUp, motor.GroundingStatus.GroundNormal) *
+                        slideGravity;
+
+        currentVel -= force * deltaTime;
     }
 
     public void HandleSlideVelocity(ref Vector3 currentVel, Vector3 movement, float deltaTime)

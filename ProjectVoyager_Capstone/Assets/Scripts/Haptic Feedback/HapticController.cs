@@ -10,6 +10,7 @@ public class HapticController : MonoBehaviour
     // SINGLETON AHAHA
     void Awake()
     {
+        // Singleton instance pattern
         if (instance != null && instance != this)
         {
             Destroy(this.gameObject);
@@ -22,6 +23,7 @@ public class HapticController : MonoBehaviour
     
     void Start()
     {
+        // If the gamepad exists, set _pad accordingly or log error
         if (Gamepad.current != null)
         {
             _pad = Gamepad.current;
@@ -32,6 +34,9 @@ public class HapticController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Provides a quick haptic rumble | lF: 0.3f | hF: 0.15f | dur: 0.1f
+    /// </summary>
     public void QuickRumble()
     {
         if (_pad == null)
@@ -40,11 +45,20 @@ public class HapticController : MonoBehaviour
        StartRumble(0.3f, 0.15f, 0.1f);
     }
     
+    /// <summary>
+    /// Provides a long haptic rumble | lF: 0.3f | hF: 0.15f | dur: 0.67f
+    /// </summary>
     public void LongRumble()
     {
         StartRumble(0.3f, 0.15f, 0.67f);
     }
 
+    /// <summary>
+    /// Starts a haptic vibration with the given frequency params. Invokes StopRumble with given duration
+    /// </summary>
+    /// <param name="lowFreq"></param>
+    /// <param name="highFreq"></param>
+    /// <param name="duration"></param>
     private void StartRumble(float lowFreq, float highFreq, float duration)
     {
         if (_pad != null)
@@ -56,6 +70,9 @@ public class HapticController : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Resets the gamepads motor speeds to 0. Effectively stopping any haptic vibration
+    /// </summary>
     private void StopRumble()
     {
         if (_pad != null)

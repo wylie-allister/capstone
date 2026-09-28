@@ -1,4 +1,3 @@
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class CameraSpring : MonoBehaviour
@@ -12,6 +11,7 @@ public class CameraSpring : MonoBehaviour
     
     public void Initialize()
     {
+        // Set position to transform position, initialize with 0 spring velocity
         _springPosition = transform.position;
         _springVelocity = Vector3.zero;
     }
@@ -28,6 +28,7 @@ public class CameraSpring : MonoBehaviour
         transform.localPosition = localSpringPos * linearDisplacement;
     }
 
+    // This that floppy arrow we see in editor :D
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -40,14 +41,14 @@ public class CameraSpring : MonoBehaviour
     private static void Spring(ref Vector3 current, ref Vector3 velocity, Vector3 target, float halfLife,
         float frequency, float timeStep)
     {
-        var dampingRatio = -Mathf.Log(0.5f) / (frequency * halfLife);
-        var f = 1.0f + 2.0f * timeStep * dampingRatio * frequency;
-        var oo = frequency * frequency;
-        var hoo = timeStep * oo;
-        var hhoo = timeStep * hoo;
-        var detInv = 1.0f / (f + hhoo);
-        var detX = f * current + timeStep * velocity + hhoo * target;
-        var detV = velocity + hoo * (target - current);
+        float dampingRatio = -Mathf.Log(0.5f) / (frequency * halfLife);
+        float f = 1.0f + 2.0f * timeStep * dampingRatio * frequency;
+        float oo = frequency * frequency;
+        float hoo = timeStep * oo;
+        float hhoo = timeStep * hoo;
+        float detInv = 1.0f / (f + hhoo);
+        Vector3 detX = f * current + timeStep * velocity + hhoo * target;
+        Vector3 detV = velocity + hoo * (target - current);
         current = detX * detInv;
         velocity = detV * detInv;
     }
