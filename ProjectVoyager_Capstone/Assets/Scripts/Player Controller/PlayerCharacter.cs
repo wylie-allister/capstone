@@ -35,12 +35,13 @@ public struct CharacterInput
 // Player character, Inherits from ICharacterController, requires overloaded methods to be created
 public class PlayerCharacter : MonoBehaviour, ICharacterController
 {
+
     [SerializeField] private KinematicCharacterMotor motor;
     [SerializeField] private Transform root;
     [SerializeField] private Transform cameraTarget;
-    
+
     [Header("Movement Settings")]
-    [Space] [SerializeField] private float walkSpeed = 20.0f;
+    [Space][SerializeField] private float walkSpeed = 20.0f;
     [SerializeField] private float crouchSpeed = 7.5f;
     [SerializeField] private float walkResponse = 25.0f;
     [SerializeField] private float crouchResponse = 20.0f;
@@ -103,7 +104,6 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         // Set character controller to this instance
         motor.CharacterController = this;
     }
-
     public void UpdateInput(CharacterInput input)
     {
         // Get requested input

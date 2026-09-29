@@ -5,7 +5,7 @@ using UnityEngine;
 [Serializable]
 public class SettingsState
 {
-    public float playerSpeed;
+    public float cameraSensitivity;
 
 
 

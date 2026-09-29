@@ -8,7 +8,8 @@ public struct CameraInput
 
 public class PlayerCamera : MonoBehaviour
 {
-    [SerializeField] private float sensitivity = 0.1f;
+    [SerializeField] CurrentSettings settings; 
+    [SerializeField] private float sensitivity;
     [SerializeField] private float maxY = 90.0f;
     [SerializeField] private float minY = -90.0f;
     [SerializeField] private float controllerSensitivityScalar = 10.0f;
@@ -27,12 +28,16 @@ public class PlayerCamera : MonoBehaviour
         // Set transform + _eulerAngles var to given camera target euler angles
         transform.eulerAngles = _eulerAngles = target.eulerAngles;
 
+        sensitivity = settings.sett.cameraSensitivity;
         // Set the current sensitivity to 
         _currentSensitivity = sensitivity;
     }
 
     public void UpdateRotation(CameraInput input)
     {
+        //added these here as well to update sensitivity if changed in settings :)
+        sensitivity = settings.sett.cameraSensitivity;
+        _currentSensitivity = sensitivity;
 
         // If gamepad is being used, scale the sensitivity accordingly
         // This should probably be changed as I dont believe a direct increase in sensitivity is how this should

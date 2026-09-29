@@ -181,6 +181,35 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "UI",
+            "id": "455d4112-105b-4bc3-8ac4-b55b8c62cba4",
+            "actions": [
+                {
+                    "name": "Save JSON",
+                    "type": "Button",
+                    "id": "51214917-1bcc-431a-ab84-4a40164b3b84",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "025d3a71-3da4-4873-a70a-a73cff5c53d4",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Save JSON",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
