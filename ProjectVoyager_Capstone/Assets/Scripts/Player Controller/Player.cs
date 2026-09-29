@@ -14,11 +14,14 @@ public class Player : MonoBehaviour
 
     // Input actions
     private PlayerInputActions _inputActions;
+    public CurrentSettings cs;
     
     void Start()
     {
         // Lock cursor
-        Cursor.lockState = CursorLockMode.Locked;
+
+            Cursor.lockState = CursorLockMode.Locked;
+        
         
         // Create and enable input actions
         _inputActions = new PlayerInputActions();
@@ -52,9 +55,17 @@ public class Player : MonoBehaviour
         var input = _inputActions.Gameplay;
         float deltaTime = Time.deltaTime;
 
+        if (cs.isOpen == false)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
 
-        
-        CameraInput cameraInput = new CameraInput { Look = input.Look.ReadValue<Vector2>() };
+        }
+
+            CameraInput cameraInput = new CameraInput { Look = input.Look.ReadValue<Vector2>() };
         playerCamera.UpdateRotation(cameraInput);
 
         CharacterInput characterInput = new CharacterInput
