@@ -21,8 +21,8 @@ public class CameraSpring : MonoBehaviour
         transform.localPosition = Vector3.zero;
         Spring(ref _springPosition, ref _springVelocity, transform.position, halfLife, frequency, deltaTime);
         
-        var localSpringPos = _springPosition - transform.position;
-        var springHeight = Vector3.Dot(localSpringPos, up);
+        Vector3 localSpringPos = _springPosition - transform.position;
+        float springHeight = Vector3.Dot(localSpringPos, up);
         
         transform.localEulerAngles = new Vector3(-springHeight * angularDisplacement, 0.0f, 0.0f);
         transform.localPosition = localSpringPos * linearDisplacement;

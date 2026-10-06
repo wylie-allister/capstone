@@ -20,20 +20,20 @@ public class CameraLean : MonoBehaviour
 
     public void UpdateLean(float deltaTime, bool sliding, Vector3 acceleration, Vector3 up)
     {
-        var planarAcceleration = Vector3.ProjectOnPlane(acceleration, up);
-        var damping = planarAcceleration.magnitude > _dampedAcceleration.magnitude ? attackDamping : decayDamping;
+        Vector3 planarAcceleration = Vector3.ProjectOnPlane(acceleration, up);
+        float damping = planarAcceleration.magnitude > _dampedAcceleration.magnitude ? attackDamping : decayDamping;
 
         _dampedAcceleration = Vector3.SmoothDamp(_dampedAcceleration, planarAcceleration, ref _dampedAccelerationVel,
             damping, float.PositiveInfinity, deltaTime);
         
         // get rot axis from accel-vector
-        var leanAxis = Vector3.Cross(_dampedAcceleration.normalized, up).normalized;
+        Vector3 leanAxis = Vector3.Cross(_dampedAcceleration.normalized, up).normalized;
         
         // reset rot to parent
         transform.localRotation = Quaternion.identity;
         
         // Rotate around lean axis
-        var effectiveStrength = sliding ? slideStrength : walkStrength;
+        float effectiveStrength = sliding ? slideStrength : walkStrength;
         _smoothStrength = Mathf.Lerp(_smoothStrength, effectiveStrength, 1.0f - Mathf.Exp(-strengthResponse * deltaTime));
         transform.rotation = Quaternion.AngleAxis(_dampedAcceleration.magnitude * _smoothStrength, leanAxis) * transform.rotation;
     }

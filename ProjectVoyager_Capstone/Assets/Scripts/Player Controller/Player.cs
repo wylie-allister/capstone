@@ -61,6 +61,7 @@ public class Player : MonoBehaviour
         {
             Rotation     = playerCamera.transform.rotation,
             Move         = input.Move.ReadValue<Vector2>(),
+            Dash         = input.Dash.WasPressedThisFrame(),
             Jump         = input.Jump.WasPressedThisFrame(),
             JumpSustain  = input.Jump.IsPressed(),
             Crouch        = input.Crouch.WasPressedThisFrame()
@@ -80,6 +81,9 @@ public class Player : MonoBehaviour
             {
                 Teleport(hit.point);
             }
+        }
+        if (Keyboard.current.yKey.wasPressedThisFrame)
+        {
         }
         #endif
     }

@@ -42,7 +42,7 @@ public class HapticController : MonoBehaviour
         if (_pad == null)
             return;
         
-       StartRumble(0.3f, 0.15f, 0.1f);
+       StartRumble(0.6f, 0.45f, 0.1f);
     }
     
     /// <summary>
