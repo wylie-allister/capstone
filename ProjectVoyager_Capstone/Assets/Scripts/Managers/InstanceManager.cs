@@ -6,6 +6,7 @@ using UnityEngine;
 public class InstanceManager : MonoBehaviour
 {
     public HapticController hapticController;
+    public LevelManager levelManager;
     public PlayerCharacter playerCharacter;
     
     // Initializers should be placed within this method
