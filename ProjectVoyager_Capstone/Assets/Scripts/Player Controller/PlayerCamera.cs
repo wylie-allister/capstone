@@ -29,6 +29,10 @@ public class PlayerCamera : MonoBehaviour
 
         // Set the current sensitivity to 
         _currentSensitivity = sensitivity;
+        
+
+        RenderSettings.skybox.SetFloat("_Rotation", 180 );
+        
     }
 
     public void UpdateRotation(CameraInput input)
