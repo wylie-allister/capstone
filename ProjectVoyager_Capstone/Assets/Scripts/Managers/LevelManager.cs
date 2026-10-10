@@ -13,10 +13,12 @@ public class LevelManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        /*
         if (playerSpawn == null || endTrigger == null) //|| gameScenes == null)
         {
             Debug.LogAssertion("LevelManager: Missing Reference");
         }
+        */
     }
 
     // Update is called once per frame

@@ -3,18 +3,25 @@ using UnityEngine;
 
 public class DebugManager : MonoBehaviour
 {
-    private InstanceManager _InstanceManager;
     [SerializeField] private TextMeshProUGUI playerSpeedText;
     public float playerSpeed;
     
     
     void Start()
     {
-        _InstanceManager = InstanceManager.Instance;
+        //_playerCharacter = InstanceManager.Instance.playerCharacter;
+        //InstanceManager.Instance.InitializeCheck();
     }
 
     void Update()
+    { 
+        UpdateText();
+    }
+
+    void UpdateText()
     {
-        
+        // Instance manager having STRUGGLES checking this?????? -bc fix later
+        //playerSpeed = InstanceManager.Instance.playerCharacter.PlayerVelocity.magnitude;
+        //playerSpeedText.text = $"Player Speed: {playerSpeed}";
     }
 }

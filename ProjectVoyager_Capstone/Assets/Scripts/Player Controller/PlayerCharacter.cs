@@ -78,7 +78,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     [SerializeField] private float dashDelay = 2.0f;
     
     [Header("Exposed Debug Vars")] 
-    public Vector3 PlayerAcceleration;
+    public Vector3 PlayerVelocity;
 
     private CharacterState _state;
     private CharacterState _tempState;
@@ -321,7 +321,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
         HandleJumpRequest(ref currentVelocity, deltaTime);
 
-        PlayerAcceleration = _state.Acceleration;
+        PlayerVelocity = currentVelocity;
 
     }
     

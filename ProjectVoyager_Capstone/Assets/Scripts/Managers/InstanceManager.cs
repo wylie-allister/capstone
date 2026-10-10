@@ -29,4 +29,14 @@ public class InstanceManager : MonoBehaviour
             return _Instance;
         }
     }
+
+    void Start()
+    {
+        if (playerCharacter != null)
+        {
+            Debug.Log("player character exists!");
+        }
+       // Debug.Log("Instance Manager instance exists!");
+    }
+
 }
