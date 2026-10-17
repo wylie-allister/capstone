@@ -109,6 +109,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         _state.Stance = Stance.Stand;
         _lastState = _state;
         
+        // Create new overlap collider results for uncrouch
         _uncrouchOverlapResults = new Collider[8];
         
         // Set character controller to this instance
@@ -136,7 +137,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         {
             _timeSinceJumpRequest = 0.0f;
         }
-
+        // Dash timer reset
         if (_requestedDash && !wasRequestingDash)
         {
             _timeSinceDashRequest = 0.0f;
@@ -170,9 +171,11 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     // Meshes will scale as well assuming that the mesh is rooted on the character root
     public void UpdateBody(float deltaTime)
     {
+        // Get current height
         float currentHeight = motor.Capsule.height;
         float normalizedHeight = currentHeight / standHeight;
         
+        // Camera height relative to current height
         float cameraTargetHeight = currentHeight * (_state.Stance is Stance.Stand ? standCameraTargetHeight : crouchCameraTargetHeight);
 
         Vector3 rootTargetScale = new Vector3(1.0f, normalizedHeight, 1.0f);
@@ -190,13 +193,14 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     // Takes the current rotation, checks for the forward vector on a flat plane
     public void UpdateRotation(ref Quaternion currentRotation, float deltaTime)
     {
+        // forward vector (relative to a flat plane, no vertical component)
         Vector3 forward = Vector3.ProjectOnPlane(_requestedRotation * Vector3.forward, motor.CharacterUp);
         
         if (forward != Vector3.zero)
             currentRotation = Quaternion.LookRotation(forward, motor.CharacterUp);
     }
 
-    // 
+    
     public void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime)
     {
         _state.Acceleration = Vector3.zero;
@@ -204,47 +208,27 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         // If on stable ground
         if (motor.GroundingStatus.IsStableOnGround)
         {
-            //HandleGroundVelocity()
-            // Reset last ground tracker for coyote time
-            _timeSinceLastGround = 0.0f;
-            _ungroundedDueToJump = false;
-            // Snap requested movement dir to angle of surface char is on
-            Vector3 groundedMovement = motor.GetDirectionTangentToSurface(direction: _requestedMovement,
-                surfaceNormal: motor.GroundingStatus.GroundNormal) * _requestedMovement.magnitude;
+            HandleStableGroundVelocity(ref currentVelocity, deltaTime);
 
-            
-            // Handle slide velocity if we are request slide while on ground
-            HandleSlideVelocity(ref currentVelocity, groundedMovement, deltaTime);
-            
-            // Standing / Crouching movement
-            if (_state.Stance is Stance.Stand or Stance.Crouch)
-                HandleGroundMovement(ref currentVelocity, deltaTime);
-            
-            // Else handle slide slope and steering, as well as swapping back to crouch
-            else
-            {
-                // Friction
-                currentVelocity -= currentVelocity * (slideFriction * deltaTime);
-                
-                // Slope 
-                HandleSlideSlope(ref currentVelocity, deltaTime);
-                
-                // Steering
-                HandleSlideSteering(ref currentVelocity, groundedMovement, deltaTime);
-                
-                // Stop - This is what is responsible for the slide boosting bug | possible feature :D 
-                if (currentVelocity.magnitude < slideEndSpeed)
-                {
-                    _state.Stance = Stance.Crouch;
-                }
-            }
-            
         }
         // in air
         else
         {
-            
-            
+            HandleAirVelocity(ref currentVelocity, deltaTime);
+
+        }
+
+        HandleJumpRequest(ref currentVelocity, deltaTime);
+        
+        HandleDashRequest(ref currentVelocity, deltaTime);
+        
+        PlayerVelocity = currentVelocity;
+
+    }
+
+    private void HandleAirVelocity(ref Vector3 currentVelocity, float deltaTime)
+    {
+                    
             // increment coyote timer
             _timeSinceLastGround += deltaTime;
             
@@ -317,18 +301,49 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             }
             
             currentVelocity += motor.CharacterUp * effectiveGravity * deltaTime;
-        }
-
-        HandleJumpRequest(ref currentVelocity, deltaTime);
-        
-        Dash(ref currentVelocity, deltaTime);
-        
-        PlayerVelocity = currentVelocity;
-
     }
-    
+
+    private void HandleStableGroundVelocity(ref Vector3 currentVelocity, float deltaTime)
+    {
+        //HandleGroundVelocity()
+        // Reset last ground tracker for coyote time
+        _timeSinceLastGround = 0.0f;
+        _ungroundedDueToJump = false;
+        // Snap requested movement dir to angle of surface char is on
+        Vector3 groundedMovement = motor.GetDirectionTangentToSurface(direction: _requestedMovement,
+            surfaceNormal: motor.GroundingStatus.GroundNormal) * _requestedMovement.magnitude;
+
+            
+        // Handle slide velocity if we are request slide while on ground
+        HandleSlideVelocity(ref currentVelocity, groundedMovement, deltaTime);
+            
+        // Standing / Crouching movement
+        if (_state.Stance is Stance.Stand or Stance.Crouch)
+            HandleGroundMovement(ref currentVelocity, deltaTime);
+            
+        // Else handle slide slope and steering, as well as swapping back to crouch
+        else
+        {
+            // Friction
+            currentVelocity -= currentVelocity * (slideFriction * deltaTime);
+                
+            // Slope 
+            HandleSlideSlope(ref currentVelocity, deltaTime);
+                
+            // Steering
+            HandleSlideSteering(ref currentVelocity, groundedMovement, deltaTime);
+                
+            // Stop - This is what is responsible for the slide boosting bug | possible feature :D 
+            if (currentVelocity.magnitude < slideEndSpeed)
+            {
+                _state.Stance = Stance.Crouch;
+            }
+        }
+    }
+
     // TODO: Update this function to feel better :D -brandon
-    public void Dash(ref Vector3 currentVelocity, float deltaTime)
+    // Okay, swapping when this is called has cleared up a decent bit of the clunkyness :D
+    public void HandleDashRequest(ref Vector3 currentVelocity, float deltaTime)
     {
         if (_requestedDash && _timeSinceDashRequest > dashDelay)
         {
