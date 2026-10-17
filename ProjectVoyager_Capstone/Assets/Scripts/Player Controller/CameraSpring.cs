@@ -37,18 +37,20 @@ public class CameraSpring : MonoBehaviour
     }
 
     // called every tick, use spring physics to affect velocity
-    // freq = resonation
+    // calculates the desired velocity and position of a spring end
+    // solves spring motion equations implicitly instead of explicitly
+    
     private static void Spring(ref Vector3 current, ref Vector3 velocity, Vector3 target, float halfLife,
         float frequency, float timeStep)
     {
         float dampingRatio = -Mathf.Log(0.5f) / (frequency * halfLife);
         float f = 1.0f + 2.0f * timeStep * dampingRatio * frequency;
-        float oo = frequency * frequency;
-        float hoo = timeStep * oo;
-        float hhoo = timeStep * hoo;
-        float detInv = 1.0f / (f + hhoo);
-        Vector3 detX = f * current + timeStep * velocity + hhoo * target;
-        Vector3 detV = velocity + hoo * (target - current);
+        float ww = frequency * frequency;
+        float hww = timeStep * ww;
+        float hhww = timeStep * hww;
+        float detInv = 1.0f / (f + hhww);
+        Vector3 detX = f * current + timeStep * velocity + hhww * target;
+        Vector3 detV = velocity + hww * (target - current);
         current = detX * detInv;
         velocity = detV * detInv;
     }

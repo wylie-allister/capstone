@@ -36,6 +36,7 @@ public struct CharacterInput
 // Player character, Inherits from ICharacterController, requires overloaded methods to be created
 public class PlayerCharacter : MonoBehaviour, ICharacterController
 {
+
     [SerializeField] private KinematicCharacterMotor motor;
     [SerializeField] private Transform root;
     [SerializeField] private Transform cameraTarget;
@@ -94,7 +95,6 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     //Dash
     private bool _requestedDash;
     
-
     private float _timeSinceLastGround;
     private float _timeSinceJumpRequest;
     private float _timeSinceDashRequest;
@@ -200,7 +200,8 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     public void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime)
     {
         _state.Acceleration = Vector3.zero;
-        // Slides only applicable on ground state 
+        
+        // If on stable ground
         if (motor.GroundingStatus.IsStableOnGround)
         {
             //HandleGroundVelocity()
@@ -212,15 +213,14 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                 surfaceNormal: motor.GroundingStatus.GroundNormal) * _requestedMovement.magnitude;
 
             
-            // Start sliding
+            // Handle slide velocity if we are request slide while on ground
             HandleSlideVelocity(ref currentVelocity, groundedMovement, deltaTime);
             
             // Standing / Crouching movement
             if (_state.Stance is Stance.Stand or Stance.Crouch)
-            {
                 HandleGroundMovement(ref currentVelocity, deltaTime);
-            }
-            // Sliding movement
+            
+            // Else handle slide slope and steering, as well as swapping back to crouch
             else
             {
                 // Friction
@@ -239,12 +239,11 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                 }
             }
             
-            Dash(ref currentVelocity, deltaTime);
         }
         // in air
         else
         {
-            Dash(ref currentVelocity, deltaTime);
+            
             
             // increment coyote timer
             _timeSinceLastGround += deltaTime;
@@ -252,7 +251,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             // move
             if (_requestedMovement.sqrMagnitude > 0.0f)
             {
-                // requested movement projected onto movement plane
+                // requested movement projected onto flat plane
                 Vector3 planarMovement = Vector3.ProjectOnPlane(
                     vector: _requestedMovement,
                     planeNormal: motor.CharacterUp) * _requestedMovement.magnitude;
@@ -265,6 +264,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                 // calc move force
                 Vector3 movementForce = planarMovement * airAcceleration * deltaTime;
 
+                // If moving slower than air speed
                 if (currentPlanarVelocity.magnitude < airSpeed)
                 {
                     // add to current pV for target vel
@@ -320,7 +320,9 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         }
 
         HandleJumpRequest(ref currentVelocity, deltaTime);
-
+        
+        Dash(ref currentVelocity, deltaTime);
+        
         PlayerVelocity = currentVelocity;
 
     }
@@ -460,8 +462,6 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
         }
     }
-
-  
     
     public void BeforeCharacterUpdate(float deltaTime)
     {
@@ -508,6 +508,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                 _state.Stance = Stance.Stand;
             }
         }
+        
 
         // Update state to reflect relevant motor properties
         _state.Grounded = motor.GroundingStatus.IsStableOnGround;

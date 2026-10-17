@@ -74,6 +74,19 @@ public class Player : MonoBehaviour
         // Teleport script for in editor purposes
         // tap T to teleport to wherever you are looking, assuming there is a ray collision (e.g. sky nono work)
         #if UNITY_EDITOR
+        /*
+        var moveAction = _inputActions.Gameplay.Move;
+        if (moveAction.IsPressed())
+        {
+            foreach (var control in moveAction.controls)
+            {
+                if (control.IsPressed())
+                {
+                    Debug.Log($"control: {control} pressed");
+                }
+            }
+        }
+        */
         if (Keyboard.current.tKey.wasPressedThisFrame)
         {
             Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
