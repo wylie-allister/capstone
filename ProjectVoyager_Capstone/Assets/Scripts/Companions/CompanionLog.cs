@@ -8,8 +8,8 @@ public class CompanionLog : MonoBehaviour
     int skill = 20;
     int will = 15;
 
-    bool hasTestCompanion;
     bool isHoldingTestCompanion;
+    bool hasCompanion;
     public bool canPickupCompanion;
 
     public GameObject testRat;
@@ -20,7 +20,7 @@ public class CompanionLog : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        hasTestCompanion = false;
+        hasCompanion = false;
         isHoldingTestCompanion = false;
         canPickupCompanion = false;
 
@@ -42,7 +42,6 @@ public class CompanionLog : MonoBehaviour
         if (canPickupCompanion == true && input.Interact.WasPressedThisFrame())
         {
             testRat.SetActive(true);
-            hasTestCompanion = true;
             lastInteracted.SetActive(false);
         }
     }
