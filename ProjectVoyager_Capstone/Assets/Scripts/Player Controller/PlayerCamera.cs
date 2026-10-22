@@ -21,6 +21,7 @@ public class PlayerCamera : MonoBehaviour
     
     public void Initialize(Transform target)
     {
+        settings = GameObject.Find("SettingsHandler").GetComponent<CurrentSettings>();
         // Set camera position and rotation to given camera target
         transform.position = target.position;
         transform.rotation = target.rotation;

@@ -18,9 +18,10 @@ public class Player : MonoBehaviour
     
     void Start()
     {
+        cs = GameObject.Find("SettingsHandler").GetComponent<CurrentSettings>();
         // Lock cursor
 
-            Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
         
         
         // Create and enable input actions
@@ -37,6 +38,7 @@ public class Player : MonoBehaviour
 
         // Toggle gameplayactive var on camera to adjust joystick sens for camera
         playerCamera.isGamepadActive = Gamepad.current != null;
+
         
         // This throws an null ref - should automatically swap the sensitivity modifier in PlayerCamera.cs
         // Figure out why and fix it, cause this inside the update loop would work much better than one check at start
