@@ -1,12 +1,10 @@
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class CompanionLog : MonoBehaviour
 {
-
-    int luck = 10;
-    int skill = 20;
-    int will = 15;
+    public TestCompanion tComp;
 
     bool isHoldingTestCompanion;
     bool hasCompanion;
@@ -17,6 +15,10 @@ public class CompanionLog : MonoBehaviour
     private PlayerInputActions _inputActions;
 
     private GameObject lastInteracted;
+
+    public TextMeshProUGUI tmp;
+
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -27,12 +29,18 @@ public class CompanionLog : MonoBehaviour
         _inputActions = new PlayerInputActions();
         _inputActions.Enable();
 
+        tComp.luck = 10;
+        tComp.skill = 20;
+        tComp.will = 15;
+
     }
 
     // Update is called once per frame
     void Update()
     {
         HandleCompanions();
+        TestCompEffects();
+        Debug.Log(tComp.luck);
     }
 
     public void HandleCompanions()
@@ -43,6 +51,26 @@ public class CompanionLog : MonoBehaviour
         {
             testRat.SetActive(true);
             lastInteracted.SetActive(false);
+            isHoldingTestCompanion = true;
+        }
+        tmp.text = ($"Luck: {tComp.luck} \n Skill: {tComp.skill} \n Will: {tComp.will}");
+    }
+
+    public void TestCompEffects()
+    {
+        if (isHoldingTestCompanion == true)
+        {
+            tComp.luck = 15;
+            tComp.skill = 25;
+            tComp.will = 20;
+          
+        }
+        else
+        {
+            tComp.luck = 10;
+            tComp.skill = 20;
+            tComp.will = 15;
+           
         }
     }
 

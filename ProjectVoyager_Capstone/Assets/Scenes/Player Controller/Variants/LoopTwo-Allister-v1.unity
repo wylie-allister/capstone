@@ -805,8 +805,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dc93f6cabc75194ca72184473d6bd28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CompanionLog
+  tComp: {fileID: 11400000, guid: cd522b8a64791dc4490a6a0ff9f0d559, type: 2}
   canPickupCompanion: 0
   testRat: {fileID: 1983958259}
+  tmp: {fileID: 210139855}
 --- !u!1 &1015072543
 GameObject:
   m_ObjectHideFlags: 0
