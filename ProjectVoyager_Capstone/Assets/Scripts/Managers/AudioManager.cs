@@ -178,7 +178,7 @@ public class AudioManager : MonoBehaviour
     private void BeatExecute()
     {
         metronomeCheck.localScale = Vector3.one * 0.8f;
-        //Debug.Log($"Accuracy: {((beatAccuracy[0] * 100) / (beatAccuracy[0] + beatAccuracy[1]))}% | {beatAccuracy[0]}, {beatAccuracy[1]}");
+        Debug.Log($"Accuracy: {((beatAccuracy[0] * 100) / (beatAccuracy[0] + beatAccuracy[1]))}% | {beatAccuracy[0]}, {beatAccuracy[1]}");
     }
 
 }

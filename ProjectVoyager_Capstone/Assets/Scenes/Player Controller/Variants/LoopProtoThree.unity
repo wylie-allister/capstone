@@ -1622,8 +1622,8 @@ MonoBehaviour:
   - {fileID: 607177661}
   - {fileID: 828183467}
   - {fileID: 952280609}
-  currentAudioClip: {fileID: 8300000, guid: e61abfd3d9d771647ba17e2ed0bbe866, type: 3}
-  bpm: 120
+  currentAudioClip: {fileID: 8300000, guid: f572a87b8b9aa7848a2eda910b659eb3, type: 3}
+  bpm: 85
   currentNoteDuration: 2
 --- !u!82 &1575583066
 AudioSource:
