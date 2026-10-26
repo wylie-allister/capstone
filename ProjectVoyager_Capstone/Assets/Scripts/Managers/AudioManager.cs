@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 // Divide these when applying (allows for eight note 0.5 % division on int enums - bc
 enum NoteDuration
@@ -14,6 +15,8 @@ enum NoteDuration
 public class AudioManager : MonoBehaviour
 {
     [SerializeField] private RectTransform metronomeCheck;
+    [SerializeField] private Image timingWindowViz;
+    [SerializeField] private Image[] highlightedLetters;
     [SerializeField] private AudioClip currentAudioClip;
     [SerializeField] private float bpm;
     [SerializeField] private NoteDuration currentNoteDuration = NoteDuration.Quarter;
@@ -31,11 +34,26 @@ public class AudioManager : MonoBehaviour
 
     private int _numOfPastBeats = 0;
     
+    // Accuracy Tracker stuff
+    private float _timingBuffer; // should be equal to the interval * 0.25 | interval / 4
+    private bool _isTimingWindowOpen = false;
+    private float DEBUGPLEASEDELETE = 0.0f;
+    private bool[] wasdStates;
+    private Color highlightColor = new Color(0.75f, 0.5f, 0.1f, 1.0f);
+    private Color unhighlighttColor = new Color(0.75f, 0.5f, 0.1f, 0.0f);
+    private int[] beatAccuracy;
+    
 
     private void Start()
     {
         _source = GetComponent<AudioSource>();
         metronomeCheck.localScale = Vector3.one * 0.2f;
+
+        wasdStates = new bool[4];
+        // beatAccuracy index 0 is made beats, 1 is missed beats
+        beatAccuracy = new int[2];
+        beatAccuracy[0] = 1;
+        beatAccuracy[1] = 0;
     }
 
     private void Update()
@@ -44,28 +62,34 @@ public class AudioManager : MonoBehaviour
         DebugInput(bpm, _deltaTime);
         TrackTimer(_deltaTime);
         
-        Debug.Log(_beatInterval * ((int)currentNoteDuration * 0.5f));
+        //Debug.Log(_beatInterval * ((int)currentNoteDuration * 0.5f));
 
-        HandleNoteDurationSelection();
+        // Lerp metronome scale down if in between beats
         if (metronomeCheck.localScale != Vector3.one * 0.2f)
         {
             metronomeCheck.localScale = Vector3.Lerp(metronomeCheck.localScale, Vector3.one * 0.2f, _deltaTime * 2.0f);
         }
     }
 
-    private void HandleNoteDurationSelection()
-    {
-        
-    }
-
+    // Debug input to begin tracking
     private void DebugInput(float trackBPM, float deltaTime)
     {
     #if UNITY_EDITOR
         if (Keyboard.current.lKey.wasPressedThisFrame)
         {
             BeginBPMTrack(currentAudioClip, trackBPM);
-        }   
+        }
+
+        wasdStates[0] = Keyboard.current.wKey.wasPressedThisFrame;
+        wasdStates[1] = Keyboard.current.sKey.wasPressedThisFrame;
+        wasdStates[2] = Keyboard.current.aKey.wasPressedThisFrame;
+        wasdStates[3] = Keyboard.current.dKey.wasPressedThisFrame;
     #endif
+
+        for (int i = 0; i < highlightedLetters.Length; i++)
+        {
+            highlightedLetters[i].color = wasdStates[i] ? highlightColor : unhighlighttColor;
+        }
     }
 
     private void BeginBPMTrack(AudioClip currentClip, float trackBPM)
@@ -79,6 +103,7 @@ public class AudioManager : MonoBehaviour
         _source.loop = false;
         _numOfPastBeats = 0;
         _beatInterval = 60.0f / trackBPM;
+        _timingBuffer = 0.125f; //_beatInterval * 0.25f;
         _clipTimer = 0.0f;
         _previousNoteDuration = currentNoteDuration;
         _source.Play();
@@ -87,11 +112,24 @@ public class AudioManager : MonoBehaviour
 
     private void TrackTimer(float deltaTime)
     {
+        // if tracking, update timer and continue
         if (_isTracking)
             _clipTimer += deltaTime;
         else
             return;
+
+        // Open timing window when appropriate
+        if (_clipTimer >= _beatInterval * ((int)_previousNoteDuration * 0.5) - _timingBuffer ||
+            _clipTimer <= _timingBuffer)
+        {
+            _isTimingWindowOpen = true;
+        }
+        else
+        {
+            _isTimingWindowOpen = false;
+        }
         
+        // if timer is greater than 
         if (_clipTimer >= _beatInterval * ((int)_previousNoteDuration * 0.5f))
         {
             _canExecuteBeat = true;
@@ -104,22 +142,43 @@ public class AudioManager : MonoBehaviour
             _previousNoteDuration = currentNoteDuration;
             _canExecuteBeat = false;
         }
+
+        timingWindowViz.color = _isTimingWindowOpen ? Color.green : Color.red;
+
+        if (_isTimingWindowOpen)
+        {
+            DEBUGPLEASEDELETE += _deltaTime;
+            foreach (var t in wasdStates)
+            {
+                if (t)
+                {
+                    beatAccuracy[0]++;
+                }
+            }
+            timingWindowViz.color = Color.green;
+        }
+        else
+        {
+            foreach (var t in wasdStates)
+            {
+                if (t)
+                {
+                    beatAccuracy[1]++;
+                }
+            }
+            //Debug.Log($"tW Open for: {DEBUGPLEASEDELETE} | tB: {_timingBuffer}");
+            DEBUGPLEASEDELETE = 0.0f;
+            timingWindowViz.color = Color.red;
+        }
         
     }
 
-    // Temp log
+    // Logic block for when beats execute
+    // Right now it just makes the circle visualizer jump in scale
     private void BeatExecute()
     {
         metronomeCheck.localScale = Vector3.one * 0.8f;
+        //Debug.Log($"Accuracy: {((beatAccuracy[0] * 100) / (beatAccuracy[0] + beatAccuracy[1]))}% | {beatAccuracy[0]}, {beatAccuracy[1]}");
     }
 
-    public void BeginTracking()
-    {
-        
-    }
-
-    public void StopTracking()
-    {
-        
-    }
 }

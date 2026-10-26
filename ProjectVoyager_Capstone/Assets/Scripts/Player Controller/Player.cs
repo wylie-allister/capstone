@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,7 +13,9 @@ public class Player : MonoBehaviour
     [SerializeField] private CameraSpring cameraSpring;
     [SerializeField] private CameraLean cameraLean;
 
-    // Input actions
+    [SerializeField] private Transform spawnLocation;
+    [SerializeField] private bool disableMovement = false;
+     // Input actions
     private PlayerInputActions _inputActions;
     
     void Start()
@@ -49,10 +52,11 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (disableMovement)
+            return;
+        
         var input = _inputActions.Gameplay;
         float deltaTime = Time.deltaTime;
-
-
         
         CameraInput cameraInput = new CameraInput { Look = input.Look.ReadValue<Vector2>() };
         playerCamera.UpdateRotation(cameraInput);
@@ -103,6 +107,9 @@ public class Player : MonoBehaviour
 
     void LateUpdate()
     {
+        if (disableMovement)
+            return;
+                
         // Get dt, camera target and current player state post updated variables
         float deltaTime = Time.deltaTime;
         Transform cameraTarget = playerCharacter.GetCameraTarget();
@@ -114,9 +121,17 @@ public class Player : MonoBehaviour
         cameraLean.UpdateLean(deltaTime, state.Stance is Stance.Slide, state.Acceleration, cameraTarget.up);
     }
 
+
+
     // Debug teleport method
     private void Teleport(Vector3 position)
     {
         playerCharacter.SetPosition(position);
     }
+
+    private void UpdateSpawnPosition(Vector3 position)
+    {
+        playerCharacter.spawnLocation.position = position;
+    }
+    
 }

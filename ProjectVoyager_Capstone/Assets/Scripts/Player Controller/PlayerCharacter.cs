@@ -20,6 +20,7 @@ public struct CharacterState
     public Stance Stance;
     public Vector3 Velocity;
     public Vector3 Acceleration;
+    public Vector3 SpawnLocation;
 }
 
 // Struct that holds all relavent character input variables
@@ -75,8 +76,13 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
     [Header("Dash Settings")]
     [SerializeField] private float dashForce = 7.0f;
-
     [SerializeField] private float dashDelay = 2.0f;
+
+    [Header("Killzone")] 
+    [SerializeField] private LayerMask killzoneLayer;
+    
+    [Header("Spawn")]
+    public Transform spawnLocation;
     
     [Header("Exposed Debug Vars")] 
     public Vector3 PlayerVelocity;
@@ -528,7 +534,8 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         // Update state to reflect relevant motor properties
         _state.Grounded = motor.GroundingStatus.IsStableOnGround;
         _state.Velocity = motor.Velocity;
-        
+
+        HandleKillzone();
         // update last state to store char state snapshot at beginning of this update cycle
         _lastState = _tempState;
     }
@@ -565,6 +572,16 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         if (killVelocity)
         {
             motor.BaseVelocity = Vector3.zero;
+        }
+    }
+    
+    private void HandleKillzone()
+    {
+        Debug.DrawRay(transform.position, motor.CharacterUp * -1, Color.red);
+        if (Physics.Raycast(transform.position, motor.CharacterUp * -1, 1.5f, killzoneLayer))
+        {
+            
+            SetPosition(spawnLocation.position);
         }
     }
 }
