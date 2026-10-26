@@ -4,7 +4,11 @@
 TagManager:
   serializedVersion: 3
   tags:
+<<<<<<< HEAD
   - KillZone
+=======
+  - Companion
+>>>>>>> d03abb3230253931d78dc23e0e27d490f581e47d
   layers:
   - Default
   - TransparentFX
