@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -20,6 +21,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip currentAudioClip;
     [SerializeField] private float bpm;
     [SerializeField] private NoteDuration currentNoteDuration = NoteDuration.Quarter;
+    [SerializeField] private TextMeshProUGUI accuracyText;
 
     private NoteDuration _previousNoteDuration;
     private AudioSource _source;
@@ -82,19 +84,19 @@ public class AudioManager : MonoBehaviour
         
         if (Keyboard.current.digit1Key.wasPressedThisFrame)
         {
-            currentNoteDuration = NoteDuration.Quarter;
+            currentNoteDuration = NoteDuration.Eighth;
         }
         else if (Keyboard.current.digit2Key.wasPressedThisFrame)
         {
-            currentNoteDuration = NoteDuration.Half;
+            currentNoteDuration = NoteDuration.Quarter;
         }
         else if (Keyboard.current.digit3Key.wasPressedThisFrame)
         {
-            currentNoteDuration = NoteDuration.Whole;
+            currentNoteDuration = NoteDuration.Half;
         }
         else if (Keyboard.current.digit4Key.wasPressedThisFrame)
         {
-            currentNoteDuration = NoteDuration.Eighth;
+            currentNoteDuration = NoteDuration.Whole;
         }
 
         wasdStates[0] = Keyboard.current.wKey.wasPressedThisFrame;
@@ -122,7 +124,7 @@ public class AudioManager : MonoBehaviour
         _beatInterval = 60.0f / trackBPM;
         
         
-        _timingBuffer = 0.225f; //_beatInterval * 0.25f;
+        _timingBuffer = 0.125f; //_beatInterval * 0.25f;
         
         
         _clipTimer = 0.0f;
@@ -206,7 +208,9 @@ public class AudioManager : MonoBehaviour
     {
         metronomeCheck.localScale = Vector3.one * 0.8f;
         // Correct * 100 / (correct + incorrect) provides a percentage of accuracy
-        Debug.Log($"Accuracy: {((beatAccuracy[0] * 100) / (beatAccuracy[0] + beatAccuracy[1]))}% | {beatAccuracy[0]}, {beatAccuracy[1]}");
+        accuracyText.text =
+            $"Accuracy: {((beatAccuracy[0] * 100) / (beatAccuracy[0] + beatAccuracy[1]))}% \nHit: {beatAccuracy[0]} \nMissed: {beatAccuracy[1]}";
+       //Debug.Log($"Accuracy: {((beatAccuracy[0] * 100) / (beatAccuracy[0] + beatAccuracy[1]))}% | {beatAccuracy[0]}, {beatAccuracy[1]}");
     }
 
 }

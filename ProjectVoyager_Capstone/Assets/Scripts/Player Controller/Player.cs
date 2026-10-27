@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform spawnLocation;
     [SerializeField] private bool disableMovement = false;
      // Input actions
-    private PlayerInputActions _inputActions;
+    public PlayerInputActions _inputActions;
     
     void Start()
     {
