@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class AccuracyManager : MonoBehaviour
 {
+    /* Currently not being used
     [SerializeField] private Image[] highlightedLetters;
 
     private bool _isTracking = false;
@@ -42,4 +43,5 @@ public class AccuracyManager : MonoBehaviour
             image.color = new Color(imgColor.r, imgColor.g, imgColor.b, 0.0f);
         }
     }
+    */
 }

@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class StartMenuController : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class StartMenuController : MonoBehaviour
     [SerializeField] private Color selectedColor;
     [SerializeField] private Color deselectedColor;
     [SerializeField] private InputActionReference moveAction;
+    [SerializeField] private InputActionReference selectAction;
 
 
     private int _currentSelection = 0;
@@ -41,6 +43,11 @@ public class StartMenuController : MonoBehaviour
         {
             canInput = true;
         }
+
+        if (selectAction.action.WasPressedThisFrame())
+        {
+            GoToSelection();
+        }
     }
 
     private void HandleSelection()
@@ -61,10 +68,27 @@ public class StartMenuController : MonoBehaviour
             }    
             
         }
+        
+        
     }
 
-    private void GoToStart()
+    private void GoToSelection()
     {
-
+        switch (_currentSelection)
+        {
+            case 0:
+                SceneManager.LoadScene(1);
+                break;
+            case 1:
+                SceneManager.LoadScene(3);
+                break;
+            case 2:
+                SceneManager.LoadScene(2);
+                break;
+            case 3:
+                SceneManager.LoadScene(4);
+                break;
+            
+        }
     }
 }

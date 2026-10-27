@@ -83,6 +83,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     
     [Header("Spawn")]
     public Transform spawnLocation;
+    [SerializeField] private LayerMask spawnRelocationLayer;
     
     [Header("Exposed Debug Vars")] 
     public Vector3 PlayerVelocity;
@@ -536,6 +537,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         _state.Velocity = motor.Velocity;
 
         HandleKillzone();
+        HandleSpawnRelocators();
         // update last state to store char state snapshot at beginning of this update cycle
         _lastState = _tempState;
     }
@@ -549,7 +551,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         if (HapticController.instance != null && _timeSinceLastGround != 0 && _timeSinceLastGround <= 0.5f)
         {
             HapticController.instance.QuickRumble();
-            Debug.Log("Haptic Pulse");
+            //Debug.Log("Haptic Pulse");
         }
     }
 
@@ -577,11 +579,19 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     
     private void HandleKillzone()
     {
-        Debug.DrawRay(transform.position, motor.CharacterUp * -1, Color.red);
+        //Debug.DrawRay(transform.position, motor.CharacterUp * -1, Color.red);
         if (Physics.Raycast(transform.position, motor.CharacterUp * -1, 1.5f, killzoneLayer))
         {
-            
             SetPosition(spawnLocation.position);
+        }
+    }
+
+    private void HandleSpawnRelocators()
+    {
+        if (Physics.Raycast(transform.position, motor.CharacterForward, 1.5f, spawnRelocationLayer, QueryTriggerInteraction.Collide))
+        {
+            //Debug.Log("Spawn Updated");
+            spawnLocation.position = transform.position;
         }
     }
 }

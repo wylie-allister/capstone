@@ -79,6 +79,23 @@ public class AudioManager : MonoBehaviour
         {
             BeginBPMTrack(currentAudioClip, trackBPM);
         }
+        
+        if (Keyboard.current.digit1Key.wasPressedThisFrame)
+        {
+            currentNoteDuration = NoteDuration.Quarter;
+        }
+        else if (Keyboard.current.digit2Key.wasPressedThisFrame)
+        {
+            currentNoteDuration = NoteDuration.Half;
+        }
+        else if (Keyboard.current.digit3Key.wasPressedThisFrame)
+        {
+            currentNoteDuration = NoteDuration.Whole;
+        }
+        else if (Keyboard.current.digit4Key.wasPressedThisFrame)
+        {
+            currentNoteDuration = NoteDuration.Eighth;
+        }
 
         wasdStates[0] = Keyboard.current.wKey.wasPressedThisFrame;
         wasdStates[1] = Keyboard.current.sKey.wasPressedThisFrame;
@@ -103,7 +120,11 @@ public class AudioManager : MonoBehaviour
         _source.loop = false;
         _numOfPastBeats = 0;
         _beatInterval = 60.0f / trackBPM;
-        _timingBuffer = 0.125f; //_beatInterval * 0.25f;
+        
+        
+        _timingBuffer = 0.225f; //_beatInterval * 0.25f;
+        
+        
         _clipTimer = 0.0f;
         _previousNoteDuration = currentNoteDuration;
         _source.Play();
@@ -119,9 +140,12 @@ public class AudioManager : MonoBehaviour
             return;
 
         // Open timing window when appropriate
+        // |-------| refers to the space between two beats | == refers to the timing window being open
+        // |==---==|
         if (_clipTimer >= _beatInterval * ((int)_previousNoteDuration * 0.5) - _timingBuffer ||
             _clipTimer <= _timingBuffer)
         {
+            // Open timming window at the beginning of a beat, as well as near the end
             _isTimingWindowOpen = true;
         }
         else
@@ -148,6 +172,8 @@ public class AudioManager : MonoBehaviour
         if (_isTimingWindowOpen)
         {
             DEBUGPLEASEDELETE += _deltaTime;
+            
+            // if timing window is open and the player presses a key, add it to hit beats
             foreach (var t in wasdStates)
             {
                 if (t)
@@ -159,6 +185,7 @@ public class AudioManager : MonoBehaviour
         }
         else
         {
+            // if timing window is closed and the player presses a key, add it to missed beats
             foreach (var t in wasdStates)
             {
                 if (t)
@@ -178,6 +205,7 @@ public class AudioManager : MonoBehaviour
     private void BeatExecute()
     {
         metronomeCheck.localScale = Vector3.one * 0.8f;
+        // Correct * 100 / (correct + incorrect) provides a percentage of accuracy
         Debug.Log($"Accuracy: {((beatAccuracy[0] * 100) / (beatAccuracy[0] + beatAccuracy[1]))}% | {beatAccuracy[0]}, {beatAccuracy[1]}");
     }
 

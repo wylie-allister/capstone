@@ -6,8 +6,20 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/Prototypes/StartMenu-Brandon-v1.unity
+    guid: c36da59eeda11114481a8b7e3f9be30e
+  - enabled: 1
+    path: Assets/Scenes/Loops/LoopOne-Brandon-v1.unity
+    guid: 4ca9e4c91f2dd934c9b992b8a271c98c
+  - enabled: 1
+    path: Assets/Scenes/Loops/LoopThree-Brandon-v1.unity
+    guid: b235c1ac0fb05ce4faf5c8a7dbf838b4
+  - enabled: 1
+    path: Assets/Scenes/Loops/LoopTwo-Allister-v1.unity
+    guid: 99a6aa7847412824c8631e48cac21d99
+  - enabled: 1
+    path: Assets/Scenes/Prototypes/PrototypeDeliverableOne-Brandon-v1.unity
+    guid: c9549bb06e852984583e03ba2c03d28f
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 49175b4d38383674a93cd6be90a448e5, type: 3}
   m_UseUCBPForAssetBundles: 0
