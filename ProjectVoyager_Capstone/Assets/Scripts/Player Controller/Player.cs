@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     [SerializeField] private bool disableMovement = false;
      // Input actions
     public PlayerInputActions _inputActions;
+    public CurrentSettings cs;
     
     void Start()
     {
@@ -52,6 +53,16 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (cs.isOpen == false)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+
+        }
+
         if (disableMovement)
             return;
         
