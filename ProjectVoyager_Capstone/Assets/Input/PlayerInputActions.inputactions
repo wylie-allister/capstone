@@ -277,6 +277,56 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "UI",
+            "id": "455d4112-105b-4bc3-8ac4-b55b8c62cba4",
+            "actions": [
+                {
+                    "name": "Save JSON",
+                    "type": "Button",
+                    "id": "51214917-1bcc-431a-ab84-4a40164b3b84",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                },
+                {
+                    "name": "Toggle Menu",
+                    "type": "Button",
+                    "id": "dc50cd93-f947-44ba-b3fa-2c8738ef21d6",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "025d3a71-3da4-4873-a70a-a73cff5c53d4",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Save JSON",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4446d7b4-832e-43b1-a4e4-d0a8aaf9580d",
+                    "path": "<Keyboard>/o",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Toggle Menu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
