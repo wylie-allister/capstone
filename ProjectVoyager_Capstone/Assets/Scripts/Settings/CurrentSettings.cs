@@ -36,6 +36,13 @@ public class CurrentSettings : MonoBehaviour
         Menu();
     }
 
+    public void SaveButton()
+    {
+        SaveJSON(sett);
+        isOpen = false;
+        menu.SetActive(isOpen);
+    }
+
     public void SaveJSON(SettingsState setti)
     {
         //move this to its own section later
