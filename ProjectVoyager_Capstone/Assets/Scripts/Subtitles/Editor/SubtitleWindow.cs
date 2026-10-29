@@ -13,6 +13,8 @@ public class SubtitleWindow : EditorWindow
     private SerializedObject _serializedSubtitleMTarget;
     private SerializedProperty _serializedSubtitleProperty;
 
+    private GUIStyle wrappingTextStyle;
+
     [MenuItem("Voyager/Subtitle Editor")]
     public static void ShowWindow()
     {
@@ -21,10 +23,11 @@ public class SubtitleWindow : EditorWindow
     
     void OnGUI()
     {
-        GUIStyle wrappingTextStyle = new GUIStyle(EditorStyles.textField);
-        wrappingTextStyle.wordWrap = true;
-        GUILayout.Label("Subtitle Editor", EditorStyles.boldLabel);
         
+        
+        GUILayout.Label("Subtitle Editor", EditorStyles.boldLabel);
+
+        CreateGUIStyles();
         newSubtitleText = (string)EditorGUILayout.TextField("New Subtitle Text", newSubtitleText, wrappingTextStyle, GUILayout.MinHeight(100));
         newCharacterTag = (CharacterTag)EditorGUILayout.EnumPopup("Character Tag", newCharacterTag);
         
@@ -44,6 +47,16 @@ public class SubtitleWindow : EditorWindow
         
         HandleSerializedSubtitles();
 
+        if (GUILayout.Button("Save Existing Subtitles"))
+        {
+            _subtitleManagerTarget.SaveCurrentSubtitlesToFile();
+        }
+        
+        if (GUILayout.Button("Load Existing Subtitles"))
+        {
+            _subtitleManagerTarget.LoadExistingSubtitlesFromFile();
+        }
+        
         if (GUILayout.Button("Debug Log Subtitle Manager Subtitles"))
         {
             _subtitleManagerTarget.DebugLogExistingSubtitles();
@@ -55,8 +68,17 @@ public class SubtitleWindow : EditorWindow
 
     }
 
+    private void CreateGUIStyles()
+    {
+        // Custom gui style for wrapping text within the subtitle field
+        // Again because its an editor window this is more manual creation 
+        wrappingTextStyle = new GUIStyle(EditorStyles.textField);
+        wrappingTextStyle.wordWrap = true;
+    }
+
     private void HandleSubtitleCreation(string subtitleText, CharacterTag characterTag)
     {
+        // Create new subtitle and add it to the manager list
         Subtitle newSubtitle = new Subtitle(subtitleText, characterTag);
         _subtitleManagerTarget._existingSubtitles.Add(newSubtitle);
     }

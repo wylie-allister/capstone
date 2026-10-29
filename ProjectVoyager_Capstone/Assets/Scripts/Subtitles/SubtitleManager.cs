@@ -1,9 +1,17 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+
+[Serializable]
+public class SubtitleWrapper
+{
+    public Subtitle[] subtitles;
+}
 
 [Serializable]
 public struct Subtitle
@@ -101,6 +109,28 @@ public class SubtitleManager : MonoBehaviour
         
     }
 
+    public void LoadExistingSubtitlesFromFile()
+    {
+        // Clear subs
+        _existingSubtitles.Clear();
+        
+        var subtitles = SaveSystem.Load<Subtitle>(JsonSavePath.Subtitles, "TestSubtitles");
+        
+        foreach (var subtitle in subtitles)
+            AddExistingSubtitle(subtitle);
+        // Import subtitles here
+    }
+
+    private void AddExistingSubtitle(Subtitle newSubtitle)
+    {
+        _existingSubtitles.Add(newSubtitle);
+    }
+    
+    public void SaveCurrentSubtitlesToFile()
+    {
+        SaveSystem.Save(_existingSubtitles, JsonSavePath.Options, "TestOptions");
+    }
+
     public void DebugLogExistingSubtitles()
     {
         if (_existingSubtitles.Count > 0)
@@ -118,5 +148,4 @@ public class SubtitleManager : MonoBehaviour
     
     // Look into custom editor window for saving subtitles directly then pulling
     // from save data to get the subtitle
-    //public void GetSubtitle
 }
