@@ -1140,7 +1140,8 @@ MonoBehaviour:
   letterboxImage: {fileID: 1671598565}
   skipTextDisplay: {fileID: 0}
   currentSubtitle:
-    subtitleText: 
+    subtitleText: This is a test subtitle, using multiple characters ultimately the
+      current subtittle should not be longer than 30 but its what we got
     characterName: 0
   fontSize: 36
   font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
@@ -1148,6 +1149,7 @@ MonoBehaviour:
   maxLinesPerSubtitle: 2
   textSpeed: 5
   letterboxOpacity: 0.9
+  enableLetterbox: 1
   _existingSubtitles: []
 --- !u!4 &1934859446
 Transform:

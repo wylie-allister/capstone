@@ -44,7 +44,8 @@ public class SubtitleManager : MonoBehaviour
     [SerializeField] private InputActionReference skipTextDisplay;
 
     [Header("Current Subtitle")] 
-    public Subtitle currentSubtitle;
+    [SerializeField]
+    private Subtitle currentSubtitle;
 
     [Header("Subtitle Settings")] 
     [Min(36)]
@@ -54,13 +55,13 @@ public class SubtitleManager : MonoBehaviour
     [SerializeField] private int maxCharactersPerLine = 40;
     [Range(1, 3)]
     [SerializeField] private int maxLinesPerSubtitle = 2;
-
     [Range(0.1f, 200.0f)] 
     [SerializeField] private float textSpeed = 5.0f;
 
     [Header("Letterbox Settings")] 
     [Range(0.0f, 1.0f)]
     [SerializeField] private float letterboxOpacity = 0.9f;
+    [SerializeField] private bool enableLetterbox = true;
     
     [Header("Existing Subtitles")] 
     public List<Subtitle> _existingSubtitles = new List<Subtitle>();
@@ -68,6 +69,7 @@ public class SubtitleManager : MonoBehaviour
     private float _charDisplayTimer = 0.0f;
     private bool _displaySubtitle = false;
     private bool _displayLetterbox = false;
+    private int _charsDisplayed = 0;
     
     
     void Start()
@@ -78,7 +80,6 @@ public class SubtitleManager : MonoBehaviour
     void Update()
     {
         float deltaTime = Time.deltaTime;
-        
     }
 
     public Subtitle CreateNewSubtitle(string newSubtitleText, CharacterTag characterName)
@@ -94,19 +95,20 @@ public class SubtitleManager : MonoBehaviour
     // Display current text via timer (display char's one at a time at a given speed)
     private void HandleTextDisplay(float deltaTime)
     {
-        
     }
 
     // Display the subtitle (pop up subtitle call)
     private void DisplayCurrentSubtitle(float deltaTime)
     {
-        
+        _displaySubtitle = true;
+        _displayLetterbox = enableLetterbox;
     }
     
     // Hide the subtitle
     private void HideCurrentSubtitle(float deltaTime)
     {
-        
+        _displaySubtitle = false;
+        _displayLetterbox = false;
     }
 
     public void LoadExistingSubtitlesFromFile()
@@ -114,8 +116,10 @@ public class SubtitleManager : MonoBehaviour
         // Clear subs
         _existingSubtitles.Clear();
         
+        // Get subtitles from subtitles file
         var subtitles = SaveSystem.Load<Subtitle>(JsonSavePath.Subtitles, "TestSubtitles");
         
+        // append each subtitle from file to the current existing subtitle list
         foreach (var subtitle in subtitles)
             AddExistingSubtitle(subtitle);
         // Import subtitles here
