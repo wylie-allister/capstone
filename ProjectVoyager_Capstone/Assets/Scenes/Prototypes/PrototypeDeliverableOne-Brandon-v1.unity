@@ -4546,7 +4546,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6628025335828097665, guid: 64374710ac378414fb6777804e8944d2, type: 3}
       propertyPath: dashForce
-      value: 1.25
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6628025335828097665, guid: 64374710ac378414fb6777804e8944d2, type: 3}
       propertyPath: slideEndSpeed

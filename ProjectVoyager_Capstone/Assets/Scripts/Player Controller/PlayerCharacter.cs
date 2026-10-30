@@ -129,7 +129,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         _requestedMovement = new Vector3(input.Move.x, 0.0f, input.Move.y);
         _requestedMovement = Vector3.ClampMagnitude(_requestedMovement, 1.0f);
         _requestedMovement = input.Rotation * _requestedMovement;
-        _requestedDash = input.Dash;
+        //_requestedDash = input.Dash;
         
         // If we want to jump, set request jump var accordingly
         bool wasRequestingJump = _requestedJump;
@@ -347,27 +347,19 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         }
     }
 
-    // TODO: Update this function to feel better :D -brandon
-    // Okay, swapping when this is called has cleared up a decent bit of the clunkyness :D
+    // TODO: readd timer for dashing / stamina system - latter of which is unpreferred
     public void HandleDashRequest(ref Vector3 currentVelocity, float deltaTime)
     {
-        if (_requestedDash && _timeSinceDashRequest > dashDelay)
+        if (_requestedDash)
         {
-            /*
-            Vector3 dashVector = Vector3.zero;
             _requestedDash = false;
-            Vector3 planarMovement = Vector3.ProjectOnPlane(
-                vector: _requestedMovement,
-                planeNormal: motor.CharacterUp) * _requestedMovement.magnitude;
-
-            Vector3 currentPlanarVelocity = Vector3.ProjectOnPlane(
-                vector: currentVelocity,
-                planeNormal: motor.CharacterUp);
-
-            dashVector = planarMovement * dashForce * deltaTime;
-            Debug.Log("dash req");
-            */
-            currentVelocity *= dashForce;
+            _requestedCrouch = false;
+            _requestedCrouchInAir = false;
+            motor.ForceUnground(time:0f);
+            
+            float currentForwardSpeed = Vector3.Dot(currentVelocity, motor.CharacterForward);
+            float targetForwardSpeed = Mathf.Max(currentForwardSpeed, dashForce);
+            currentVelocity += motor.CharacterForward * (targetForwardSpeed - currentForwardSpeed);
         }
         else
         {
