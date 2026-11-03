@@ -4546,7 +4546,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6628025335828097665, guid: 64374710ac378414fb6777804e8944d2, type: 3}
       propertyPath: dashForce
-      value: 15
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6628025335828097665, guid: 64374710ac378414fb6777804e8944d2, type: 3}
       propertyPath: slideEndSpeed
@@ -4940,6 +4940,8 @@ SceneRoots:
   - {fileID: 930279412}
   - {fileID: 832575519}
   - {fileID: 874815356}
+  - {fileID: 1145163659}
+  - {fileID: 1819889109}
   - {fileID: 205998868}
   - {fileID: 996645205}
   - {fileID: 1583890371}
@@ -4947,6 +4949,4 @@ SceneRoots:
   - {fileID: 1362554874}
   - {fileID: 58897444}
   - {fileID: 959384628}
-  - {fileID: 1145163659}
-  - {fileID: 1819889109}
   - {fileID: 970261861}
