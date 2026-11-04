@@ -571,8 +571,9 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     private void HandleKillzone()
     {
         //Debug.DrawRay(transform.position, motor.CharacterUp * -1, Color.red);
-        if (Physics.Raycast(transform.position, motor.CharacterUp * -1, 1.2f, killzoneLayer))
+        if (Physics.Raycast(transform.position, motor.CharacterUp * -1, 0.4f, killzoneLayer))
         {
+            _requestedCrouch = false;
             SetPosition(spawnLocation.position);
         }
     }
