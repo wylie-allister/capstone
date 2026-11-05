@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{87ea6132-8a86-4d2d-8648-700e30e0c827}">
+		<property name="assetPath">
+			<value>Movement/Footsteps/ESM_GF_fx_wood_one_shots_footstep_boots_dry_interior_27.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>96</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.55676041666666665</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{b28a532f-913b-4ea2-82aa-06f51fa99164}</destination>
+		</relationship>
+	</object>
+</objects>
