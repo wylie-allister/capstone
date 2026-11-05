@@ -13,6 +13,7 @@ public class PlayerCamera : MonoBehaviour
     [SerializeField] private float maxY = 90.0f;
     [SerializeField] private float minY = -90.0f;
     [SerializeField] private float controllerSensitivityScalar = 10.0f;
+    [SerializeField] private float wallrideAngle = 30.0f;
 
     private Vector3 _eulerAngles;
     private float _currentSensitivity;
@@ -36,6 +37,10 @@ public class PlayerCamera : MonoBehaviour
 
         RenderSettings.skybox.SetFloat("_Rotation", 180 );
         
+    }
+
+    public void WallRideLean()
+    {
     }
 
     public void UpdateRotation(CameraInput input)

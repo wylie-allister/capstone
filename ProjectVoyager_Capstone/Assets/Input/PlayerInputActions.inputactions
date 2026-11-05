@@ -37,6 +37,16 @@
                     "priority": 0
                 },
                 {
+                    "name": "Wallride",
+                    "type": "Button",
+                    "id": "5545bcb9-3659-4fa0-9f46-649240c135d7",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                },
+                {
                     "name": "Crouch",
                     "type": "Button",
                     "id": "1b2c7a85-27d2-437b-8afb-bc4ac128e940",
@@ -119,6 +129,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2a51eb4c-eb1d-4392-8d9a-d92bea7e88da",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Wallride",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
