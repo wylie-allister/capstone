@@ -190,6 +190,21 @@ MonoBehaviour:
   crouchHeightResponse: 15
   standCameraTargetHeight: 0.9
   crouchCameraTargetHeight: 0.7
+  dashForce: 7
+  dashDelay: 2
+  killzoneLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  spawnLocation: {fileID: 0}
+  spawnRelocationLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  wallrideGravity: -15
+  wallrideJumpForce: 20
+  wallrideSpeed: 8
+  wallrideStickForce: 5
+  wallrideDuration: 2
+  PlayerVelocity: {x: 0, y: 0, z: 0}
 --- !u!1 &4240271496215036599
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,6 +299,9 @@ MonoBehaviour:
   playerCamera: {fileID: 7434898358569745184}
   cameraSpring: {fileID: 1697907349839123404}
   cameraLean: {fileID: 2781448034111558427}
+  spawnLocation: {fileID: 0}
+  disableMovement: 0
+  cs: {fileID: 0}
 --- !u!136 &1288033842765293602
 CapsuleCollider:
   m_ObjectHideFlags: 8
@@ -317,6 +335,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7235160986054505894}
   - component: {fileID: 7434898358569745184}
+  - component: {fileID: 55338146874896264}
   m_Layer: 0
   m_Name: Player Camera
   m_TagString: Untagged
@@ -352,11 +371,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d559c62d343dd73449e0d39febba156f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCamera
+  settings: {fileID: 0}
   sensitivity: 0.1
   maxY: 85
   minY: -85
   controllerSensitivityScalar: 10
+  wallrideAngle: 30
   isGamepadActive: 0
+--- !u!114 &55338146874896264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5255612676022893309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioListener
+  nonRigidbodyVelocity: 0
+  attenuationObject: {fileID: 0}
 --- !u!1 &7492982085728837487
 GameObject:
   m_ObjectHideFlags: 0

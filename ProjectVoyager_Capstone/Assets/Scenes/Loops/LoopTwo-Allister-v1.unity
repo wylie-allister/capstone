@@ -119,11 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!4 &87869710 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7235160986054505894, guid: 9adb65ea5fd48e044a29f6d9da777645, type: 3}
-  m_PrefabInstance: {fileID: 654181056899626817}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &198087718
 GameObject:
   m_ObjectHideFlags: 0
@@ -513,7 +508,7 @@ Transform:
   m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 87869710}
+  m_Father: {fileID: 1004389062}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &253594712
 GameObject:
@@ -1022,8 +1017,13 @@ MonoBehaviour:
   canPickupCompanion: 0
   tmp: {fileID: 210139855}
   companionList:
-  - {fileID: 1983958259}
-  - {fileID: 239567546}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!4 &1004389062 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1355810392252519418, guid: 9adb65ea5fd48e044a29f6d9da777645, type: 3}
+  m_PrefabInstance: {fileID: 654181056899626817}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1015072543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1486,7 +1486,7 @@ Transform:
   m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 87869710}
+  m_Father: {fileID: 1004389062}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1983958261
 MeshRenderer:
@@ -1858,10 +1858,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 7235160986054505894, guid: 9adb65ea5fd48e044a29f6d9da777645, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 1355810392252519418, guid: 9adb65ea5fd48e044a29f6d9da777645, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1983958260}
-    - targetCorrespondingSourceObject: {fileID: 7235160986054505894, guid: 9adb65ea5fd48e044a29f6d9da777645, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 1355810392252519418, guid: 9adb65ea5fd48e044a29f6d9da777645, type: 3}
       insertIndex: -1
       addedObject: {fileID: 239567549}
     m_AddedComponents:
