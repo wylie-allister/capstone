@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerCamera playerCamera;
     [SerializeField] private CameraSpring cameraSpring;
     [SerializeField] private CameraLean cameraLean;
+    [SerializeField] private PlayerAnimation playerAnim;
 
     [SerializeField] private Transform spawnLocation;
     [SerializeField] private bool disableMovement = false;
@@ -86,6 +87,11 @@ public class Player : MonoBehaviour
         };
         playerCharacter.UpdateInput(characterInput);
         playerCharacter.UpdateBody(deltaTime);
+
+        if (input.Crouch.WasPressedThisFrame())
+        {
+            playerAnim.TriggerSlide();
+        }
         
         // Teleport script for in editor purposes
         // tap T to teleport to wherever you are looking, assuming there is a ray collision (e.g. sky nono work)
