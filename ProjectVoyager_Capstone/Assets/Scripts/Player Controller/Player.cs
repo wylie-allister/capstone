@@ -21,6 +21,9 @@ public class Player : MonoBehaviour
     
     void Start()
     {
+        GameObject settingsHandler = GameObject.Find("SettingsHandler");
+
+        cs = settingsHandler.GetComponent<CurrentSettings>();
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
         

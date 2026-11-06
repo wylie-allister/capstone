@@ -954,17 +954,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &868743750 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7146950639073851475, guid: 07c19d59bdc33d84f9867471da78319e, type: 3}
-  m_PrefabInstance: {fileID: 625410043}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccfa5fe060ab6bf43bbac98f3a84df58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CurrentSettings
 --- !u!1 &970958596
 GameObject:
   m_ObjectHideFlags: 0
@@ -1866,14 +1855,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 7434898358569745184, guid: 9adb65ea5fd48e044a29f6d9da777645, type: 3}
-      propertyPath: settings
-      value: 
-      objectReference: {fileID: 868743750}
-    - target: {fileID: 9150458779134183585, guid: 9adb65ea5fd48e044a29f6d9da777645, type: 3}
-      propertyPath: cs
-      value: 
-      objectReference: {fileID: 868743750}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
