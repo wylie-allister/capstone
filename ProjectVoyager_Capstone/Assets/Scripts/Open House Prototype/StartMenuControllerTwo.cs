@@ -108,6 +108,7 @@ public class StartMenuControllerTwo : MonoBehaviour
         {
             case 0:
                 //SceneManager.LoadScene(1);
+                SceneManager.LoadScene(1);
                 break;
             case 1:
                 // Open settings, pause menu input
