@@ -109,6 +109,7 @@ public class StartMenuControllerTwo : MonoBehaviour
                 //SceneManager.LoadScene(2);
                 break;
             case 3:
+                Application.Quit();
                 //SceneManager.LoadScene(4);
                 break;
             

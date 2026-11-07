@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Prototypes/StartMenu-Brandon-v1.unity
+    path: Assets/Scenes/Prototypes/OpenHouse/StartMenu-Brandon-v2.unity
     guid: c36da59eeda11114481a8b7e3f9be30e
   - enabled: 1
     path: Assets/Scenes/Loops/LoopOne-Brandon-v1.unity

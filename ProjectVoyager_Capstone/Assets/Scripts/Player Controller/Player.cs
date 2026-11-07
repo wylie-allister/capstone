@@ -88,7 +88,7 @@ public class Player : MonoBehaviour
         playerCharacter.UpdateInput(characterInput);
         playerCharacter.UpdateBody(deltaTime);
 
-        if (input.Crouch.WasPressedThisFrame())
+        if (input.Crouch.WasPressedThisFrame() && playerCharacter.GetState().Stance != Stance.Slide)
         {
             playerAnim.TriggerSlide();
         }
