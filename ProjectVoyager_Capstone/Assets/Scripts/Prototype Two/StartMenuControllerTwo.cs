@@ -12,9 +12,9 @@ public class StartMenuControllerTwo : MonoBehaviour
     [SerializeField] private InputActionReference selectAction;
     [SerializeField] private InputActionReference backAction;
     [SerializeField] private CurrentSettings currentSettings;
-    
+    [SerializeField] private GameObject creditImage;
 
-
+    private bool _toggleCredits = false;
     private int _currentSelection = 0;
     private bool canInput = true;
     private bool _canSelect = true;
@@ -30,7 +30,7 @@ public class StartMenuControllerTwo : MonoBehaviour
 
     private void Update()
     {
-
+        creditImage.SetActive(_toggleCredits);
         HandleSelection();
 
         if (moveAction.action.ReadValue<Vector2>().y > 0 && _currentSelection > 0 && canInput && _canSelect)
@@ -81,12 +81,21 @@ public class StartMenuControllerTwo : MonoBehaviour
             // If we press back, revert
             if (backAction.action.WasPressedThisFrame())
             {
-                // If menu options is open
-                // toggle menu off, allow selection
-                if (_currentSelection == 1)
+                switch (_currentSelection)
                 {
-                    currentSettings.ManualToggle();
-                    _canSelect = true;
+                    case 0:
+                        break;
+                    case 1:
+                        currentSettings.ManualToggle();
+                        _canSelect = true;
+                        break;
+                    case 2:
+                        _toggleCredits = false;
+                        _canSelect = true;
+                        break;
+                    case 3: 
+                        break;
+                    
                 }
             }
         }
@@ -106,7 +115,8 @@ public class StartMenuControllerTwo : MonoBehaviour
                 _canSelect = false;
                 break;
             case 2:
-                //SceneManager.LoadScene(2);
+                _toggleCredits = true;
+                _canSelect = false;
                 break;
             case 3:
                 Application.Quit();
