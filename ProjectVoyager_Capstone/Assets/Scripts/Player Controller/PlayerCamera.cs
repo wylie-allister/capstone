@@ -39,8 +39,18 @@ public class PlayerCamera : MonoBehaviour
         
     }
 
-    public void WallRideLean()
+    public void WallRideLean(bool leftWall, bool rightWall, Stance stance)
     {
+        float targetAngle = 0f;
+        
+        if (leftWall && stance == Stance.Wallride)
+            targetAngle = -wallrideAngle;
+        else if (rightWall && stance == Stance.Wallride)
+            targetAngle = wallrideAngle;
+        
+        _eulerAngles.z = Mathf.LerpAngle(_eulerAngles.z, targetAngle, Time.deltaTime * 5.0f);
+
+        transform.eulerAngles = _eulerAngles;
     }
 
     public void UpdateRotation(CameraInput input)

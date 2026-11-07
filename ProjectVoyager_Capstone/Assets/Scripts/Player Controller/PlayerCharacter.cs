@@ -20,7 +20,8 @@ public struct CharacterState
     public Stance Stance;
     public Vector3 Velocity;
     public Vector3 Acceleration;
-    public Vector3 SpawnLocation;
+    public bool TouchingLeftWall;
+    public bool TouchingRightWall;
 }
 
 // Struct that holds all relavent character input variables
@@ -87,11 +88,12 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     [SerializeField] private LayerMask spawnRelocationLayer;
     
     [Header("Wallride Settings")]
-    [Space] [SerializeField] private float wallrideGravity = -15.0f;
+    [SerializeField] private float wallrideGravity = -15.0f;
     [SerializeField] private float wallrideJumpForce = 20.0f;
     [SerializeField] private float wallrideSpeed = 8.0f;
     [SerializeField] private float wallrideStickForce = 5.0f;
     [SerializeField] private float wallrideDuration = 2.0f;
+    [SerializeField] private float wallDetectionRange = 0.6f;
     
     [Header("Exposed Debug Vars")] 
     public Vector3 PlayerVelocity;
@@ -113,6 +115,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
     // Wallride 
     private bool _canWallRide;
+    private bool _wallrideHoldToggle = false;
     private bool _canWallJump;
     private Vector3 _wallNormal;
     private float _wallrideTimer;
@@ -254,7 +257,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             if (_canWallRide && _requestedWallride &&
                 _state.Stance != Stance.Wallride)
             {
-                Debug.Log("Swap to wallride, reset wallride timer");
+                ////Debug.Log("Swap to wallride, reset wallride timer");
                 _state.Stance = Stance.Wallride;
                 _wallrideTimer = 0f;
             }
@@ -262,7 +265,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             // If we can wallride and stance is wallride, handle wallride vel, otherwise handle normal air velocity
             if (_state.Stance == Stance.Wallride && _canWallRide)
             {
-                //Debug.Log("STANCE WALLRIDE" + $" {_state.Stance}");
+                ////Debug.Log("STANCE WALLRIDE" + $" {_state.Stance}");
                 HandleWallrideVelocity(ref currentVelocity, deltaTime);
                 
             }
@@ -295,7 +298,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             _wallrideTimer = 0f;    
             
             // Set stance to stand
-            Debug.Log("WALL JUMP STANCE TO STAND");
+            //Debug.Log("WALL JUMP STANCE TO STAND");
             _state.Stance = Stance.Stand;
 
             // Force unground for velocity input
@@ -421,7 +424,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             // Stop - This is what is responsible for the slide boosting bug | possible feature :D 
             if (currentVelocity.magnitude < slideEndSpeed)
             {
-                Debug.Log("STABLEGROUNDVEL STANCE TO CROUCH");
+                //Debug.Log("STABLEGROUNDVEL STANCE TO CROUCH");
                 _state.Stance = Stance.Crouch;
             }
         }
@@ -500,44 +503,42 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     
     private void HandleWallrideVelocity(ref Vector3 currentVelocity, float deltaTime)
     {
-        //Debug.Log($"wrR: {_requestedWallride}, wjR: {_requestedWallJump} \ncWR: {_canWallRide}, cWJ: {_canWallJump}\n st: {_state.Stance}");
+        ////Debug.Log($"wrR: {_requestedWallride}, wjR: {_requestedWallJump} \ncWR: {_canWallRide}, cWJ: {_canWallJump}\n st: {_state.Stance}");
         // Increment wall ride timer
-        if (_requestedWallride && _canWallRide)
+
+
+        HandleWallJumpRequest(ref currentVelocity, deltaTime);
+        
+        _wallrideTimer += deltaTime;
+
+        // Get vertical speed, and target speed
+        float verticalSpeed = Vector3.Dot(currentVelocity, motor.CharacterUp * 0.5f);
+
+        float targetVerticalSpeed = -wallrideSpeed;
+
+        // Calc new vertical speed based on target speed
+        float newVerticalSpeed = Mathf.MoveTowards(
+            verticalSpeed,
+            targetVerticalSpeed,
+            Mathf.Abs(wallrideGravity) * deltaTime
+        );
+
+        currentVelocity += motor.CharacterUp * (newVerticalSpeed - verticalSpeed);
+
+        // Keep player against wall
+        currentVelocity += -_wallNormal * wallrideStickForce * deltaTime;
+
+        
+
+        // End wallride after duration or if there are no walls present
+        if (_wallrideTimer >= wallrideDuration || !_wallrideWallsPresent)
         {
-            HandleWallJumpRequest(ref currentVelocity, deltaTime);
-            
-            _wallrideTimer += deltaTime;
-
-            // Get vertical speed, and target speed
-            float verticalSpeed = Vector3.Dot(currentVelocity, motor.CharacterUp);
-
-            float targetVerticalSpeed = -wallrideSpeed;
-
-            // Calc new vertical speed based on target speed
-            float newVerticalSpeed = Mathf.MoveTowards(
-                verticalSpeed,
-                targetVerticalSpeed,
-                Mathf.Abs(wallrideGravity) * deltaTime
-            );
-
-            currentVelocity += motor.CharacterUp * (newVerticalSpeed - verticalSpeed);
-
-            // Keep player against wall
-            currentVelocity += -_wallNormal * wallrideStickForce * deltaTime;
-
-            
-
-            // End wallride after duration
-            if (_wallrideTimer >= wallrideDuration)
-            {
-                _wallrideTimer = 0f;
-                Debug.Log("WALLRIDEVEL STANCE TO STAND");
-                _state.Stance = Stance.Stand;
-                _canWallRide = false;
-                _canWallJump = false;
-            }
+            _wallrideTimer = 0f;
+            //Debug.Log("WALLRIDEVEL STANCE TO STAND");
+            _state.Stance = Stance.Stand;
+            _canWallRide = false;
+            _canWallJump = false;
         }
-
     }
 
     public void HandleSlideSteering(ref Vector3 currentVel, Vector3 movement, float deltaTime)
@@ -573,7 +574,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         {
             //Debug.DrawRay(transform.position, currentVelocity, Color.red, 5.0f);
             //Debug.DrawRay(transform.position, _lastState.Velocity, Color.green, 5.0f);
-            Debug.Log("SLIDEVEL STANCE TO SLIDE");
+            //Debug.Log("SLIDEVEL STANCE TO SLIDE");
             _state.Stance = Stance.Slide;
                     
             // if landing on stable ground, vel is projected onto a flat plane
@@ -609,7 +610,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         // Crouch
         if (_requestedCrouch && _state.Stance is Stance.Stand)
         {
-            Debug.Log("BEFORECHARUPDATE STANCE TO CROUCH");
+            //Debug.Log("BEFORECHARUPDATE STANCE TO CROUCH");
             _state.Stance = Stance.Crouch;
             motor.SetCapsuleDimensions(radius: motor.Capsule.radius, height: crouchHeight,
                 yOffset: crouchHeight * 0.5f);
@@ -620,8 +621,8 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     {
         if (!motor.GroundingStatus.IsStableOnGround && _state.Stance is Stance.Slide)
         {
-            Debug.Log("POSTGROUNDUPDATE STANCE TO CROUCH");
-            _state.Stance = Stance.Crouch;
+            //Debug.Log("POSTGROUNDUPDATE STANCE TO CROUCH");
+            _state.Stance = Stance.Stand;
         }
     }
 
@@ -649,7 +650,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             }
             else
             {
-                Debug.Log("AFTERCHAR STANCE TO STAND");
+                //Debug.Log("AFTERCHAR STANCE TO STAND");
                 _state.Stance = Stance.Stand;
             }
         }
@@ -681,7 +682,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         if (HapticController.instance != null && _timeSinceLastGround != 0 && _timeSinceLastGround <= 0.5f)
         {
             HapticController.instance.QuickRumble();
-            //Debug.Log("Haptic Pulse");
+            ////Debug.Log("Haptic Pulse");
         }
     }
 
@@ -738,24 +739,28 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     {
         if (Physics.Raycast(transform.position, motor.CharacterForward, 1.5f, spawnRelocationLayer, QueryTriggerInteraction.Collide))
         {
-            //Debug.Log("Spawn Updated");
+            ////Debug.Log("Spawn Updated");
             spawnLocation.position = transform.position;
         }
     }
 
     private void HandleWallRideRayCasts()
     {
-        bool wallToRight = Physics.Raycast(transform.position, motor.CharacterRight, 0.55f);
-        bool wallToLeft = Physics.Raycast(transform.position, -motor.CharacterRight, 0.55f);
+        bool wallToRight = Physics.Raycast(transform.position, motor.CharacterRight, wallDetectionRange);
+        bool wallToLeft = Physics.Raycast(transform.position, -motor.CharacterRight, wallDetectionRange);
+
+        _state.TouchingLeftWall = wallToLeft;
+        _state.TouchingRightWall = wallToRight;
+        
         if (wallToLeft && !_state.Grounded || wallToRight && !_state.Grounded)
         {
             _wallrideWallsPresent = true;
-            //Debug.Log("WALL DETECTED");
+            ////Debug.Log("WALL DETECTED");
         }
         else
         {
             _wallrideWallsPresent = false;
-            //Debug.Log("NO WALLS");
+            ////Debug.Log("NO WALLS");
         }
     }
 

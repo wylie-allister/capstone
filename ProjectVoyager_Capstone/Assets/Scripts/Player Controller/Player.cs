@@ -67,6 +67,7 @@ public class Player : MonoBehaviour
         if (disableMovement)
             return;
         
+        
         var input = _inputActions.Gameplay;
         float deltaTime = Time.deltaTime;
         
@@ -88,7 +89,11 @@ public class Player : MonoBehaviour
         playerCharacter.UpdateInput(characterInput);
         playerCharacter.UpdateBody(deltaTime);
 
-        if (input.Crouch.WasPressedThisFrame() && playerCharacter.GetState().Stance != Stance.Slide)
+        CharacterState playerState = playerCharacter.GetState();
+
+        playerCamera.WallRideLean(playerState.TouchingLeftWall, playerState.TouchingRightWall, playerState.Stance);
+        
+        if (input.Crouch.WasPressedThisFrame() && playerState.Stance != Stance.Slide)
         {
             playerAnim.TriggerSlide();
         }

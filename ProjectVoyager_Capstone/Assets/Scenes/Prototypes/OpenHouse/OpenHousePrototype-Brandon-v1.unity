@@ -680,6 +680,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8749991576805875827, guid: d6c69cc176f87994cb2460966184d0c5, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.69321
+      objectReference: {fileID: 0}
+    - target: {fileID: -8749991576805875827, guid: d6c69cc176f87994cb2460966184d0c5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1364
+      objectReference: {fileID: 0}
+    - target: {fileID: -8749991576805875827, guid: d6c69cc176f87994cb2460966184d0c5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8749991576805875827, guid: d6c69cc176f87994cb2460966184d0c5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -7371
+      objectReference: {fileID: 0}
     - target: {fileID: -8747264537902136033, guid: d6c69cc176f87994cb2460966184d0c5, type: 3}
       propertyPath: m_LocalScale.y
       value: 8.070888
@@ -740,9 +756,29 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -9402
       objectReference: {fileID: 0}
+    - target: {fileID: -865481416246779958, guid: d6c69cc176f87994cb2460966184d0c5, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.62185
+      objectReference: {fileID: 0}
+    - target: {fileID: -865481416246779958, guid: d6c69cc176f87994cb2460966184d0c5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2879
+      objectReference: {fileID: 0}
+    - target: {fileID: -865481416246779958, guid: d6c69cc176f87994cb2460966184d0c5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -865481416246779958, guid: d6c69cc176f87994cb2460966184d0c5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6599
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d6c69cc176f87994cb2460966184d0c5, type: 3}
       propertyPath: m_Name
       value: levelTest
+      objectReference: {fileID: 0}
+    - target: {fileID: 2845200726830935431, guid: d6c69cc176f87994cb2460966184d0c5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8828307087798737873, guid: d6c69cc176f87994cb2460966184d0c5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1192,8 +1228,8 @@ Transform:
   m_GameObject: {fileID: 256344856}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1945, y: -2.2737368e-13, z: -6999.304}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 1945, y: 0, z: -6999.304}
+  m_LocalScale: {x: 1.637, y: 1, z: 2.0100763}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 358218088}
@@ -2502,12 +2538,20 @@ PrefabInstance:
       value: Player_Anim
       objectReference: {fileID: 0}
     - target: {fileID: 5834244066087921406, guid: 150e26ea854129849b4d94419ee44e3a, type: 3}
+      propertyPath: wallrideSpeed
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 5834244066087921406, guid: 150e26ea854129849b4d94419ee44e3a, type: 3}
       propertyPath: wallrideGravity
-      value: -12
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 5834244066087921406, guid: 150e26ea854129849b4d94419ee44e3a, type: 3}
       propertyPath: wallrideDuration
-      value: 3
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5834244066087921406, guid: 150e26ea854129849b4d94419ee44e3a, type: 3}
+      propertyPath: wallrideJumpForce
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6913362556365260978, guid: 150e26ea854129849b4d94419ee44e3a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2548,6 +2592,10 @@ PrefabInstance:
     - target: {fileID: 6913362556365260978, guid: 150e26ea854129849b4d94419ee44e3a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635624218082221103, guid: 150e26ea854129849b4d94419ee44e3a, type: 3}
+      propertyPath: wallrideAngle
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4071,7 +4119,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1653816010
 Transform:
   m_ObjectHideFlags: 0
