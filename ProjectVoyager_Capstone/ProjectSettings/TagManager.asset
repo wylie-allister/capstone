@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Companion
   - PlayerSpawn
+  - WarpBack
   layers:
   - Default
   - TransparentFX
