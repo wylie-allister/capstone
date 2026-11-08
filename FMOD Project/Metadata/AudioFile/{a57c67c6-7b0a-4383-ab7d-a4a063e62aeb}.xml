@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{a57c67c6-7b0a-4383-ab7d-a4a063e62aeb}">
+		<property name="assetPath">
+			<value>Movement/Jump/TSP_HTM_kick_jump_up_cleaner.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.21158730158730157</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{b28a532f-913b-4ea2-82aa-06f51fa99164}</destination>
+		</relationship>
+	</object>
+</objects>

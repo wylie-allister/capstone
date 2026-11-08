@@ -9,8 +9,17 @@ public class CurrentSettings : MonoBehaviour
     InputAction toggleMenu;
     public Slider camSens;
     public string json;
-    public GameObject menu;
+    public GameObject obMenu;
+    public GameObject auMenu;
+    public GameObject viMenu;
+    public GameObject HUDMenu;
+    
+
     public bool isOpen = false;
+    public GameObject saveButton;
+
+    public GameObject lineButtons;
+ 
 
     public SettingsState sett = new SettingsState();
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -19,7 +28,10 @@ public class CurrentSettings : MonoBehaviour
         save = InputSystem.actions.FindAction("Save JSON");
         toggleMenu = InputSystem.actions.FindAction("Toggle Menu");
         sett.cameraSensitivity = 0.1f;
-        menu.SetActive(false);
+        
+        obMenu.SetActive(false);
+        saveButton.SetActive(false);
+        lineButtons.SetActive(false);
 
     }
 
@@ -34,6 +46,51 @@ public class CurrentSettings : MonoBehaviour
         }
         LoadJSON(sett);
         Menu();
+    }
+
+    //this should be done with enums tbh
+    public void Controls()
+    {
+        obMenu.SetActive(true);
+        auMenu.SetActive(false);
+        viMenu.SetActive(false);
+        HUDMenu.SetActive(false);
+    }
+
+    public void Audio()
+    {
+        obMenu.SetActive(false);
+        auMenu.SetActive(true);
+        viMenu.SetActive(false);
+        HUDMenu.SetActive(false);
+    }
+
+    public void Visual()
+    {
+        obMenu.SetActive(false);
+        auMenu.SetActive(false);
+        viMenu.SetActive(true);
+        HUDMenu.SetActive(false);
+    }
+
+    public void HUD()
+    {
+        obMenu.SetActive(false);
+        auMenu.SetActive(false);
+        viMenu.SetActive(false);
+        HUDMenu.SetActive(true);
+    }
+
+    public void SaveButton()
+    {
+        SaveJSON(sett);
+        isOpen = false;
+        obMenu.SetActive(isOpen);
+        auMenu.SetActive(isOpen);
+        viMenu.SetActive(isOpen);
+        HUDMenu.SetActive(isOpen);
+        saveButton.SetActive(isOpen);
+        lineButtons.SetActive(isOpen);
     }
 
     public void SaveJSON(SettingsState setti)
@@ -54,7 +111,9 @@ public class CurrentSettings : MonoBehaviour
         if (toggleMenu.WasPerformedThisFrame())
         {
             isOpen = !isOpen;
-            menu.SetActive(isOpen);
+            obMenu.SetActive(isOpen);
+            saveButton.SetActive(isOpen);
+            lineButtons.SetActive(isOpen);
         }
     }
 }

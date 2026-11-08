@@ -98,7 +98,7 @@ public class CompanionLog : MonoBehaviour
     {
         var input = _inputActions.Gameplay;
 
-        if (input.Swap.WasPressedThisFrame())
+        if (input.Swap.WasPressedThisFrame() && hasTestComp == true)
         {
             companionList[comp].SetActive(false);
             comp++;

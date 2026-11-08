@@ -97,6 +97,7 @@ MonoBehaviour:
   cameraLean: {fileID: 3827362816988176733}
   spawnLocation: {fileID: 0}
   disableMovement: 0
+  cs: {fileID: 0}
 --- !u!136 &5724226601281079610
 CapsuleCollider:
   m_ObjectHideFlags: 8
@@ -646,6 +647,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d559c62d343dd73449e0d39febba156f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCamera
+  settings: {fileID: 0}
   sensitivity: 0.1
   maxY: 85
   minY: -85
@@ -819,10 +821,13 @@ MonoBehaviour:
   crouchHeightResponse: 15
   standCameraTargetHeight: 0.9
   crouchCameraTargetHeight: 0.7
-  dashForce: 3
+  dashForce: 30
   dashDelay: 0.75
   killzoneLayer:
     serializedVersion: 2
     m_Bits: 0
   spawnLocation: {fileID: 0}
+  spawnRelocationLayer:
+    serializedVersion: 2
+    m_Bits: 0
   PlayerVelocity: {x: 0, y: 0, z: 0}

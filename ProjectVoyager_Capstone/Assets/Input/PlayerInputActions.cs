@@ -123,6 +123,16 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""priority"": 0
                 },
                 {
+                    ""name"": ""Wallride"",
+                    ""type"": ""Button"",
+                    ""id"": ""5545bcb9-3659-4fa0-9f46-649240c135d7"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false,
+                    ""priority"": 0
+                },
+                {
                     ""name"": ""Crouch"",
                     ""type"": ""Button"",
                     ""id"": ""1b2c7a85-27d2-437b-8afb-bc4ac128e940"",
@@ -205,6 +215,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2a51eb4c-eb1d-4392-8d9a-d92bea7e88da"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Wallride"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -422,6 +443,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Gameplay_Look = m_Gameplay.FindAction("Look", throwIfNotFound: true);
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
         m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
+        m_Gameplay_Wallride = m_Gameplay.FindAction("Wallride", throwIfNotFound: true);
         m_Gameplay_Crouch = m_Gameplay.FindAction("Crouch", throwIfNotFound: true);
         m_Gameplay_Dash = m_Gameplay.FindAction("Dash", throwIfNotFound: true);
         m_Gameplay_Interact = m_Gameplay.FindAction("Interact", throwIfNotFound: true);
@@ -514,6 +536,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Look;
     private readonly InputAction m_Gameplay_Move;
     private readonly InputAction m_Gameplay_Jump;
+    private readonly InputAction m_Gameplay_Wallride;
     private readonly InputAction m_Gameplay_Crouch;
     private readonly InputAction m_Gameplay_Dash;
     private readonly InputAction m_Gameplay_Interact;
@@ -541,6 +564,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Gameplay/Jump".
         /// </summary>
         public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay/Wallride".
+        /// </summary>
+        public InputAction @Wallride => m_Wrapper.m_Gameplay_Wallride;
         /// <summary>
         /// Provides access to the underlying input action "Gameplay/Crouch".
         /// </summary>
@@ -592,6 +619,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @Wallride.started += instance.OnWallride;
+            @Wallride.performed += instance.OnWallride;
+            @Wallride.canceled += instance.OnWallride;
             @Crouch.started += instance.OnCrouch;
             @Crouch.performed += instance.OnCrouch;
             @Crouch.canceled += instance.OnCrouch;
@@ -624,6 +654,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @Wallride.started -= instance.OnWallride;
+            @Wallride.performed -= instance.OnWallride;
+            @Wallride.canceled -= instance.OnWallride;
             @Crouch.started -= instance.OnCrouch;
             @Crouch.performed -= instance.OnCrouch;
             @Crouch.canceled -= instance.OnCrouch;
@@ -804,6 +837,13 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnJump(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Wallride" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnWallride(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Crouch" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
