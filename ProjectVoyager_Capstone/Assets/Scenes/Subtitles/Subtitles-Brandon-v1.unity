@@ -947,6 +947,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SubtitleManager
   subtitleText: {fileID: 1431145636}
   letterboxImage: {fileID: 1671598565}
+  characterTagText: {fileID: 4399881596616176867}
+  characterTagLetterboxImage: {fileID: 4399881596616176866}
   skipTextDisplay: {fileID: -2226935665757672279, guid: 49175b4d38383674a93cd6be90a448e5, type: 3}
   subtitlePrefab: {fileID: 4399881596616176864}
   currentSubtitle:
@@ -958,7 +960,7 @@ MonoBehaviour:
   maxCharactersPerLine: 40
   maxLinesPerSubtitle: 2
   textSpeed: 5
-  letterboxOpacity: 1
+  letterboxOpacity: 0.735
   enableLetterbox: 1
   _existingSubtitles:
   - subtitleText: .tnemetats siht etorw ymmes seY .tey ecalp ni ton si metsys eltitbus-bus
@@ -1043,6 +1045,14 @@ PrefabInstance:
     - target: {fileID: 4263954621903356488, guid: 2819c2d3c1c161e4f8898eb6c9c796c1, type: 3}
       propertyPath: m_HorizontalAlignment
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5453165986069595637, guid: 2819c2d3c1c161e4f8898eb6c9c796c1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8465888533321818026, guid: 2819c2d3c1c161e4f8898eb6c9c796c1, type: 3}
+      propertyPath: m_text
+      value: Semmy
       objectReference: {fileID: 0}
     - target: {fileID: 8518189574895047004, guid: 2819c2d3c1c161e4f8898eb6c9c796c1, type: 3}
       propertyPath: m_Pivot.x
@@ -1139,6 +1149,28 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8518189574895047004, guid: 2819c2d3c1c161e4f8898eb6c9c796c1, type: 3}
   m_PrefabInstance: {fileID: 4399881596616176863}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4399881596616176866 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5728516545684600888, guid: 2819c2d3c1c161e4f8898eb6c9c796c1, type: 3}
+  m_PrefabInstance: {fileID: 4399881596616176863}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+--- !u!114 &4399881596616176867 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8465888533321818026, guid: 2819c2d3c1c161e4f8898eb6c9c796c1, type: 3}
+  m_PrefabInstance: {fileID: 4399881596616176863}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

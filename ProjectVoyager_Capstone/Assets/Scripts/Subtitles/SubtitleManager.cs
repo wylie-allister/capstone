@@ -41,6 +41,8 @@ public class SubtitleManager : MonoBehaviour
     [Header("References")]
     [SerializeField] private TextMeshProUGUI subtitleText;
     [SerializeField] private Image letterboxImage;
+    [SerializeField] private TextMeshProUGUI characterTagText;
+    [SerializeField] private Image characterTagLetterboxImage;
     [SerializeField] private InputActionReference skipTextDisplay;
     [SerializeField] private GameObject subtitlePrefab;
 
@@ -160,6 +162,7 @@ public class SubtitleManager : MonoBehaviour
         if (!_displaySubtitle)
             return;
 
+        // TODO: REMOVE IMMEDIATELY, THIS IS ONLY FOR DEBUG TESTING
         Subtitle subtitle = _existingSubtitles[1];
         
         // Get subtitle info
@@ -185,16 +188,30 @@ public class SubtitleManager : MonoBehaviour
         RefreshSubtitleSettings();
         
         // Set subtitle text to the formatted string
+        characterTagText.text = charTag;
         subtitleText.text = popupText;
+        
         
     }
 
     private void RefreshSubtitleSettings()
     {
+        // Set font and font size
         subtitleText.font = font;
-        subtitleText.fontSize =  fontSize; 
+        subtitleText.fontSize =  fontSize;
         
-        letterboxImage.color = new Color(letterboxImage.color.r, letterboxImage.color.g, letterboxImage.color.b, letterboxOpacity);
+        characterTagText.font = font;
+        characterTagText.fontSize = fontSize;
+        
+        // Get letterbox color with desired alpha
+        Color desiredLetterboxColor = letterboxImage.color;
+        desiredLetterboxColor.a = letterboxOpacity;
+        
+        // Set letterbox color to letterboxes
+        letterboxImage.color = desiredLetterboxColor;
+        characterTagLetterboxImage.color = desiredLetterboxColor;
+        
+        // Hide or Display letterbox when applicable
         letterboxImage.gameObject.SetActive(enableLetterbox);
     }
 

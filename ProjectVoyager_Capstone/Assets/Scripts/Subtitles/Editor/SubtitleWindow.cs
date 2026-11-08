@@ -71,6 +71,7 @@ public class SubtitleWindow : EditorWindow
             // logs existing subtitle to console
             //_subtitleManagerTarget.DebugLogExistingSubtitles();
             _subtitleManagerTarget.SubtitlePopUp();
+            Repaint();
         }
         
         // Refresh GUI if anything changes within fields
