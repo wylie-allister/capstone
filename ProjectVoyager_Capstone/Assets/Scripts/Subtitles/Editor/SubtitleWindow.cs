@@ -15,6 +15,7 @@ public class SubtitleWindow : EditorWindow
 
     private GUIStyle wrappingTextStyle;
 
+    // Create menu item for subtitle editor, ShowWindow() is what unity calls to open the window
     [MenuItem("Voyager/Subtitle Editor")]
     public static void ShowWindow()
     {
@@ -23,14 +24,17 @@ public class SubtitleWindow : EditorWindow
     
     void OnGUI()
     {
-        
-        
+        // Label
         GUILayout.Label("Subtitle Editor", EditorStyles.boldLabel);
 
+        // Create style for wrapping text in text field
         CreateGUIStyles();
+        
+        // Create and Get subtext field and char tag
         newSubtitleText = (string)EditorGUILayout.TextField("New Subtitle Text", newSubtitleText, wrappingTextStyle, GUILayout.MinHeight(100));
         newCharacterTag = (CharacterTag)EditorGUILayout.EnumPopup("Character Tag", newCharacterTag);
         
+        // Creates new subtitle if text is not empty
         if (GUILayout.Button("Create New Subtitle"))
         {
             if (newSubtitleText == "")
@@ -42,26 +46,34 @@ public class SubtitleWindow : EditorWindow
             HandleSubtitleCreation(newSubtitleText, newCharacterTag);
         }
         
+        // Vertical spacer
         EditorGUILayout.Space();
         EditorGUILayout.Space();
         
+        // Handle the serialized object for existing subtitles
         HandleSerializedSubtitles();
 
+        // Save subtitles to file
         if (GUILayout.Button("Save Existing Subtitles"))
         {
             _subtitleManagerTarget.SaveCurrentSubtitlesToFile();
         }
         
+        // Load subtitles from file
         if (GUILayout.Button("Load Existing Subtitles"))
         {
             _subtitleManagerTarget.LoadExistingSubtitlesFromFile();
         }
         
-        if (GUILayout.Button("Debug Log Subtitle Manager Subtitles"))
+        // Debug Function
+        if (GUILayout.Button("DEBUG BUTTON :D"))
         {
-            _subtitleManagerTarget.DebugLogExistingSubtitles();
+            // logs existing subtitle to console
+            //_subtitleManagerTarget.DebugLogExistingSubtitles();
+            _subtitleManagerTarget.SubtitlePopUp();
         }
         
+        // Refresh GUI if anything changes within fields
         if (GUI.changed)
             Repaint();
 
@@ -93,13 +105,17 @@ public class SubtitleWindow : EditorWindow
         _subtitleManagerTarget = FindFirstObjectByType<SubtitleManager>();
         if (_subtitleManagerTarget == null) return;
         
+        // Refresh target
         if (_serializedSubtitleMTarget == null || _serializedSubtitleMTarget.targetObject != _subtitleManagerTarget)
         {
             _serializedSubtitleMTarget = new SerializedObject(_subtitleManagerTarget);
             _serializedSubtitleProperty = _serializedSubtitleMTarget.FindProperty("_existingSubtitles");
         }
         
+        // Update serialized target
         _serializedSubtitleMTarget.Update();
+        
+        // Create property field to display existing subtitles
         EditorGUILayout.PropertyField(_serializedSubtitleProperty, true);
         _serializedSubtitleMTarget.ApplyModifiedProperties();
     }

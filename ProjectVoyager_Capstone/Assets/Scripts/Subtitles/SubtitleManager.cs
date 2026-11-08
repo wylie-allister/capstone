@@ -42,6 +42,7 @@ public class SubtitleManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI subtitleText;
     [SerializeField] private Image letterboxImage;
     [SerializeField] private InputActionReference skipTextDisplay;
+    [SerializeField] private GameObject subtitlePrefab;
 
     [Header("Current Subtitle")] 
     [SerializeField]
@@ -50,7 +51,7 @@ public class SubtitleManager : MonoBehaviour
     [Header("Subtitle Settings")] 
     [Min(36)]
     [SerializeField] private float fontSize = 36;
-    [SerializeField] private Font font;
+    [SerializeField] private TMP_FontAsset font;
     [Range(1, 40)]
     [SerializeField] private int maxCharactersPerLine = 40;
     [Range(1, 3)]
@@ -149,7 +150,55 @@ public class SubtitleManager : MonoBehaviour
             Debug.Log("No subtitles found in Subtitle Manager.");
         }
     }
-    
+
+    public void SubtitlePopUp()//Subtitle subtitle)
+    {
+        // Toggle sub display
+        _displaySubtitle = !_displaySubtitle;
+
+        // If not displaying, break from function
+        if (!_displaySubtitle)
+            return;
+
+        Subtitle subtitle = _existingSubtitles[1];
+        
+        // Get subtitle info
+        string subText = subtitle.subtitleText;
+        string charTag = subtitle.characterName.ToString();
+
+        // New string for formating 
+        string popupText = string.Empty;
+
+        for (int charIndex = 0; charIndex < subText.Length; charIndex++)
+        {
+            // Add char from subtitles text to the popup string
+            popupText += subText[charIndex];
+            
+            // If at max characters, add the max char and add a new line
+            if (charIndex > 2 && charIndex % maxCharactersPerLine == 1)
+            {
+                popupText += "\n";
+            }
+        }
+
+        // Refresh subtitle settings to class settings
+        RefreshSubtitleSettings();
+        
+        // Set subtitle text to the formatted string
+        subtitleText.text = popupText;
+        
+    }
+
+    private void RefreshSubtitleSettings()
+    {
+        subtitleText.font = font;
+        subtitleText.fontSize =  fontSize; 
+        
+        letterboxImage.color = new Color(letterboxImage.color.r, letterboxImage.color.g, letterboxImage.color.b, letterboxOpacity);
+        letterboxImage.gameObject.SetActive(enableLetterbox);
+    }
+
+
     // Look into custom editor window for saving subtitles directly then pulling
     // from save data to get the subtitle
 }
