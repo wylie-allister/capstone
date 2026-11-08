@@ -172,6 +172,7 @@ public class SubtitleManager : MonoBehaviour
         // New string for formating 
         string popupText = string.Empty;
 
+        // Loop through 
         for (int charIndex = 0; charIndex < subText.Length; charIndex++)
         {
             // Add char from subtitles text to the popup string

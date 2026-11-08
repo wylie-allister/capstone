@@ -960,19 +960,15 @@ MonoBehaviour:
   maxCharactersPerLine: 40
   maxLinesPerSubtitle: 2
   textSpeed: 5
-  letterboxOpacity: 0.735
+  letterboxOpacity: 0.731
   enableLetterbox: 1
   _existingSubtitles:
-  - subtitleText: .tnemetats siht etorw ymmes seY .tey ecalp ni ton si metsys eltitbus-bus
-      eht revewoh ,sretcarahc ytrof revo era ew fi depparw eb lliw eltitbus eht ton
-      ro erehw fo tset a si sihT .gniitamrof lautca yna evah ton dluohs taht ,eltitbus
-      tset a si sihT
+  - subtitleText: I said something really smart!
     characterName: 2
-  - subtitleText: This is a test subtitle, that should not have any actual formatiing.
-      This is a test of where or not the subtitle will be wrapped if we are over
-      forty characters, however the sub-subtitle system is not in place yet. Yes
-      semmy wrote this statement.
-    characterName: 5
+  - subtitleText: I said something really smart!
+    characterName: 2
+  - subtitleText: I said something really smart!
+    characterName: 4
 --- !u!4 &1934859446
 Transform:
   m_ObjectHideFlags: 0
@@ -1033,10 +1029,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4263954621903356488, guid: 2819c2d3c1c161e4f8898eb6c9c796c1, type: 3}
       propertyPath: m_text
-      value: "This is a test subtitle, that should not h\nave any actual formatiing.
-        This is a tes\nt of where or not the subtitle will be w\nrapped if we are
-        over forty characters, \nhowever the sub-subtitle system is not i\nn place
-        yet. Yes semmy wrote this statem\nent."
+      value: I said something really smart!
       objectReference: {fileID: 0}
     - target: {fileID: 4263954621903356488, guid: 2819c2d3c1c161e4f8898eb6c9c796c1, type: 3}
       propertyPath: m_VerticalAlignment
@@ -1052,7 +1045,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8465888533321818026, guid: 2819c2d3c1c161e4f8898eb6c9c796c1, type: 3}
       propertyPath: m_text
-      value: Semmy
+      value: Cookie
       objectReference: {fileID: 0}
     - target: {fileID: 8518189574895047004, guid: 2819c2d3c1c161e4f8898eb6c9c796c1, type: 3}
       propertyPath: m_Pivot.x

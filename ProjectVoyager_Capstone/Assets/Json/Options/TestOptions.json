@@ -1,16 +1,16 @@
 {
     "savedObjects": [
         {
-            "subtitleText": "I said something really smart!",
+            "subtitleText": ".tnemetats siht etorw ymmes seY .tey ecalp ni ton si metsys eltitbus-bus eht revewoh ,sretcarahc ytrof revo era ew fi depparw eb lliw eltitbus eht ton ro erehw fo tset a si sihT .gniitamrof lautca yna evah ton dluohs taht ,eltitbus tset a si sihT",
             "characterName": 2
         },
         {
-            "subtitleText": "I said something really smart!",
-            "characterName": 4
+            "subtitleText": "This is my test subtitle",
+            "characterName": 3
         },
         {
-            "subtitleText": "I said something really smart!",
-            "characterName": 2
+            "subtitleText": "This is a test subtitle, that should not have any actual formatiing. This is a test of where or not the subtitle will be wrapped if we are over forty characters, however the sub-subtitle system is not in place yet. Yes semmy wrote this statement.",
+            "characterName": 5
         }
     ]
 }
