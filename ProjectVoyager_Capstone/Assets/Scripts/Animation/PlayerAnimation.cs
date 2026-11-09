@@ -3,7 +3,10 @@ using UnityEngine;
 public class PlayerAnimation : MonoBehaviour
 {
     [SerializeField] 
-    private Animator _animator;
+    private Animator _armAnimator;
+    
+    [SerializeField] 
+    private Animator _legAnimator;
     
     void Start()
     {
@@ -18,6 +21,7 @@ public class PlayerAnimation : MonoBehaviour
 
     public void TriggerSlide()
     {
-        _animator.SetTrigger("Dashing");
+        _armAnimator.SetTrigger("Sliding");
+        _legAnimator.SetTrigger("Sliding");
     }
 }

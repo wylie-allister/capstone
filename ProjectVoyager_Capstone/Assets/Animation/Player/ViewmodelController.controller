@@ -31,7 +31,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Dashing
+    m_ConditionEvent: Sliding
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 7665251276586435483}
@@ -41,7 +41,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
-  m_ExitTime: 0.625
+  m_ExitTime: 0.75
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -81,7 +81,7 @@ AnimatorController:
   m_Name: ViewmodelController
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: Dashing
+  - m_Name: Sliding
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
