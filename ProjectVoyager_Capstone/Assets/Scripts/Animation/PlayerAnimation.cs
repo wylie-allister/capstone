@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerAnimation : MonoBehaviour
 {
@@ -16,7 +17,14 @@ public class PlayerAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        #if UNITY_EDITOR
+
+        if (Keyboard.current.digit0Key.wasPressedThisFrame)
+        {
+            _armAnimator.SetTrigger("Debug");
+        }
         
+        #endif
     }
 
     public void TriggerSlide()

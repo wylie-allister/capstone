@@ -51,7 +51,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: 2574632462191796213}
   cacheVersion: 131861
-  cacheTime: 639295653889358323
+  cacheTime: 639297529696877657
   SerializableEventsDict:
   - key: event:/Goop
     index: 0
@@ -70,7 +70,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639295653889320819
+  lastModified: 639297529696857710
   FileSizes:
   - Name: 
     Value: 812
@@ -90,7 +90,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 639295653889358323
+  lastModified: 639297529696877657
   FileSizes: []
   Exists: 1
 --- !u!114 &8357786303673962235
@@ -108,6 +108,6 @@ MonoBehaviour:
   Path: FMOD/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639295653889310304
+  lastModified: 639297529696847736
   FileSizes: []
   Exists: 1
