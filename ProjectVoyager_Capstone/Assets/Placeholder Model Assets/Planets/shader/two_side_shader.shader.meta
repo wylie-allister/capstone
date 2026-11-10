@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: f9b2a32f538fa3a43a3f285523b908f1
+timeCreated: 1429040915
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 34894
+  packageName: Poly Planets
+  packageVersion: draft
+  assetPath: Assets/Planets/shader/two_side_shader.shader
+  uploadId: 59745

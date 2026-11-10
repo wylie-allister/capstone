@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a552dd281388320479bd223949cfaf55
+timeCreated: 1429040425
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 34894
+  packageName: Poly Planets
+  packageVersion: draft
+  assetPath: Assets/Planets/Materials/Materials/stars.mat
+  uploadId: 59745
