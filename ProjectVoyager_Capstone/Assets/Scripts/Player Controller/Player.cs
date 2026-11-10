@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerCamera playerCamera;
     [SerializeField] private CameraSpring cameraSpring;
     [SerializeField] private CameraLean cameraLean;
+    [SerializeField] private PlayerAnimation playerAnim;
 
     [SerializeField] private Transform spawnLocation;
     [SerializeField] private bool disableMovement = false;
@@ -69,6 +70,7 @@ public class Player : MonoBehaviour
         if (disableMovement)
             return;
         
+        
         var input = _inputActions.Gameplay;
         float deltaTime = Time.deltaTime;
         
@@ -89,35 +91,16 @@ public class Player : MonoBehaviour
         };
         playerCharacter.UpdateInput(characterInput);
         playerCharacter.UpdateBody(deltaTime);
+
+        CharacterState playerState = playerCharacter.GetState();
+
+        playerCamera.WallRideLean(playerState.TouchingLeftWall, playerState.TouchingRightWall, playerState.Stance);
         
-        // Teleport script for in editor purposes
-        // tap T to teleport to wherever you are looking, assuming there is a ray collision (e.g. sky nono work)
-        #if UNITY_EDITOR
-        /*
-        var moveAction = _inputActions.Gameplay.Move;
-        if (moveAction.IsPressed())
+        if (input.Crouch.WasPressedThisFrame() && playerState.Stance != Stance.Slide)
         {
-            foreach (var control in moveAction.controls)
-            {
-                if (control.IsPressed())
-                {
-                    Debug.Log($"control: {control} pressed");
-                }
-            }
+            playerAnim.TriggerSlide();
         }
-        */
-        if (Keyboard.current.tKey.wasPressedThisFrame)
-        {
-            Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
-            if (Physics.Raycast(ray, out var hit))
-            {
-                Teleport(hit.point);
-            }
-        }
-        if (Keyboard.current.yKey.wasPressedThisFrame)
-        {
-        }
-        #endif
+        
     }
 
     void LateUpdate()

@@ -10,10 +10,12 @@ public class StartMenuController : MonoBehaviour
     [SerializeField] private Color deselectedColor;
     [SerializeField] private InputActionReference moveAction;
     [SerializeField] private InputActionReference selectAction;
+    
 
 
     private int _currentSelection = 0;
     private bool canInput = true;
+    private bool _canSelect = true;
 
     private float _defaultFontSize;
     [SerializeField] private float selectedFontSize;
@@ -26,7 +28,6 @@ public class StartMenuController : MonoBehaviour
 
     private void Update()
     {
-
         HandleSelection();
 
         if (moveAction.action.ReadValue<Vector2>().y > 0 && _currentSelection > 0 && canInput)
@@ -66,14 +67,13 @@ public class StartMenuController : MonoBehaviour
                 textOptions[i].color = deselectedColor;
                 textOptions[i].fontSize = _defaultFontSize;
             }    
-            
         }
-        
         
     }
 
     private void GoToSelection()
     {
+
         switch (_currentSelection)
         {
             case 0:

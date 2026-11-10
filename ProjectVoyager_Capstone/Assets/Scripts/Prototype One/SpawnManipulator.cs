@@ -11,6 +11,10 @@ public class SpawnManipulator : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if (spawnLocation == null)
+        {
+            spawnLocation = GameObject.FindGameObjectWithTag("PlayerSpawn").transform;
+        }
         _originalSpawnPosition = spawnLocation.position;
     }
 

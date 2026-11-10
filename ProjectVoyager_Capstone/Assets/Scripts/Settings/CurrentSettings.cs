@@ -19,6 +19,8 @@ public class CurrentSettings : MonoBehaviour
     public GameObject saveButton;
 
     public GameObject lineButtons;
+
+    private bool _toggle = false;
  
 
     public SettingsState sett = new SettingsState();
@@ -104,6 +106,21 @@ public class CurrentSettings : MonoBehaviour
     {
         setti = JsonUtility.FromJson<SettingsState>(json);
         
+    }
+
+    // Shitty form of manual toggle -bc used for start menu settings
+    public void ManualToggle()
+    {
+        _toggle = true;
+        if (!_toggle) return;
+        
+        isOpen = !isOpen;
+        obMenu.SetActive(isOpen);
+        saveButton.SetActive(isOpen);
+        lineButtons.SetActive(isOpen);
+        
+        
+        _toggle = false;
     }
 
     public void Menu()

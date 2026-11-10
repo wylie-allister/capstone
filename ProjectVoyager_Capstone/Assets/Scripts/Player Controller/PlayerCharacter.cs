@@ -20,7 +20,8 @@ public struct CharacterState
     public Stance Stance;
     public Vector3 Velocity;
     public Vector3 Acceleration;
-    public Vector3 SpawnLocation;
+    public bool TouchingLeftWall;
+    public bool TouchingRightWall;
 }
 
 // Struct that holds all relavent character input variables
@@ -87,11 +88,12 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     [SerializeField] private LayerMask spawnRelocationLayer;
     
     [Header("Wallride Settings")]
-    [Space] [SerializeField] private float wallrideGravity = -15.0f;
+    [SerializeField] private float wallrideGravity = -15.0f;
     [SerializeField] private float wallrideJumpForce = 20.0f;
     [SerializeField] private float wallrideSpeed = 8.0f;
     [SerializeField] private float wallrideStickForce = 5.0f;
     [SerializeField] private float wallrideDuration = 2.0f;
+    [SerializeField] private float wallDetectionRange = 0.6f;
     
     [Header("Exposed Debug Vars")] 
     public Vector3 PlayerVelocity;
@@ -113,17 +115,23 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
     // Wallride 
     private bool _canWallRide;
+    private bool _wallrideHoldToggle = false;
     private bool _canWallJump;
     private Vector3 _wallNormal;
     private float _wallrideTimer;
     private bool _requestedWallJump;
+    private bool _wallrideWallsPresent;
     
     private float _timeSinceLastGround;
     private float _timeSinceJumpRequest;
     private float _timeSinceDashRequest;
+    private float _timeSinceWallRideRequest;
+    private float _timeSinceWallJumpRequest;
     private bool _ungroundedDueToJump;
 
     private Collider[] _uncrouchOverlapResults;
+
+    private CharacterInput _debuginput;
     
     
     public void Initialize()
@@ -131,6 +139,11 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         // Set state to standing
         _state.Stance = Stance.Stand;
         _lastState = _state;
+
+        if (spawnLocation == null)
+        {
+            spawnLocation = GameObject.FindGameObjectWithTag("PlayerSpawn").transform;
+        }
         
         // Create new overlap collider results for uncrouch
         _uncrouchOverlapResults = new Collider[8];
@@ -141,6 +154,9 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     
     public void UpdateInput(CharacterInput input)
     {
+        // For debug boxes ongui in editor
+        _debuginput = input;
+        
         // Get requested input
         _requestedRotation = input.Rotation;
         _requestedMovement = new Vector3(input.Move.x, 0.0f, input.Move.y);
@@ -152,21 +168,17 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         bool wasRequestingJump = _requestedJump;
         _requestedJump = _requestedJump || input.Jump;
 
-        bool wasRequestingDash = _requestedDash;
         _requestedDash = _requestedDash || input.Dash;
-        
-        _requestedWallride = input.WallRide;
-        _requestedWallJump = input.Jump;
+
+        _requestedWallJump = _requestedWallJump || input.Jump && _state.Stance == Stance.Wallride;
+
+        _requestedWallride = input.WallRide && _wallrideWallsPresent; //_requestedWallride || input.WallRide;
+        //_requestedWallJump = input.Jump;
         
         // Ground timer reset for coyote time
         if (_requestedJump && !wasRequestingJump)
         {
             _timeSinceJumpRequest = 0.0f;
-        }
-        // Dash timer reset
-        if (_requestedDash && !wasRequestingDash)
-        {
-            _timeSinceDashRequest = 0.0f;
         }
         
         _requestedSustainedJump = input.JumpSustain;
@@ -230,6 +242,8 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     {
         _state.Acceleration = Vector3.zero;
         
+        HandleWallRideRayCasts();
+        
         // If on stable ground
         if (motor.GroundingStatus.IsStableOnGround)
         {
@@ -238,10 +252,12 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         // in air
         else
         {
+            
             // if we can wallride and requested wallride AND are not currently wallriding, wallride
             if (_canWallRide && _requestedWallride &&
                 _state.Stance != Stance.Wallride)
             {
+                ////Debug.Log("Swap to wallride, reset wallride timer");
                 _state.Stance = Stance.Wallride;
                 _wallrideTimer = 0f;
             }
@@ -249,7 +265,9 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             // If we can wallride and stance is wallride, handle wallride vel, otherwise handle normal air velocity
             if (_state.Stance == Stance.Wallride && _canWallRide)
             {
+                ////Debug.Log("STANCE WALLRIDE" + $" {_state.Stance}");
                 HandleWallrideVelocity(ref currentVelocity, deltaTime);
+                
             }
             else
             {
@@ -263,6 +281,37 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         
         PlayerVelocity = currentVelocity;
 
+    }
+
+    private void HandleWallJumpRequest(ref Vector3 currentVelocity, float deltaTime)
+    {
+        if (_requestedWallJump && _canWallJump)// && _state.Stance == Stance.Wallride)
+        {
+            // disable jump and wall ride
+            _requestedJump = false;
+            _requestedWallJump = false;
+
+            _canWallJump = false;
+            _canWallRide = false;
+            
+            // Reset timer
+            _wallrideTimer = 0f;    
+            
+            // Set stance to stand
+            //Debug.Log("WALL JUMP STANCE TO STAND");
+            _state.Stance = Stance.Stand;
+
+            // Force unground for velocity input
+            motor.ForceUnground(0f);
+
+            // Remove velocity into the wall
+            currentVelocity = Vector3.ProjectOnPlane(
+                currentVelocity, _wallNormal);
+
+            // Apply velocity
+            currentVelocity += _wallNormal * wallrideJumpForce;
+            currentVelocity += motor.CharacterUp * wallrideJumpForce;
+        }
     }
 
     private void HandleAirVelocity(ref Vector3 currentVelocity, float deltaTime)
@@ -375,6 +424,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             // Stop - This is what is responsible for the slide boosting bug | possible feature :D 
             if (currentVelocity.magnitude < slideEndSpeed)
             {
+                //Debug.Log("STABLEGROUNDVEL STANCE TO CROUCH");
                 _state.Stance = Stance.Crouch;
             }
         }
@@ -393,10 +443,6 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             float currentForwardSpeed = Vector3.Dot(currentVelocity, motor.CharacterForward);
             float targetForwardSpeed = Mathf.Max(currentForwardSpeed, dashForce);
             currentVelocity += motor.CharacterForward * (targetForwardSpeed - currentForwardSpeed);
-        }
-        else
-        {
-            _timeSinceDashRequest += deltaTime;
         }
     }
     
@@ -457,11 +503,16 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     
     private void HandleWallrideVelocity(ref Vector3 currentVelocity, float deltaTime)
     {
+        ////Debug.Log($"wrR: {_requestedWallride}, wjR: {_requestedWallJump} \ncWR: {_canWallRide}, cWJ: {_canWallJump}\n st: {_state.Stance}");
         // Increment wall ride timer
+
+
+        HandleWallJumpRequest(ref currentVelocity, deltaTime);
+        
         _wallrideTimer += deltaTime;
 
         // Get vertical speed, and target speed
-        float verticalSpeed = Vector3.Dot(currentVelocity, motor.CharacterUp);
+        float verticalSpeed = Vector3.Dot(currentVelocity, motor.CharacterUp * 0.5f);
 
         float targetVerticalSpeed = -wallrideSpeed;
 
@@ -477,43 +528,16 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         // Keep player against wall
         currentVelocity += -_wallNormal * wallrideStickForce * deltaTime;
 
-        // Wall jump
-        if (_requestedWallJump && _canWallJump)
+        
+
+        // End wallride after duration or if there are no walls present
+        if (_wallrideTimer >= wallrideDuration || !_wallrideWallsPresent)
         {
-            // disable jump and wall ride
-            _requestedJump = false;
-            _requestedWallJump = false;
-
-            _canWallJump = false;
-            _canWallRide = false;
-
-            // Set stance to stand
-            _state.Stance = Stance.Stand;
-
-            // Force unground for velocity input
-            motor.ForceUnground(0f);
-
-            // Remove velocity into the wall
-            currentVelocity = Vector3.ProjectOnPlane(
-                currentVelocity, _wallNormal);
-
-            // Apply velocity
-            currentVelocity += _wallNormal * wallrideJumpForce;
-            currentVelocity += motor.CharacterUp * wallrideJumpForce;
-
-            // Reset timer
             _wallrideTimer = 0f;
-
-            return;
-        }
-
-        // End wallride after duration
-        if (_wallrideTimer >= wallrideDuration)
-        {
+            //Debug.Log("WALLRIDEVEL STANCE TO STAND");
+            _state.Stance = Stance.Stand;
             _canWallRide = false;
             _canWallJump = false;
-            _wallrideTimer = 0f;
-            _state.Stance = Stance.Stand;
         }
     }
 
@@ -550,6 +574,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         {
             //Debug.DrawRay(transform.position, currentVelocity, Color.red, 5.0f);
             //Debug.DrawRay(transform.position, _lastState.Velocity, Color.green, 5.0f);
+            //Debug.Log("SLIDEVEL STANCE TO SLIDE");
             _state.Stance = Stance.Slide;
                     
             // if landing on stable ground, vel is projected onto a flat plane
@@ -570,7 +595,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                 _requestedCrouchInAir = false;
             }
                     
-            float slideSpeed = Mathf.Max(slideStartSpeed, currentVel.magnitude);
+            float slideSpeed = Mathf.Max(effectiveSlideStartSpeed, currentVel.magnitude);
             currentVel = motor.GetDirectionTangentToSurface(
                 direction: currentVel,
                 surfaceNormal: motor.GroundingStatus.GroundNormal) * slideSpeed; 
@@ -585,6 +610,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         // Crouch
         if (_requestedCrouch && _state.Stance is Stance.Stand)
         {
+            //Debug.Log("BEFORECHARUPDATE STANCE TO CROUCH");
             _state.Stance = Stance.Crouch;
             motor.SetCapsuleDimensions(radius: motor.Capsule.radius, height: crouchHeight,
                 yOffset: crouchHeight * 0.5f);
@@ -595,12 +621,16 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     {
         if (!motor.GroundingStatus.IsStableOnGround && _state.Stance is Stance.Slide)
         {
-            _state.Stance = Stance.Crouch;
+            //Debug.Log("POSTGROUNDUPDATE STANCE TO CROUCH");
+            _state.Stance = Stance.Stand;
         }
     }
 
     public void AfterCharacterUpdate(float deltaTime)
     {
+        if (_state.Stance is Stance.Wallride)
+            return;
+        
         // Uncrouch
         if (!_requestedCrouch && _state.Stance is not Stance.Stand)
         {
@@ -620,21 +650,23 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             }
             else
             {
+                //Debug.Log("AFTERCHAR STANCE TO STAND");
                 _state.Stance = Stance.Stand;
             }
         }
+
+
+        // Update state to reflect relevant motor properties
+        _state.Grounded = motor.GroundingStatus.IsStableOnGround;
+        _state.Velocity = motor.Velocity;
         
-        // if grounded, enable wallride and walljump
+        // if grounded, disable wallride and walljump
         if (_state.Grounded)
         {
             _canWallRide = false;
             _canWallJump = false;
         }
-
-        // Update state to reflect relevant motor properties
-        _state.Grounded = motor.GroundingStatus.IsStableOnGround;
-        _state.Velocity = motor.Velocity;
-
+        
         HandleKillzone();
         HandleSpawnRelocators();
         // update last state to store char state snapshot at beginning of this update cycle
@@ -650,7 +682,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         if (HapticController.instance != null && _timeSinceLastGround != 0 && _timeSinceLastGround <= 0.5f)
         {
             HapticController.instance.QuickRumble();
-            //Debug.Log("Haptic Pulse");
+            ////Debug.Log("Haptic Pulse");
         }
     }
 
@@ -666,7 +698,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         float wallAngle = Vector3.Dot(hitNormal, motor.CharacterUp);
         
         // Accept only walls
-        if (Mathf.Abs(wallAngle) < 0.2f)
+        if (Mathf.Abs(wallAngle) < 0.2f && _requestedWallride)
         {
             _wallNormal = hitNormal;
             _canWallRide = true;
@@ -707,8 +739,45 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     {
         if (Physics.Raycast(transform.position, motor.CharacterForward, 1.5f, spawnRelocationLayer, QueryTriggerInteraction.Collide))
         {
-            //Debug.Log("Spawn Updated");
+            ////Debug.Log("Spawn Updated");
             spawnLocation.position = transform.position;
         }
     }
+
+    private void HandleWallRideRayCasts()
+    {
+        bool wallToRight = Physics.Raycast(transform.position, motor.CharacterRight, wallDetectionRange);
+        bool wallToLeft = Physics.Raycast(transform.position, -motor.CharacterRight, wallDetectionRange);
+
+        _state.TouchingLeftWall = wallToLeft;
+        _state.TouchingRightWall = wallToRight;
+        
+        if (wallToLeft && !_state.Grounded || wallToRight && !_state.Grounded)
+        {
+            _wallrideWallsPresent = true;
+            ////Debug.Log("WALL DETECTED");
+        }
+        else
+        {
+            _wallrideWallsPresent = false;
+            ////Debug.Log("NO WALLS");
+        }
+    }
+
+    #if UNITY_EDITOR
+    void OnGUI()
+    {
+        GUILayout.Box($"Wallride Debug\n" +
+                      $"requestedWallride: {_requestedWallride}\n" +
+                      $"requestedWallJump: {_requestedWallJump}\n" +
+                      $"canWallride: {_canWallRide}\n" +
+                      $"canWallJump: {_canWallJump}\n" +
+                      $"wallNormal: {_wallNormal}\n" +
+                      $"wallRideTimer: {_wallrideTimer}\n" +
+                      $"wallRideWalls: {_wallrideWallsPresent}\n" +
+                      $"currentStance: {_state.Stance}");
+        
+       // GUILayout.Box($"Character Input Debug\n $"Wallride: {_debuginput.WallRide}");
+    }
+    #endif
 }
