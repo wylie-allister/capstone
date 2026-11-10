@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.04.00">
+	<object class="AudioFile" id="{afc618c1-e11e-45fd-88d0-c151e28eee61}">
+		<property name="assetPath">
+			<value>Songs/CompDay1_108bpm.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.100000000000001</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>105.42056689342404</value>
+		</property>
+		<property name="embeddedMetadataTagsHash">
+			<value>937327121</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{01bf758f-3ede-4cef-abf3-4e4fca61beb4}</destination>
+		</relationship>
+		<relationship name="metadataTags">
+			<destination>{b5f3f79a-1859-4329-9085-bea181489742}</destination>
+		</relationship>
+	</object>
+	<object class="MetadataTags" id="{b5f3f79a-1859-4329-9085-bea181489742}">
+		<relationship name="assetMarkers">
+			<destination>{a31e1462-0131-40eb-8865-178b74eb4e4c}</destination>
+		</relationship>
+	</object>
+	<object class="AssetMarker" id="{a31e1462-0131-40eb-8865-178b74eb4e4c}">
+		<property name="name">
+			<value>Tempo: 107.0</value>
+		</property>
+	</object>
+</objects>

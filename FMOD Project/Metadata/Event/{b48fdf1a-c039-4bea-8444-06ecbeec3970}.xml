@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<objects serializationModel="Studio.02.03.00">
+<objects serializationModel="Studio.02.04.00">
 	<object class="Event" id="{b48fdf1a-c039-4bea-8444-06ecbeec3970}">
 		<property name="name">
 			<value>Dash</value>

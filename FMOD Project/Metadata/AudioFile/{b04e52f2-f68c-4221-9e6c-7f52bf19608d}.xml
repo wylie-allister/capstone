@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.04.00">
+	<object class="AudioFile" id="{b04e52f2-f68c-4221-9e6c-7f52bf19608d}">
+		<property name="assetPath">
+			<value>Songs/TempoShiftTitleThemeWIP_105bpm.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.100000000000001</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>205.71428571428572</value>
+		</property>
+		<property name="embeddedMetadataTagsHash">
+			<value>1888269571</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{01bf758f-3ede-4cef-abf3-4e4fca61beb4}</destination>
+		</relationship>
+		<relationship name="metadataTags">
+			<destination>{829e0e33-e8c6-49c9-b165-2aade9447751}</destination>
+		</relationship>
+	</object>
+	<object class="MetadataTags" id="{829e0e33-e8c6-49c9-b165-2aade9447751}">
+		<relationship name="assetMarkers">
+			<destination>{c8a76dcd-904b-4357-afd8-92e025dd4fac}</destination>
+		</relationship>
+	</object>
+	<object class="AssetMarker" id="{c8a76dcd-904b-4357-afd8-92e025dd4fac}">
+		<property name="name">
+			<value>Tempo: 210.0</value>
+		</property>
+	</object>
+</objects>
