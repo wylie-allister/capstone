@@ -1,61 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-6737182762686351690
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Goop
-  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
-  Path: event:/Goop
-  Guid:
-    Data1: -626214016
-    Data2: 1339606464
-    Data3: -331956309
-    Data4: 2067211899
-  Banks:
-  - {fileID: 8352856165055371876}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
-  m_Name: FMODStudioCache
-  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EventCache
-  EditorBanks:
-  - {fileID: 2574632462191796213}
-  - {fileID: 8357786303673962235}
-  - {fileID: 8352856165055371876}
-  EditorEvents:
-  - {fileID: -6737182762686351690}
-  EditorParameters: []
-  MasterBanks:
-  - {fileID: 8357786303673962235}
-  StringsBanks:
-  - {fileID: 2574632462191796213}
-  cacheVersion: 131861
-  cacheTime: 639297529696877657
-  SerializableEventsDict:
-  - key: event:/Goop
-    index: 0
---- !u!114 &2574632462191796213
+--- !u!114 &-1067664753240636257
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -70,12 +15,12 @@ MonoBehaviour:
   Path: FMOD/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639297529696857710
+  lastModified: 639299220262302832
   FileSizes:
   - Name: 
-    Value: 812
+    Value: 780
   Exists: 1
---- !u!114 &8352856165055371876
+--- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -84,16 +29,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Music.bank
-  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorBankRef
-  Path: FMOD/Desktop/Music.bank
-  Name: Music
-  StudioPath: bank:/Music
-  lastModified: 639297529696877657
-  FileSizes: []
-  Exists: 1
---- !u!114 &8357786303673962235
+  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
+  m_Name: FMODStudioCache
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EventCache
+  EditorBanks:
+  - {fileID: -1067664753240636257}
+  - {fileID: 2287620698737379884}
+  EditorEvents:
+  - {fileID: 3421530629835073924}
+  EditorParameters: []
+  MasterBanks:
+  - {fileID: 2287620698737379884}
+  StringsBanks:
+  - {fileID: -1067664753240636257}
+  cacheVersion: 131861
+  cacheTime: 639299220262302832
+  SerializableEventsDict:
+  - key: event:/ParameterScene/Goop
+    index: 0
+--- !u!114 &2287620698737379884
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,6 +62,33 @@ MonoBehaviour:
   Path: FMOD/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639297529696847736
+  lastModified: 639299220262292345
   FileSizes: []
   Exists: 1
+--- !u!114 &3421530629835073924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/ParameterScene/Goop
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/ParameterScene/Goop
+  Guid:
+    Data1: -1320766688
+    Data2: 1187457511
+    Data3: 143102848
+    Data4: -25137766
+  Banks:
+  - {fileID: 2287620698737379884}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 56000
