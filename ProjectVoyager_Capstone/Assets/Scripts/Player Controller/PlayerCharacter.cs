@@ -749,9 +749,22 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         bool wallToRight = Physics.Raycast(transform.position, motor.CharacterRight, wallDetectionRange);
         bool wallToLeft = Physics.Raycast(transform.position, -motor.CharacterRight, wallDetectionRange);
 
+        bool wallToBackRight = Physics.Raycast(transform.position, (motor.CharacterRight + -motor.CharacterForward).normalized, wallDetectionRange);
+        bool wallToBackLeft = Physics.Raycast(transform.position, (-motor.CharacterRight + -motor.CharacterForward).normalized, wallDetectionRange);
+        
         _state.TouchingLeftWall = wallToLeft;
         _state.TouchingRightWall = wallToRight;
+
+        if (wallToBackLeft || wallToLeft || wallToBackRight || wallToRight)
+        {
+            _wallrideWallsPresent = true;
+        }
+        else
+        {
+            _wallrideWallsPresent = false;
+        }
         
+        /*
         if (wallToLeft && !_state.Grounded || wallToRight && !_state.Grounded)
         {
             _wallrideWallsPresent = true;
@@ -761,7 +774,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         {
             _wallrideWallsPresent = false;
             ////Debug.Log("NO WALLS");
-        }
+        }*/
     }
 
     #if UNITY_EDITOR
