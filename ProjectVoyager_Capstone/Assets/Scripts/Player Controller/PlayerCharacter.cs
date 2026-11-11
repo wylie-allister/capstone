@@ -45,17 +45,17 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     [SerializeField] private Transform cameraTarget;
 
     [Header("Movement Settings")]
-    [Space][SerializeField] private float walkSpeed = 20.0f;
+    [Space][SerializeField] private float walkSpeed = 13.0f;
     [SerializeField] private float crouchSpeed = 7.5f;
     [SerializeField] private float walkResponse = 25.0f;
     [SerializeField] private float crouchResponse = 20.0f;
     
     [Header("Air Movement Settings")]
     [Space] [SerializeField] private float airSpeed = 15.0f;
-    [SerializeField] private float airAcceleration = 70.0f;  
+    [SerializeField] private float airAcceleration = 65.0f;  
     
     [Header("Jump and Gravity Settings")]
-    [Space] [SerializeField] private float jumpSpeed = 20.0f;
+    [Space] [SerializeField] private float jumpSpeed = 17.0f;
     [SerializeField] private float coyoteTime = 0.2f;
     [Range(0.0f, 1.0f)] [SerializeField] private float jumpSustainGravity = 0.7f;
     [SerializeField] private float gravity = -90.0f;
@@ -78,7 +78,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
     [Header("Dash Settings")]
     [SerializeField] private float dashForce = 7.0f;
-    [SerializeField] private float dashDelay = 2.0f;
+    //[SerializeField] private float dashDelay = 2.0f;
 
     [Header("Killzone")] 
     [SerializeField] private LayerMask killzoneLayer;
@@ -89,14 +89,15 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     
     [Header("Wallride Settings")]
     [SerializeField] private float wallrideGravity = -15.0f;
-    [SerializeField] private float wallrideJumpForce = 20.0f;
-    [SerializeField] private float wallrideSpeed = 8.0f;
-    [SerializeField] private float wallrideStickForce = 5.0f;
-    [SerializeField] private float wallrideDuration = 2.0f;
-    [SerializeField] private float wallDetectionRange = 0.6f;
+    [SerializeField] private float wallrideJumpForce = 15.0f;
+    [SerializeField] private float wallrideSpeed = 40.0f;
+    [SerializeField] private float wallrideStickForce = 15.0f;
+    [SerializeField] private float wallrideDuration = 1.5f;
+    [SerializeField] private float wallDetectionRange = 0.8f;
     
     [Header("Exposed Debug Vars")] 
     public Vector3 PlayerVelocity;
+    [SerializeField] private bool _toggleDebugBoxes = false;
 
     private CharacterState _state;
     private CharacterState _tempState;
@@ -115,7 +116,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
     // Wallride 
     private bool _canWallRide;
-    private bool _wallrideHoldToggle = false;
+    //private bool _wallrideHoldToggle = false;
     private bool _canWallJump;
     private Vector3 _wallNormal;
     private float _wallrideTimer;
@@ -654,8 +655,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                 _state.Stance = Stance.Stand;
             }
         }
-
-
+        
         // Update state to reflect relevant motor properties
         _state.Grounded = motor.GroundingStatus.IsStableOnGround;
         _state.Velocity = motor.Velocity;
@@ -767,6 +767,8 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     #if UNITY_EDITOR
     void OnGUI()
     {
+        if (!_toggleDebugBoxes)
+            return;
         GUILayout.Box($"Wallride Debug\n" +
                       $"requestedWallride: {_requestedWallride}\n" +
                       $"requestedWallJump: {_requestedWallJump}\n" +
