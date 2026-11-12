@@ -504,15 +504,13 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     
     private void HandleWallrideVelocity(ref Vector3 currentVelocity, float deltaTime)
     {
-        ////Debug.Log($"wrR: {_requestedWallride}, wjR: {_requestedWallJump} \ncWR: {_canWallRide}, cWJ: {_canWallJump}\n st: {_state.Stance}");
-        // Increment wall ride timer
-
-
+        // Check for wall jump request
         HandleWallJumpRequest(ref currentVelocity, deltaTime);
         
+        // Increment wall ride timer
         _wallrideTimer += deltaTime;
 
-        // Get vertical speed, and target speed
+        // Get vertical speed component of the current velocity vector
         float verticalSpeed = Vector3.Dot(currentVelocity, motor.CharacterUp * 0.5f);
 
         float targetVerticalSpeed = -wallrideSpeed;
@@ -524,18 +522,16 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             Mathf.Abs(wallrideGravity) * deltaTime
         );
 
+        // Apply desired vertical speed to player
         currentVelocity += motor.CharacterUp * (newVerticalSpeed - verticalSpeed);
 
         // Keep player against wall
         currentVelocity += -_wallNormal * wallrideStickForce * deltaTime;
 
-        
-
         // End wallride after duration or if there are no walls present
         if (_wallrideTimer >= wallrideDuration || !_wallrideWallsPresent)
         {
             _wallrideTimer = 0f;
-            //Debug.Log("WALLRIDEVEL STANCE TO STAND");
             _state.Stance = Stance.Stand;
             _canWallRide = false;
             _canWallJump = false;
@@ -746,35 +742,21 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
     private void HandleWallRideRayCasts()
     {
+        // Check if wall is present to the immediate left and right of the player
         bool wallToRight = Physics.Raycast(transform.position, motor.CharacterRight, wallDetectionRange);
         bool wallToLeft = Physics.Raycast(transform.position, -motor.CharacterRight, wallDetectionRange);
 
+        // Get the direction between the back of the player and both the left and right vector
+        // Check if wall is present
         bool wallToBackRight = Physics.Raycast(transform.position, (motor.CharacterRight + -motor.CharacterForward).normalized, wallDetectionRange);
         bool wallToBackLeft = Physics.Raycast(transform.position, (-motor.CharacterRight + -motor.CharacterForward).normalized, wallDetectionRange);
         
-        _state.TouchingLeftWall = wallToLeft;
-        _state.TouchingRightWall = wallToRight;
+        // Set respective state var
+        _state.TouchingLeftWall = wallToLeft || wallToBackLeft;
+        _state.TouchingRightWall = wallToRight || wallToBackRight;
 
-        if (wallToBackLeft || wallToLeft || wallToBackRight || wallToRight)
-        {
-            _wallrideWallsPresent = true;
-        }
-        else
-        {
-            _wallrideWallsPresent = false;
-        }
-        
-        /*
-        if (wallToLeft && !_state.Grounded || wallToRight && !_state.Grounded)
-        {
-            _wallrideWallsPresent = true;
-            ////Debug.Log("WALL DETECTED");
-        }
-        else
-        {
-            _wallrideWallsPresent = false;
-            ////Debug.Log("NO WALLS");
-        }*/
+        // Walls are present depending 
+        _wallrideWallsPresent = wallToBackLeft || wallToBackRight || wallToLeft || wallToRight;
     }
 
     #if UNITY_EDITOR

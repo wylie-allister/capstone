@@ -3057,6 +3057,10 @@ PrefabInstance:
       value: Player_Anim
       objectReference: {fileID: 0}
     - target: {fileID: 3516318446706306013, guid: 150e26ea854129849b4d94419ee44e3a, type: 3}
+      propertyPath: field of view
+      value: 85
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516318446706306013, guid: 150e26ea854129849b4d94419ee44e3a, type: 3}
       propertyPath: far clip plane
       value: 4500
       objectReference: {fileID: 0}
