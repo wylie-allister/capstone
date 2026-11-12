@@ -113,6 +113,9 @@
 		<property name="volume">
 			<value>-6</value>
 		</property>
+		<property name="looping">
+			<value>true</value>
+		</property>
 		<relationship name="sounds">
 			<destination>{62b6e881-2c8c-4e5e-9332-35b7a4505807}</destination>
 			<destination>{4c2fd5cf-6caf-45d1-92c5-aa90846892b0}</destination>
