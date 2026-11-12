@@ -15,10 +15,8 @@ MonoBehaviour:
   Path: ../TempoShift_Audio/Build/Desktop/Movement.bank
   Name: Movement
   StudioPath: bank:/Movement
-  lastModified: 639300205266662100
-  FileSizes:
-  - Name: Desktop
-    Value: 60928
+  lastModified: 639300742734731960
+  FileSizes: []
   Exists: 1
 --- !u!114 &-6872354900666659709
 MonoBehaviour:
@@ -238,10 +236,20 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: 6905846889296761366}
   cacheVersion: 131861
-  cacheTime: 639300205266734189
+  cacheTime: 639300742734777194
   SerializableEventsDict:
-  - key: event:/Goop
+  - key: event:/Ambience/UnknownThreatAmbience
     index: 0
+  - key: event:/Movement/Footsteps
+    index: 1
+  - key: event:/Movement/Jump
+    index: 2
+  - key: event:/Movement/Dash
+    index: 3
+  - key: event:/Music/Goop_Level1_120bpm
+    index: 4
+  - key: event:/Music/BackgroundMusic_Level1_120bpm
+    index: 5
 --- !u!114 &1375037572024337428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,10 +265,8 @@ MonoBehaviour:
   Path: ../TempoShift_Audio/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639300205266612356
-  FileSizes:
-  - Name: Desktop
-    Value: 1074
+  lastModified: 639300742734721869
+  FileSizes: []
   Exists: 1
 --- !u!114 &2061708111104095883
 MonoBehaviour:
@@ -277,10 +283,8 @@ MonoBehaviour:
   Path: ../TempoShift_Audio/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 639300205266734189
-  FileSizes:
-  - Name: Desktop
-    Value: 1774784
+  lastModified: 639300742734777194
+  FileSizes: []
   Exists: 1
 --- !u!114 &2574632462191796213
 MonoBehaviour:
@@ -324,7 +328,7 @@ MonoBehaviour:
   - {fileID: -8144449718907775653}
   IsStream: 0
   Is3D: 1
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
@@ -344,10 +348,8 @@ MonoBehaviour:
   Path: ../TempoShift_Audio/Build/Desktop/Ambience.bank
   Name: Ambience
   StudioPath: bank:/Ambience
-  lastModified: 639300205266612356
-  FileSizes:
-  - Name: Desktop
-    Value: 512512
+  lastModified: 639300742734711685
+  FileSizes: []
   Exists: 1
 --- !u!114 &5462979341239994373
 MonoBehaviour:
@@ -363,10 +365,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
   Path: event:/Movement/Jump
   Guid:
-    Data1: 1649145263
-    Data2: 1074113057
-    Data3: -69601144
-    Data4: 1758108217
+    Data1: 1310271331
+    Data2: 1192325468
+    Data3: -1543011163
+    Data4: 1111071805
   Banks:
   - {fileID: -8144449718907775653}
   IsStream: 0
@@ -391,9 +393,9 @@ MonoBehaviour:
   Path: ../TempoShift_Audio/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639300205266612356
+  lastModified: 639300742734721869
   FileSizes:
-  - Name: Desktop
+  - Name: 
     Value: 1310
   Exists: 1
 --- !u!114 &8352856165055371876

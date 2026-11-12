@@ -5268,8 +5268,8 @@ MonoBehaviour:
   NonRigidbodyVelocity: 0
   Params: []
   OverrideAttenuation: 0
-  OverrideMinDistance: -1
-  OverrideMaxDistance: -1
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!114 &1618308248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5289,6 +5289,20 @@ MonoBehaviour:
       Data3: -1435635289
       Data4: 1027886532
     Path: event:/Movement/Footsteps
+  jumping:
+    Guid:
+      Data1: 1310271331
+      Data2: 1192325468
+      Data3: -1543011163
+      Data4: 1111071805
+    Path: event:/Movement/Jump
+  dashing:
+    Guid:
+      Data1: 192562171
+      Data2: 1150379779
+      Data3: -520733797
+      Data4: 1398223528
+    Path: event:/Movement/Dash
 --- !u!64 &1647679809
 MeshCollider:
   m_ObjectHideFlags: 0
