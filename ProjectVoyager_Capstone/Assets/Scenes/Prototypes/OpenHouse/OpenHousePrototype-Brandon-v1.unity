@@ -3045,6 +3045,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2352197509027201466, guid: 150e26ea854129849b4d94419ee44e3a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1618308242}
+    - targetCorrespondingSourceObject: {fileID: 2352197509027201466, guid: 150e26ea854129849b4d94419ee44e3a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1618308248}
     - targetCorrespondingSourceObject: {fileID: 3827639215569045617, guid: 150e26ea854129849b4d94419ee44e3a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1598134118}
@@ -5267,6 +5270,25 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: -1
   OverrideMaxDistance: -1
+--- !u!114 &1618308248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618308230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f37b5405844f0e419e9b6a365c9eb5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerNoises
+  footsteps:
+    Guid:
+      Data1: 1772085257
+      Data2: 1295584519
+      Data3: -1435635289
+      Data4: 1027886532
+    Path: event:/Movement/Footsteps
 --- !u!64 &1647679809
 MeshCollider:
   m_ObjectHideFlags: 0
