@@ -1238,7 +1238,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 508443887317945833, guid: 150e26ea854129849b4d94419ee44e3a, type: 3}
   m_PrefabInstance: {fileID: 848466135}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &200194764
+--- !u!114 &200194767
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3044,13 +3044,13 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2352197509027201466, guid: 150e26ea854129849b4d94419ee44e3a, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1618308236}
+      addedObject: {fileID: 1618308242}
     - targetCorrespondingSourceObject: {fileID: 3827639215569045617, guid: 150e26ea854129849b4d94419ee44e3a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1598134118}
     - targetCorrespondingSourceObject: {fileID: 508443887317945833, guid: 150e26ea854129849b4d94419ee44e3a, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 200194764}
+      addedObject: {fileID: 200194767}
   m_SourcePrefab: {fileID: 100100000, guid: 150e26ea854129849b4d94419ee44e3a, type: 3}
 --- !u!1 &874815355
 GameObject:
@@ -5236,7 +5236,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2352197509027201466, guid: 150e26ea854129849b4d94419ee44e3a, type: 3}
   m_PrefabInstance: {fileID: 848466135}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1618308236
+--- !u!114 &1618308242
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5251,11 +5251,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: -626214016
-      Data2: 1339606464
-      Data3: -331956309
-      Data4: 2067211899
-    Path: event:/Goop
+      Data1: 483067064
+      Data2: 1272809940
+      Data3: -699871069
+      Data4: -98965017
+    Path: event:/Music/BackgroundMusic_Level1_120bpm
   Event: 
   EventPlayTrigger: 1
   EventStopTrigger: 0
@@ -5265,8 +5265,8 @@ MonoBehaviour:
   NonRigidbodyVelocity: 0
   Params: []
   OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
+  OverrideMinDistance: -1
+  OverrideMaxDistance: -1
 --- !u!64 &1647679809
 MeshCollider:
   m_ObjectHideFlags: 0
