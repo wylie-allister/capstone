@@ -8,6 +8,7 @@ public class CurrentSettings : MonoBehaviour
     InputAction save;
     InputAction toggleMenu;
     public Slider camSens;
+    public Slider mVol;
     public string json;
     public GameObject obMenu;
     public GameObject auMenu;
@@ -99,6 +100,7 @@ public class CurrentSettings : MonoBehaviour
     {
         //move this to its own section later
         sett.cameraSensitivity = camSens.value;
+        sett.masterVolume = mVol.value;
         json = JsonUtility.ToJson(setti); 
     }
 

@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: ../TempoShift_Audio/Build/Desktop/Movement.bank
   Name: Movement
   StudioPath: bank:/Movement
-  lastModified: 639300742734731960
+  lastModified: 639300862424122403
   FileSizes: []
   Exists: 1
 --- !u!114 &-6872354900666659709
@@ -236,7 +236,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: 6905846889296761366}
   cacheVersion: 131861
-  cacheTime: 639300742734777194
+  cacheTime: 639300862424302421
   SerializableEventsDict:
   - key: event:/Ambience/UnknownThreatAmbience
     index: 0
@@ -265,7 +265,7 @@ MonoBehaviour:
   Path: ../TempoShift_Audio/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639300742734721869
+  lastModified: 639300205266612356
   FileSizes: []
   Exists: 1
 --- !u!114 &2061708111104095883
@@ -283,7 +283,7 @@ MonoBehaviour:
   Path: ../TempoShift_Audio/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 639300742734777194
+  lastModified: 639300862424302421
   FileSizes: []
   Exists: 1
 --- !u!114 &2574632462191796213
@@ -348,7 +348,7 @@ MonoBehaviour:
   Path: ../TempoShift_Audio/Build/Desktop/Ambience.bank
   Name: Ambience
   StudioPath: bank:/Ambience
-  lastModified: 639300742734711685
+  lastModified: 639300862424056792
   FileSizes: []
   Exists: 1
 --- !u!114 &5462979341239994373
@@ -393,7 +393,7 @@ MonoBehaviour:
   Path: ../TempoShift_Audio/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639300742734721869
+  lastModified: 639300862424077425
   FileSizes:
   - Name: 
     Value: 1310

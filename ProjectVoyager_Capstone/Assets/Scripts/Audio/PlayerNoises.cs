@@ -14,6 +14,8 @@ public class PlayerNoises : MonoBehaviour
     public FMODUnity.EventReference footsteps;
     public FMODUnity.EventReference jumping;
     public FMODUnity.EventReference dashing;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
