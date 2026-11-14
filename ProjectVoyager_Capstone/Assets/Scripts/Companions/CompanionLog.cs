@@ -39,6 +39,11 @@ public class CompanionLog : MonoBehaviour
 
     }
 
+    void OnDestroy()
+    {
+        _inputActions.Dispose();
+    }
+
     // Update is called once per frame
     void Update()
     {
