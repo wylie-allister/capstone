@@ -742,14 +742,23 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
     private void HandleWallRideRayCasts()
     {
+        Vector3 raycastOrigin = transform.position;
+        raycastOrigin.y += (standHeight * 0.5f);
         // Check if wall is present to the immediate left and right of the player
-        bool wallToRight = Physics.Raycast(transform.position, motor.CharacterRight, wallDetectionRange);
-        bool wallToLeft = Physics.Raycast(transform.position, -motor.CharacterRight, wallDetectionRange);
+        bool wallToRight = Physics.Raycast(raycastOrigin, motor.CharacterRight, wallDetectionRange);
+        bool wallToLeft = Physics.Raycast(raycastOrigin, -motor.CharacterRight, wallDetectionRange);
 
         // Get the direction between the back of the player and both the left and right vector
         // Check if wall is present
-        bool wallToBackRight = Physics.Raycast(transform.position, (motor.CharacterRight + -motor.CharacterForward).normalized, wallDetectionRange);
-        bool wallToBackLeft = Physics.Raycast(transform.position, (-motor.CharacterRight + -motor.CharacterForward).normalized, wallDetectionRange);
+        bool wallToBackRight = Physics.Raycast(raycastOrigin, (motor.CharacterRight + -motor.CharacterForward).normalized, wallDetectionRange);
+        bool wallToBackLeft = Physics.Raycast(raycastOrigin, (-motor.CharacterRight + -motor.CharacterForward).normalized, wallDetectionRange);
+        
+        // debug checks for displaying the raycasts for wall detection
+        // came in handy lmao, origin was at feet, meaning the player fell off walls sooner than desired -bc
+        //Debug.DrawRay(raycastOrigin, motor.CharacterRight * wallDetectionRange, Color.darkRed);
+        //Debug.DrawRay(raycastOrigin, -motor.CharacterRight * wallDetectionRange, Color.darkRed);
+        //Debug.DrawRay(raycastOrigin, (motor.CharacterRight + -motor.CharacterForward).normalized * wallDetectionRange, Color.darkRed);
+        //Debug.DrawRay(raycastOrigin, (-motor.CharacterRight + -motor.CharacterForward).normalized * wallDetectionRange, Color.darkRed);
         
         // Set respective state var
         _state.TouchingLeftWall = wallToLeft || wallToBackLeft;
