@@ -75,14 +75,20 @@ public class Player : MonoBehaviour
         CameraInput cameraInput = new CameraInput { Look = input.Look.ReadValue<Vector2>() };
         playerCamera.UpdateRotation(cameraInput);
 
+        double InputTiming;
+        if (!AudioManagerRedux.isPlayingMusic)
+            InputTiming = 0.0f;
+        else
+            InputTiming = AudioManagerRedux.GetCurrentTimeInMilliseconds();
+        
         CharacterInput characterInput = new CharacterInput
         {
             Rotation     = playerCamera.transform.rotation,
             Move         = input.Move.ReadValue<Vector2>(),
-            Dash         = input.Dash.WasPressedThisFrame(),
-            Jump         = input.Jump.WasPressedThisFrame(),
+            Dash         = CheckForBeatTiming(input.Dash.WasPressedThisFrame(), InputTiming),
+            Jump         = CheckForBeatTiming(input.Jump.WasPressedThisFrame(), InputTiming),
             JumpSustain  = input.Jump.IsPressed(),
-            Crouch        = input.Crouch.WasPressedThisFrame()
+            Crouch        = CheckForBeatTiming(input.Crouch.WasPressedThisFrame(), InputTiming)
                 ? CrouchInput.Toggle
                 : CrouchInput.None,
             WallRide = input.Wallride.IsPressed()
@@ -129,6 +135,14 @@ public class Player : MonoBehaviour
     private void UpdateSpawnPosition(Vector3 position)
     {
         playerCharacter.spawnLocation.position = position;
+    }
+
+    public bool CheckForBeatTiming(bool inputPressed, double inputTiming)
+    {
+        
+        var res = AccuracyManager.instance.CheckInput(inputTiming);
+        Debug.Log($"{res.ToString()} | {inputTiming}");
+        return inputPressed;
     }
     
 }
