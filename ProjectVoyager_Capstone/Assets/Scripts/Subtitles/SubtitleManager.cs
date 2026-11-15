@@ -159,15 +159,15 @@ public class SubtitleManager : MonoBehaviour
         _displaySubtitle = !_displaySubtitle;
 
         // If not displaying, break from function
-        if (!_displaySubtitle)
+        if (!_displaySubtitle || currentSubtitle.subtitleText == string.Empty)
             return;
 
         // TODO: REMOVE IMMEDIATELY, THIS IS ONLY FOR DEBUG TESTING
-        Subtitle subtitle = _existingSubtitles[1];
+        //Subtitle subtitle = _existingSubtitles[1];
         
         // Get subtitle info
-        string subText = subtitle.subtitleText;
-        string charTag = subtitle.characterName.ToString();
+        string subText = currentSubtitle.subtitleText;
+        string charTag = currentSubtitle.characterName.ToString();
 
         // New string for formating 
         string popupText = string.Empty;

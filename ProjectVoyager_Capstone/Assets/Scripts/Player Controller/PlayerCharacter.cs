@@ -82,6 +82,9 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
     [Header("Killzone")] 
     [SerializeField] private LayerMask killzoneLayer;
+
+    [Header("Instruction Popups")] 
+    [SerializeField] private LayerMask instructionLayer;
     
     [Header("Spawn")]
     public Transform spawnLocation;
@@ -110,6 +113,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     private bool _requestedCrouch;
     private bool _requestedCrouchInAir;
     private bool _requestedWallride;
+    private bool _crouchPressed;
     
     // Dash
     private bool _requestedDash;
@@ -194,6 +198,8 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             CrouchInput.Crouch => true,
             CrouchInput.UnCrouch => false
         };
+
+        _crouchPressed = _requestedCrouch && !wasRequestingCrouch;
 
         // if we havent crouched and want to, toggle based on air state
         if (_requestedCrouch && !wasRequestingCrouch)
@@ -564,39 +570,33 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     {
         bool moving = movement.sqrMagnitude > 0.0f;
         bool crouching = _state.Stance is Stance.Crouch;
-        bool wasStanding = _lastState.Stance is Stance.Stand;
-        bool wasInAir = _lastState.Grounded;
-                
-        if (moving && crouching && (wasStanding || wasInAir))
-        {
-            //Debug.DrawRay(transform.position, currentVelocity, Color.red, 5.0f);
-            //Debug.DrawRay(transform.position, _lastState.Velocity, Color.green, 5.0f);
-            //Debug.Log("SLIDEVEL STANCE TO SLIDE");
-            _state.Stance = Stance.Slide;
-                    
-            // if landing on stable ground, vel is projected onto a flat plane
-            // KinematicCharacterMotor.HandleVelocityProjection()
-            // 
 
-            if (wasInAir)
+        if (moving && crouching && _crouchPressed)
+        {
+            _state.Stance = Stance.Slide;
+
+            if (_lastState.Grounded)
             {
-                currentVel =
-                    Vector3.ProjectOnPlane(_lastState.Velocity, motor.GroundingStatus.GroundNormal);
+                currentVel = Vector3.ProjectOnPlane(
+                    _lastState.Velocity,
+                    motor.GroundingStatus.GroundNormal);
             }
 
-
             float effectiveSlideStartSpeed = slideStartSpeed;
+
             if (!_lastState.Grounded && !_requestedCrouchInAir)
             {
                 effectiveSlideStartSpeed = 0.0f;
                 _requestedCrouchInAir = false;
             }
-                    
+
             float slideSpeed = Mathf.Max(effectiveSlideStartSpeed, currentVel.magnitude);
+
             currentVel = motor.GetDirectionTangentToSurface(
                 direction: currentVel,
-                surfaceNormal: motor.GroundingStatus.GroundNormal) * slideSpeed; 
-
+                surfaceNormal: motor.GroundingStatus.GroundNormal) * slideSpeed;
+            
+            _crouchPressed = false;
         }
     }
     
@@ -625,8 +625,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
     public void AfterCharacterUpdate(float deltaTime)
     {
-        if (_state.Stance is Stance.Wallride)
-            return;
+        
         
         // Uncrouch
         if (!_requestedCrouch && _state.Stance is not Stance.Stand)
@@ -647,6 +646,9 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             }
             else
             {
+                if (_state.Stance is Stance.Wallride)
+                    return;
+                
                 //Debug.Log("AFTERCHAR STANCE TO STAND");
                 _state.Stance = Stance.Stand;
             }
@@ -667,6 +669,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         HandleSpawnRelocators();
         // update last state to store char state snapshot at beginning of this update cycle
         _lastState = _tempState;
+        
     }
 
     public bool IsColliderValidForCollisions(Collider coll) => true;
@@ -685,6 +688,8 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     public void OnMovementHit(Collider hitCollider, Vector3 hitNormal, Vector3 hitPoint,
         ref HitStabilityReport hitStabilityReport)
     {
+
+        
         // Wallride -------------------------------------------------------
         // If on ground, do not enable wallride/walljump
         if (motor.GroundingStatus.IsStableOnGround)
@@ -705,7 +710,10 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     public void ProcessHitStabilityReport(Collider hitCollider, Vector3 hitNormal, Vector3 hitPoint, Vector3 atCharacterPosition,
         Quaternion atCharacterRotation, ref HitStabilityReport hitStabilityReport) { }
 
-    public void OnDiscreteCollisionDetected(Collider hitCollider) { }
+    public void OnDiscreteCollisionDetected(Collider hitCollider)
+    {
+
+    }
     
     public Transform GetCameraTarget() => cameraTarget;
     
@@ -723,11 +731,30 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     
     private void HandleKillzone()
     {
+        HandleInstructionPopUp();
         //Debug.DrawRay(transform.position, motor.CharacterUp * -1, Color.red);
         if (Physics.Raycast(transform.position, motor.CharacterUp * -1, 0.4f, killzoneLayer))
         {
             _requestedCrouch = false;
             SetPosition(spawnLocation.position);
+        }
+    }
+
+    private void HandleInstructionPopUp()
+    {
+        if (Physics.Raycast(transform.position, motor.CharacterForward, out var hit, 0.5f, instructionLayer, QueryTriggerInteraction.Collide))
+        {
+            InstructionPopup popup;
+            if (!hit.transform.gameObject.TryGetComponent<InstructionPopup>(out popup))
+            {
+                return;
+            }
+        
+            if (!popup.isDisplayed)
+            {
+                popup.Display();
+            }
+            
         }
     }
 

@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
      // Input actions
     public PlayerInputActions _inputActions;
     public CurrentSettings cs;
+    public CharacterInput _exposedInput;
     
     void Start()
     {
@@ -97,7 +98,8 @@ public class Player : MonoBehaviour
         {
             playerAnim.TriggerSlide();
         }
-        
+
+        _exposedInput = characterInput;
     }
 
     void LateUpdate()

@@ -113,16 +113,7 @@ public class AudioManagerRedux : MonoBehaviour
 
         timelineInfo.songLengthInMS = length;
 
-        int totalTime = 0;
-        FMOD.RESULT res = descriptionCallback.getLength(out totalTime);
-        if (res != FMOD.RESULT.OK)
-        {
-            Debug.LogError($"FMOD GET LENGTH ERROR: {res}");
-        }
-        else
-        {
-            Debug.Log($"Length = {totalTime}");
-        }
+
         
         //Debug.Log("SONG LENGTH = " + length);
 

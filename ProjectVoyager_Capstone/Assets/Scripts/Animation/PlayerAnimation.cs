@@ -8,6 +8,7 @@ public class PlayerAnimation : MonoBehaviour
     
     [SerializeField] 
     private Animator _legAnimator;
+
     
     void Start()
     {
@@ -23,8 +24,9 @@ public class PlayerAnimation : MonoBehaviour
         {
             _armAnimator.SetTrigger("Debug");
         }
-        
         #endif
+
+
     }
 
     public void TriggerSlide()
@@ -32,4 +34,5 @@ public class PlayerAnimation : MonoBehaviour
         _armAnimator.SetTrigger("Sliding");
         _legAnimator.SetTrigger("Sliding");
     }
+
 }
