@@ -6,7 +6,7 @@ using UnityEngine;
 public class SettingsState
 {
     public float cameraSensitivity;
-
+    public float masterVolume;
 
 
 }

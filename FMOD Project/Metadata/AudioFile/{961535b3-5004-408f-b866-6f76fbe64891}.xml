@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.04.00">
+	<object class="AudioFile" id="{961535b3-5004-408f-b866-6f76fbe64891}">
+		<property name="assetPath">
+			<value>Songs/CyberSneak(85bpm).wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.100000000000001</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>36</value>
+		</property>
+		<property name="embeddedMetadataTagsHash">
+			<value>2245564169</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{01bf758f-3ede-4cef-abf3-4e4fca61beb4}</destination>
+		</relationship>
+		<relationship name="metadataTags">
+			<destination>{3b983c9d-a7ad-4b3b-826d-79bd0dc4f31a}</destination>
+		</relationship>
+	</object>
+	<object class="MetadataTags" id="{3b983c9d-a7ad-4b3b-826d-79bd0dc4f31a}">
+		<relationship name="assetMarkers">
+			<destination>{8dbb01a1-cda8-4e8c-81ac-1b0e568f77af}</destination>
+			<destination>{8b71df31-be3a-4eeb-84ae-ce644b1504af}</destination>
+		</relationship>
+	</object>
+	<object class="AssetMarker" id="{8dbb01a1-cda8-4e8c-81ac-1b0e568f77af}">
+		<property name="name">
+			<value>Tempo: 85.0</value>
+		</property>
+	</object>
+	<object class="AssetMarker" id="{8b71df31-be3a-4eeb-84ae-ce644b1504af}">
+		<property name="positionSec">
+			<value>6.3529478458049891</value>
+		</property>
+		<property name="name">
+			<value>Marker 1</value>
+		</property>
+	</object>
+</objects>

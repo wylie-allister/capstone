@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.04.00">
+	<object class="AudioFile" id="{aff398a8-c235-43c1-9075-69c302dc857a}">
+		<property name="assetPath">
+			<value>Ambience/ForebodingAmbience.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.100000000000001</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>118</value>
+		</property>
+		<property name="embeddedMetadataTagsHash">
+			<value>1024976508</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{01bf758f-3ede-4cef-abf3-4e4fca61beb4}</destination>
+		</relationship>
+		<relationship name="metadataTags">
+			<destination>{2c33e412-45af-4bcf-b172-a4acb0e89fd9}</destination>
+		</relationship>
+	</object>
+	<object class="MetadataTags" id="{2c33e412-45af-4bcf-b172-a4acb0e89fd9}">
+		<relationship name="assetMarkers">
+			<destination>{af37f6e1-28ef-43ef-b12d-e3c827ccfd94}</destination>
+			<destination>{ace9f513-c072-44c8-ae99-732c616ffc16}</destination>
+		</relationship>
+	</object>
+	<object class="AssetMarker" id="{af37f6e1-28ef-43ef-b12d-e3c827ccfd94}">
+		<property name="name">
+			<value>Tempo: 120.0</value>
+		</property>
+	</object>
+	<object class="AssetMarker" id="{ace9f513-c072-44c8-ae99-732c616ffc16}">
+		<property name="name">
+			<value>Heavy drum Drop</value>
+		</property>
+	</object>
+</objects>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.04.00">
+	<object class="AudioFile" id="{3bd229db-104c-48fd-b9c7-f1c80ee48e79}">
+		<property name="assetPath">
+			<value>Songs/Music Monday #1 v4.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.100000000000001</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>82</value>
+		</property>
+		<property name="embeddedMetadataTagsHash">
+			<value>2456728926</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{01bf758f-3ede-4cef-abf3-4e4fca61beb4}</destination>
+		</relationship>
+		<relationship name="metadataTags">
+			<destination>{9d8e77d7-ed83-4973-bd36-ed94ef5fd444}</destination>
+		</relationship>
+	</object>
+	<object class="MetadataTags" id="{9d8e77d7-ed83-4973-bd36-ed94ef5fd444}">
+		<relationship name="assetMarkers">
+			<destination>{13ebefc4-60b6-4d6f-a6e3-03c7ce2557c4}</destination>
+		</relationship>
+	</object>
+	<object class="AssetMarker" id="{13ebefc4-60b6-4d6f-a6e3-03c7ce2557c4}">
+		<property name="name">
+			<value>Tempo: 120.0</value>
+		</property>
+	</object>
+</objects>

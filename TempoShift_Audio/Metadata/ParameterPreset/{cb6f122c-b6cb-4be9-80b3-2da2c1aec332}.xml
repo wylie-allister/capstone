@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{cb6f122c-b6cb-4be9-80b3-2da2c1aec332}">
+		<property name="name">
+			<value>Restart</value>
+		</property>
+		<relationship name="folder">
+			<destination>{f15d0aee-b5ec-459c-b838-789fdc4dc100}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{7d00b603-e5ec-45bf-ae51-8844ce5de7ca}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{7d00b603-e5ec-45bf-ae51-8844ce5de7ca}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>2</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>Disabled</value>
+			<value>Enabled</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>
