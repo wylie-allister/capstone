@@ -18,7 +18,7 @@ public class InstructionPopup : MonoBehaviour
 
     private float popupTimer = 0.0f;
     private Vector3 _finalPosition;
-    private float _positionOffsetSpeed;
+    private float _positionOffsetSpeed = 10.0f;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -29,20 +29,24 @@ public class InstructionPopup : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // If not displayed reset timer and break
         if (!isDisplayed)
         {
             popupTimer = 0.0f;
             return;
         }
 
+        // if displayed increment timer
         popupTimer += Time.deltaTime;
 
+        // lerp popup position to final pos
         if (popupObject.transform.position != _finalPosition)
         {
             popupObject.transform.position = Vector3.Lerp(popupObject.transform.position, _finalPosition,
                 _positionOffsetSpeed * Time.deltaTime);
         }
         
+        // hide if over max display time
         if (popupTimer >= maxDisplayTime)
             Hide();
 
@@ -50,15 +54,17 @@ public class InstructionPopup : MonoBehaviour
 
     public void Display()
     {
+        // Set display, instantiate popup, get final pos at instantiation point, move popup to side
         isDisplayed = true;
         popupObject = Instantiate(popupPrefab, popupParent.transform);
         _finalPosition = popupObject.transform.position;
-        popupObject.transform.position = new Vector3(_finalPosition.x - 20, _finalPosition.y, _finalPosition.z);
+        popupObject.transform.position = new Vector3(_finalPosition.x - 300, _finalPosition.y, _finalPosition.z);
         popupObject.SetActive(true);
     }
 
     public void Hide()
     {
+        // if theres a popup, destroy it and disable display
         if (popupObject != null)
             Destroy(popupObject);
 

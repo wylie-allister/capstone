@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+// Timing enum for accuracy values
 public enum Timing
 {
    Early,
@@ -38,14 +39,14 @@ public class AccuracyManager : MonoBehaviour
    
    void Start()
    {
-
-      
+      // Subscribe to beat delegates  
       AudioManagerRedux.onFixedBeat += OnDownBeat;
       AudioManagerRedux.onUpBeat += OnUpBeat;
    }
 
    void OnDestroy()
    {
+      // Unsubscribe to beat delagates
       AudioManagerRedux.onFixedBeat -= OnDownBeat;
       AudioManagerRedux.onUpBeat -= OnUpBeat;
    }
@@ -56,10 +57,14 @@ public class AccuracyManager : MonoBehaviour
 
    private void OnDownBeat()
    {
+      // if nothings playing return
       if (!AudioManagerRedux.isPlayingMusic)
          return;
       
+      // Else get the reference beat time as soon as the downbeat procs
       referenceDownbeatTime = AudioManagerRedux.GetCurrentTimeInMilliseconds();
+      
+      // Get beat interval * 1000 for ms
       beatInterval = AudioManagerRedux.GetBeatInterval() * 1000;
    }
 
@@ -70,17 +75,24 @@ public class AccuracyManager : MonoBehaviour
 
    public Timing CheckInput(double inputTime)
    {
+      // If not playing anything, return Timing.None
       if (!AudioManagerRedux.isPlayingMusic)
          return Timing.None;
+      
+      // If playing, get elapsed time and where the current beat is
       double elapsed = inputTime - referenceDownbeatTime;
       double beatPos = elapsed / beatInterval;
 
+      // Find the nearest beat by rounding
       long nearestBeat = (long)Mathf.Round((float)beatPos);
 
+      // Get target time
       double targBeatTime = referenceDownbeatTime + nearestBeat * beatInterval;
 
+      // Get the difference between target time and when the player presses a key
       double diff = inputTime - targBeatTime;
 
+      // Accuracy as the abs of diff
       double accuracy = Mathf.Abs((float)diff);
 
       /*
@@ -91,22 +103,24 @@ public class AccuracyManager : MonoBehaviour
          $"Reference: {referenceDownbeatTime:F4}, " +
          $"Input: {inputTime:F4}"
       );*/
-      
-      //Debug.Log($"INPUT TIME: {inputTime} | REFERENCE: {referenceDownbeatTime} | BEAT INTERVAL: {beatInterval}");
-      
+
+      // If accuracy is within 25, return perfect
       if (accuracy <= 25)
       {
          return Timing.Perfect;
       }
 
+      // If accuracy is within 60, return great
       if (accuracy <= 60)
       {
          return Timing.Great;
       }
 
+      // If accuracy is outside the timing window, return miss
       if (accuracy <= timingWindow)
          return Timing.Miss;
       
+      // 
       return diff < 0 ? Timing.Early : Timing.Late;
 
    }
