@@ -3538,9 +3538,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2352197509027201466, guid: 150e26ea854129849b4d94419ee44e3a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1618308236}
-    - targetCorrespondingSourceObject: {fileID: 3827639215569045617, guid: 150e26ea854129849b4d94419ee44e3a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1598134118}
     - targetCorrespondingSourceObject: {fileID: 508443887317945833, guid: 150e26ea854129849b4d94419ee44e3a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 200194764}
@@ -5810,27 +5807,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1598134115 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3827639215569045617, guid: 150e26ea854129849b4d94419ee44e3a, type: 3}
-  m_PrefabInstance: {fileID: 848466135}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1598134118
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1598134115}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dc93f6cabc75194ca72184473d6bd28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CompanionLog
-  tComp: {fileID: 11400000, guid: cd522b8a64791dc4490a6a0ff9f0d559, type: 2}
-  canPickupCompanion: 0
-  tmp: {fileID: 0}
-  companionList: []
 --- !u!1 &1618308230 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2352197509027201466, guid: 150e26ea854129849b4d94419ee44e3a, type: 3}
@@ -6598,7 +6574,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1871651240
 MonoBehaviour:
   m_ObjectHideFlags: 0
