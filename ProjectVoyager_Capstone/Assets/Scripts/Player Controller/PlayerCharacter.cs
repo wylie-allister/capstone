@@ -89,6 +89,9 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     [Header("Spawn")]
     public Transform spawnLocation;
     [SerializeField] private LayerMask spawnRelocationLayer;
+
+    [Header("BGM")]
+    [SerializeField] private LayerMask bgmLayer;
     
     [Header("Wallride Settings")]
     [SerializeField] private float wallrideGravity = -15.0f;
@@ -137,8 +140,8 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     private Collider[] _uncrouchOverlapResults;
 
     private CharacterInput _debuginput;
-    
-    
+
+    public PlayerNoises pn;
     public void Initialize()
     {
         // Set state to standing
@@ -667,6 +670,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         
         HandleKillzone();
         HandleSpawnRelocators();
+        HandleBGM();
         // update last state to store char state snapshot at beginning of this update cycle
         _lastState = _tempState;
         
@@ -762,8 +766,24 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     {
         if (Physics.Raycast(transform.position, motor.CharacterForward, 1.5f, spawnRelocationLayer, QueryTriggerInteraction.Collide))
         {
-            ////Debug.Log("Spawn Updated");
+            //Debug.Log("Spawn Updated");
             spawnLocation.position = transform.position;
+
+        }
+    }
+
+    private void HandleBGM()
+    {
+        if (Physics.Raycast(transform.position, motor.CharacterForward, out var hit, 1.5f, bgmLayer, QueryTriggerInteraction.Collide))
+        {
+            BGMParams bgmp;
+            if (!hit.transform.gameObject.TryGetComponent<BGMParams>(out bgmp))
+            {
+                return;
+            }
+
+            //couldn't think of a good name for this so its just "this shit makes me want to kill myself" fyi
+            bgmp.TSMMWKMS();
         }
     }
 

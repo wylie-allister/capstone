@@ -318,6 +318,8 @@ GameObject:
   - component: {fileID: 1973140051912109418}
   - component: {fileID: 6784436916583590277}
   - component: {fileID: 1578770369535655651}
+  - component: {fileID: 4185830654818918266}
+  - component: {fileID: 1418247524242959904}
   m_Layer: 0
   m_Name: Player_Anim
   m_TagString: Untagged
@@ -439,7 +441,72 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae3b659e4fc1e94aabf3e55e6539b2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimation
-  _animator: {fileID: 8135953033667477923}
+  _armAnimator: {fileID: 0}
+  _legAnimator: {fileID: 0}
+--- !u!114 &4185830654818918266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2352197509027201466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f37b5405844f0e419e9b6a365c9eb5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerNoises
+  footsteps:
+    Guid:
+      Data1: 1772085257
+      Data2: 1295584519
+      Data3: -1435635289
+      Data4: 1027886532
+    Path: event:/Movement/Footsteps
+  jumping:
+    Guid:
+      Data1: 1310271331
+      Data2: 1192325468
+      Data3: -1543011163
+      Data4: 1111071805
+    Path: event:/Movement/Jump
+  dashing:
+    Guid:
+      Data1: 192562171
+      Data2: 1150379779
+      Data3: -520733797
+      Data4: 1398223528
+    Path: event:/Movement/Dash
+--- !u!114 &1418247524242959904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2352197509027201466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 483067064
+      Data2: 1272809940
+      Data3: -699871069
+      Data4: -98965017
+    Path: event:/Music/BackgroundMusic_Level1_120bpm
+  Event: 
+  EventPlayTrigger: 1
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &2580264196143794885
 GameObject:
   m_ObjectHideFlags: 0
@@ -650,10 +717,12 @@ MonoBehaviour:
   standCameraTargetHeight: 0.9
   crouchCameraTargetHeight: 0.7
   dashForce: 30
-  dashDelay: 0.75
   killzoneLayer:
     serializedVersion: 2
     m_Bits: 64
+  instructionLayer:
+    serializedVersion: 2
+    m_Bits: 0
   spawnLocation: {fileID: 0}
   spawnRelocationLayer:
     serializedVersion: 2
@@ -663,7 +732,9 @@ MonoBehaviour:
   wallrideSpeed: 35
   wallrideStickForce: 15
   wallrideDuration: 8
+  wallDetectionRange: 0.8
   PlayerVelocity: {x: 0, y: 0, z: 0}
+  _toggleDebugBoxes: 0
 --- !u!1 &6688715035026600573
 GameObject:
   m_ObjectHideFlags: 0

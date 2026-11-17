@@ -11,10 +11,14 @@ public class PlayerNoises : MonoBehaviour
     InputAction dash;
 
     FMOD.Studio.EventInstance playerState;
+    private FMOD.Studio.EventInstance instance;
+
+    public FMODUnity.EventReference bgMusic;
     public FMODUnity.EventReference footsteps;
     public FMODUnity.EventReference jumping;
     public FMODUnity.EventReference dashing;
 
+    public int checkNum = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -23,6 +27,8 @@ public class PlayerNoises : MonoBehaviour
         jump = InputSystem.actions.FindAction("Jump");
         dash = InputSystem.actions.FindAction("Dash");
         playerState = FMODUnity.RuntimeManager.CreateInstance(footsteps);
+        instance = FMODUnity.RuntimeManager.CreateInstance(bgMusic);
+        instance.start();
     }
     void OnDestroy()
     {
@@ -35,6 +41,7 @@ public class PlayerNoises : MonoBehaviour
         Walk();
         Jump();
         Dash();
+        JankAssBGMusicChanger();
     }
 
     public void Dash()
@@ -84,6 +91,13 @@ public class PlayerNoises : MonoBehaviour
             }
 
         }
+    }
+
+    public void JankAssBGMusicChanger()
+    {
+       
+
+        instance.setParameterByName("Checkpoint", checkNum);
     }
 
     FMOD.Studio.PLAYBACK_STATE PlaybackState(FMOD.Studio.EventInstance instance)
