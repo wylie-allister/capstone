@@ -25,7 +25,7 @@ RenderSettings:
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 0
-  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_SubtractiveShadowColor: {r: 0.41960785, g: 0.627451, b: 0.5090286, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 40fa5696077438a49bbce1aac01eba84, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 0}
+  m_Sun: {fileID: 410087040}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -93,8 +93,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 20201, guid: 0000000000000000f000000000000000, type: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 1984083d0ca3aff40b8c97be3bbb63cb, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 38455d527254d114d89c8558094c945f, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -6895,8 +6895,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 12
   m_Type: 1
-  m_Color: {r: 0.43596476, g: 0.45443726, b: 0.9528302, a: 1}
-  m_Intensity: 0.86
+  m_Color: {r: 0, g: 0.026801005, b: 0.7075472, a: 1}
+  m_Intensity: 0.62
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -6938,7 +6938,7 @@ Light:
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
+  m_BounceIntensity: 1.45
   m_ColorTemperature: 5000
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
@@ -12175,13 +12175,29 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 340461976802100607, guid: ef75eda57237b414e9d6ef4b686417e3, type: 3}
+      propertyPath: ditherScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 340461976802100607, guid: ef75eda57237b414e9d6ef4b686417e3, type: 3}
+      propertyPath: patternIndex
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 340461976802100607, guid: ef75eda57237b414e9d6ef4b686417e3, type: 3}
+      propertyPath: ditherThreshold
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 540937357499906942, guid: ef75eda57237b414e9d6ef4b686417e3, type: 3}
+      propertyPath: fogFar
+      value: 77.9
+      objectReference: {fileID: 0}
     - target: {fileID: 540937357499906942, guid: ef75eda57237b414e9d6ef4b686417e3, type: 3}
       propertyPath: fogNear
-      value: 13.7
+      value: 24.8
       objectReference: {fileID: 0}
     - target: {fileID: 540937357499906942, guid: ef75eda57237b414e9d6ef4b686417e3, type: 3}
       propertyPath: fogDensity
-      value: 1.08
+      value: 3.19
       objectReference: {fileID: 0}
     - target: {fileID: 540937357499906942, guid: ef75eda57237b414e9d6ef4b686417e3, type: 3}
       propertyPath: noiseScale
@@ -12193,7 +12209,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 540937357499906942, guid: ef75eda57237b414e9d6ef4b686417e3, type: 3}
       propertyPath: fogDistance
-      value: 17.6
+      value: 18.6
       objectReference: {fileID: 0}
     - target: {fileID: 540937357499906942, guid: ef75eda57237b414e9d6ef4b686417e3, type: 3}
       propertyPath: noiseStrength
@@ -12245,15 +12261,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1480704060874874570, guid: ef75eda57237b414e9d6ef4b686417e3, type: 3}
       propertyPath: colorPrecision
-      value: 16
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 1480704060874874570, guid: ef75eda57237b414e9d6ef4b686417e3, type: 3}
       propertyPath: widthPixelation
-      value: 325
+      value: 652
       objectReference: {fileID: 0}
     - target: {fileID: 1480704060874874570, guid: ef75eda57237b414e9d6ef4b686417e3, type: 3}
       propertyPath: heightPixelation
-      value: 325
+      value: 326
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12316,7 +12332,7 @@ Light:
   serializedVersion: 12
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -13484,6 +13500,7 @@ GameObject:
   - component: {fileID: 821905154}
   - component: {fileID: 821905153}
   - component: {fileID: 821905156}
+  - component: {fileID: 821905157}
   m_Layer: 12
   m_Name: Spaceship Part
   m_TagString: Untagged
@@ -18337,12 +18354,28 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1.8476026, y: 1.7409295, z: 1.6370815}
   m_Center: {x: -0.016273499, y: -0.091780454, z: 0.2543831}
+--- !u!114 &821905157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821905152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17889d64ad4c49441a451e98da1078f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InstructionPopup
+  isDisplayed: 0
+  popupPrefab: {fileID: 6847491298054699618, guid: c6d9911eb3d177747b6c98c2d6ac15da, type: 3}
+  popupParent: {fileID: 2040721995}
+  maxDisplayTime: 3
 --- !u!1 &835793188
 GameObject:
   m_ObjectHideFlags: 0
@@ -27854,6 +27887,7 @@ GameObject:
   - component: {fileID: 2015630554}
   - component: {fileID: 2015630553}
   - component: {fileID: 2015630556}
+  - component: {fileID: 2015630557}
   m_Layer: 12
   m_Name: Spaceship Part
   m_TagString: Untagged
@@ -32707,12 +32741,28 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.98060274, y: 1.0471283, z: 1.6223613}
   m_Center: {x: 0.14351761, y: 0.04590708, z: 0.4966569}
+--- !u!114 &2015630557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015630552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17889d64ad4c49441a451e98da1078f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InstructionPopup
+  isDisplayed: 0
+  popupPrefab: {fileID: 6847491298054699618, guid: c6d9911eb3d177747b6c98c2d6ac15da, type: 3}
+  popupParent: {fileID: 2040721995}
+  maxDisplayTime: 3
 --- !u!1 &2040721995
 GameObject:
   m_ObjectHideFlags: 0
@@ -32888,6 +32938,7 @@ GameObject:
   - component: {fileID: 2088869555}
   - component: {fileID: 2088869554}
   - component: {fileID: 2088869557}
+  - component: {fileID: 2088869558}
   m_Layer: 12
   m_Name: Spaceship Part
   m_TagString: Untagged
@@ -37741,12 +37792,28 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1.15, z: 1.6028799}
   m_Center: {x: 0, y: 7.310072e-16, z: 0.30144}
+--- !u!114 &2088869558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2088869553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17889d64ad4c49441a451e98da1078f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InstructionPopup
+  isDisplayed: 0
+  popupPrefab: {fileID: 6847491298054699618, guid: c6d9911eb3d177747b6c98c2d6ac15da, type: 3}
+  popupParent: {fileID: 2040721995}
+  maxDisplayTime: 3
 --- !u!64 &2111328628
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -37886,6 +37953,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 930279412}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2119702727 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1480704060874874570, guid: ef75eda57237b414e9d6ef4b686417e3, type: 3}
+  m_PrefabInstance: {fileID: 350448029}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ca8b8996ce5cb49bb6503323a8ed34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PSX.PixelationController
 --- !u!1001 &5654247430443792862
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37974,13 +38052,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3071591660996452022, guid: 2edb7cdfae2d90e4cb58b45ec44ca099, type: 3}
+      propertyPath: pixelationController
+      value: 
+      objectReference: {fileID: 2119702727}
     - target: {fileID: 4261910148057325196, guid: 2edb7cdfae2d90e4cb58b45ec44ca099, type: 3}
       propertyPath: m_Name
       value: OverlayIntroPrefab
       objectReference: {fileID: 0}
     - target: {fileID: 4261910148057325196, guid: 2edb7cdfae2d90e4cb58b45ec44ca099, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

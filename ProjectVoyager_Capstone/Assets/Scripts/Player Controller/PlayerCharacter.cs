@@ -801,8 +801,21 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         if (Physics.Raycast(transform.position, motor.CharacterForward, out var hit, 1.5f, spaceshipPartLayer,
                 QueryTriggerInteraction.Collide))
         {
+            InstructionPopup popup;
             collectablesCount++;
-            Destroy(hit.transform.gameObject);
+            
+            if (!hit.transform.gameObject.TryGetComponent<InstructionPopup>(out popup))
+            {
+                return;
+            }
+
+            if (!popup.isDisplayed)
+            {
+                popup.Display(destroyGameObject: true);
+            }
+            
+            hit.transform.gameObject.GetComponentInChildren<MeshRenderer>().enabled = false;
+            
         }
     }
 

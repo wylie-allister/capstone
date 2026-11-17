@@ -11,8 +11,8 @@ namespace PSX
         [SerializeField] protected bool isEnabled = true;
 
         protected Pixelation pixelation;
-        [SerializeField] protected float widthPixelation = 512;
-        [SerializeField] protected float heightPixelation = 256;
+        public float widthPixelation = 652;
+        public float heightPixelation =  326;
         [SerializeField] protected float colorPrecision = 16;
         
         protected void Update()

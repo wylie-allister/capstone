@@ -19,6 +19,9 @@ public class InstructionPopup : MonoBehaviour
     private float popupTimer = 0.0f;
     private Vector3 _finalPosition;
     private float _positionOffsetSpeed = 10.0f;
+
+    private bool distroyObject = false;
+
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -52,9 +55,10 @@ public class InstructionPopup : MonoBehaviour
 
     }
 
-    public void Display()
+    public void Display(bool destroyGameObject = false)
     {
         // Set display, instantiate popup, get final pos at instantiation point, move popup to side
+        distroyObject = destroyGameObject;
         isDisplayed = true;
         popupObject = Instantiate(popupPrefab, popupParent.transform);
         _finalPosition = popupObject.transform.position;
@@ -67,8 +71,11 @@ public class InstructionPopup : MonoBehaviour
         // if theres a popup, destroy it and disable display
         if (popupObject != null)
             Destroy(popupObject);
-
+        
         isDisplayed = false;
+        
+        if (distroyObject)
+            Destroy(gameObject);
     }
     
 }
