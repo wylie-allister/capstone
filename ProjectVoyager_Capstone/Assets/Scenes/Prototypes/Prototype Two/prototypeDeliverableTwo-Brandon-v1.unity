@@ -6728,6 +6728,7 @@ Transform:
   - {fileID: 1306089361}
   - {fileID: 981980083}
   - {fileID: 1222978107}
+  - {fileID: 1371979338}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &306227364
@@ -20910,6 +20911,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 566f339680bcec947951a2b73511531e, type: 3}
+--- !u!4 &1371979338 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1896178304801094523, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
+  m_PrefabInstance: {fileID: 1816739634}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1397373616 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6391320587183137068, guid: 68eaed47601a93e48a58b42bd5bfdb3c, type: 3}
@@ -27283,6 +27289,83 @@ PrefabInstance:
       propertyPath: popupPrefab
       value: 
       objectReference: {fileID: 6847491298054699618, guid: 6c5c6d6a7cda917478acfe0985a0e1d4, type: 3}
+    - target: {fileID: 8138002437252919324, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
+      propertyPath: maxDisplayTime
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
+--- !u!1001 &1816739634
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 280356740}
+    m_Modifications:
+    - target: {fileID: 1896178304801094523, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -21.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 1896178304801094523, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 1896178304801094523, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -92.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1896178304801094523, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1896178304801094523, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1896178304801094523, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1896178304801094523, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1896178304801094523, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1896178304801094523, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1896178304801094523, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4489488723089788672, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
+      propertyPath: m_Name
+      value: InstructionPopup (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6923289609283665850, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
+      propertyPath: m_Size.z
+      value: 6.3442006
+      objectReference: {fileID: 0}
+    - target: {fileID: 6923289609283665850, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
+      propertyPath: m_Center.z
+      value: 2.0321004
+      objectReference: {fileID: 0}
+    - target: {fileID: 8138002437252919324, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
+      propertyPath: popupParent
+      value: 
+      objectReference: {fileID: 2040721995}
+    - target: {fileID: 8138002437252919324, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
+      propertyPath: popupPrefab
+      value: 
+      objectReference: {fileID: 6847491298054699618, guid: 80c8d865a687a8f4f97a15a0562e3f39, type: 3}
     - target: {fileID: 8138002437252919324, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
       propertyPath: maxDisplayTime
       value: 2
