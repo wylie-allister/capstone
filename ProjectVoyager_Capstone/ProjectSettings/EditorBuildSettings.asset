@@ -6,11 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Prototypes/OpenHouse/StartMenu-Brandon-v2.unity
-    guid: c36da59eeda11114481a8b7e3f9be30e
+    path: Assets/Scenes/Prototypes/Prototype Two/StartMenu-Brandon-v3.unity
+    guid: 46c74086a10d8e94aa526386e216634c
   - enabled: 1
-    path: Assets/Scenes/Prototypes/OpenHouse/OpenHousePrototype-Brandon-v1.unity
-    guid: 6ffc4a1f10974404baf1849f1c02ff92
+    path: Assets/Scenes/Prototypes/Prototype Two/prototypeDeliverableTwo-Brandon-v1.unity
+    guid: ecb456f0202d53e48b15c8478faf7631
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 49175b4d38383674a93cd6be90a448e5, type: 3}
   m_UseUCBPForAssetBundles: 0

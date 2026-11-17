@@ -144,10 +144,15 @@ public class Player : MonoBehaviour
     public bool CheckForBeatTiming(bool inputPressed, double inputTiming)
     {
         
-        var res = AccuracyManager.instance.CheckInput(inputTiming);
+        //var res = AccuracyManager.instance.CheckInput(inputTiming);
         
         //Debug.Log($"{res.ToString()} | {inputTiming}");
         return inputPressed;
+    }
+
+    public CharacterState GetCharacterState()
+    {
+        return playerCharacter.GetState();
     }
     
 }

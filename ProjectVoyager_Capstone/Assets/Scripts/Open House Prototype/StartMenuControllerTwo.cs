@@ -14,6 +14,8 @@ public class StartMenuControllerTwo : MonoBehaviour
     [SerializeField] private CurrentSettings currentSettings;
     [SerializeField] private GameObject creditImage;
 
+    [SerializeField] private SceneExitOverlay exitOverlay;
+    
     private bool _toggleCredits = false;
     private int _currentSelection = 0;
     private bool canInput = true;
@@ -25,7 +27,10 @@ public class StartMenuControllerTwo : MonoBehaviour
     private void Start()
     {
         _defaultFontSize = textOptions[0].fontSize;
-      
+        if (exitOverlay == null)
+        {
+            Debug.LogError("StartMenuControllerTwo.cs | Missing overlay exit reference!");
+        }
     }
 
     private void Update()
@@ -52,6 +57,9 @@ public class StartMenuControllerTwo : MonoBehaviour
         {
             GoToSelection();
         }
+        
+        if (exitOverlay.hasFinished)
+            SceneManager.LoadScene(1);
     }
 
     private void HandleSelection()
@@ -108,7 +116,9 @@ public class StartMenuControllerTwo : MonoBehaviour
         {
             case 0:
                 //SceneManager.LoadScene(1);
-                SceneManager.LoadScene(1);
+                exitOverlay.toggle = true;
+                _canSelect = false;
+                
                 break;
             case 1:
                 // Open settings, pause menu input

@@ -6,6 +6,8 @@ using static UnityEditor.Profiling.RawFrameDataView;
 
 public class PlayerNoises : MonoBehaviour
 {
+    
+    private Player player;
     InputAction move;
     InputAction jump;
     InputAction dash;
@@ -23,6 +25,7 @@ public class PlayerNoises : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        player = GetComponent<Player>();
         move = InputSystem.actions.FindAction("Move");
         jump = InputSystem.actions.FindAction("Jump");
         dash = InputSystem.actions.FindAction("Dash");
@@ -60,7 +63,9 @@ public class PlayerNoises : MonoBehaviour
     {
         if (jump.WasPressedThisFrame())
         {
-            FMODUnity.RuntimeManager.PlayOneShot(jumping, transform.position);
+            // added grounded check for jumps just cause they can be spammed, needs to be fixed in fmod studio
+            if (player.GetCharacterState().Grounded)
+                FMODUnity.RuntimeManager.PlayOneShot(jumping, transform.position);
         }
         else if (jump.WasReleasedThisFrame())
         {
