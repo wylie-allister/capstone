@@ -144,7 +144,8 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     private Collider[] _uncrouchOverlapResults;
 
     private CharacterInput _debuginput;
-
+    public float debugspeedmod = 1.0f;
+    
     public PlayerNoises pn;
     public int collectablesCount = 0;
     
@@ -295,7 +296,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         
         HandleDashRequest(ref currentVelocity, deltaTime);
         
-        PlayerVelocity = currentVelocity;
+        PlayerVelocity = currentVelocity * debugspeedmod;
 
     }
 
@@ -485,7 +486,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
                 float currentVerticalSpeed = Vector3.Dot(currentVel, motor.CharacterUp);
                 float targetVerticalSpeed = Mathf.Max(currentVerticalSpeed, jumpSpeed);
-                currentVel += motor.CharacterUp * (targetVerticalSpeed - currentVerticalSpeed);
+                currentVel += motor.CharacterUp * (targetVerticalSpeed - currentVerticalSpeed) * debugspeedmod;
             }
             else
             {

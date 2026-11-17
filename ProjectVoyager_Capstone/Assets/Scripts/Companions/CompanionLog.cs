@@ -5,6 +5,8 @@ using UnityEngine;
 public class CompanionLog : MonoBehaviour
 {
     public TestCompanion tComp;
+    public PlayerCharacter playerChar;
+    public PlayerCamera playerCam;
 
     bool isHoldingTestCompanion;
     //bool hasCompanion;
@@ -82,7 +84,9 @@ public class CompanionLog : MonoBehaviour
             tComp.luck = 15;
             tComp.skill = 25;
             tComp.will = 20;
-          
+
+            playerCam.fov = 90;
+            playerChar.debugspeedmod = 1.5f;
         }
         
         if (isHoldingTestCompanion == false)
