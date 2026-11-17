@@ -1,5 +1,6 @@
 using UnityEngine;
 using KinematicCharacterController;
+using UnityEditor.PackageManager;
 
 // Types of chrouch input
 public enum CrouchInput
@@ -93,6 +94,9 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     [Header("BGM")]
     [SerializeField] private LayerMask bgmLayer;
     
+    [Header("Collectables")]
+    [SerializeField] private LayerMask spaceshipPartLayer;
+    
     [Header("Wallride Settings")]
     [SerializeField] private float wallrideGravity = -15.0f;
     [SerializeField] private float wallrideJumpForce = 15.0f;
@@ -142,6 +146,8 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     private CharacterInput _debuginput;
 
     public PlayerNoises pn;
+    public int collectablesCount = 0;
+    
     public void Initialize()
     {
         // Set state to standing
@@ -671,6 +677,8 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         HandleKillzone();
         HandleSpawnRelocators();
         HandleBGM();
+        HandleSpaceshipParts();
+        
         // update last state to store char state snapshot at beginning of this update cycle
         _lastState = _tempState;
         
@@ -784,6 +792,17 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
             //couldn't think of a good name for this so its just "this shit makes me want to kill myself" fyi
             bgmp.TSMMWKMS();
+        }
+    }
+
+    // Debug - delete this as soon as possible :-D bc
+    private void HandleSpaceshipParts()
+    {
+        if (Physics.Raycast(transform.position, motor.CharacterForward, out var hit, 1.5f, spaceshipPartLayer,
+                QueryTriggerInteraction.Collide))
+        {
+            collectablesCount++;
+            Destroy(hit.transform.gameObject);
         }
     }
 
