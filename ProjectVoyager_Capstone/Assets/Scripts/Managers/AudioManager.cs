@@ -25,6 +25,8 @@ public class AudioManager : MonoBehaviour
 
     private NoteDuration _previousNoteDuration;
     private AudioSource _source;
+    private FMOD.Studio.EventInstance instance;
+    public FMODUnity.EventReference bgMusic;
     private float _deltaTime;
     private float _clipLength;
     private float _clipTimer = 0.0f;
