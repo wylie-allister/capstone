@@ -49,12 +49,13 @@ public class PlayerNoises : MonoBehaviour
         Walk();
         Jump();
         Dash();
+        Interact();
         JankAssBGMusicChanger();
     }
 
     public void Dash()
     {
-        if (dash.WasPressedThisFrame())
+        if (dash.WasPressedThisFrame() && cl.canPickupCompanion == true)
         {
             FMODUnity.RuntimeManager.PlayOneShot(dashing, transform.position);
         }
@@ -67,11 +68,11 @@ public class PlayerNoises : MonoBehaviour
 
     public void Interact()
     {
-        if (dash.WasPressedThisFrame())
+        if (interact.WasPressedThisFrame())
         {
-            FMODUnity.RuntimeManager.PlayOneShot(dashing, transform.position);
+            FMODUnity.RuntimeManager.PlayOneShot(interacting, transform.position);
         }
-        else if (dash.WasReleasedThisFrame())
+        else if (interact.WasReleasedThisFrame())
         {
             playerState.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             playerState.release();
