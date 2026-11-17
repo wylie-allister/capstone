@@ -8,6 +8,7 @@ public class CurrentSettings : MonoBehaviour
     InputAction save;
     InputAction toggleMenu;
     public Slider camSens;
+    public Slider mVol;
     public string json;
     public GameObject obMenu;
     public GameObject auMenu;
@@ -19,6 +20,8 @@ public class CurrentSettings : MonoBehaviour
     public GameObject saveButton;
 
     public GameObject lineButtons;
+
+    private bool _toggle = false;
  
 
     public SettingsState sett = new SettingsState();
@@ -97,6 +100,7 @@ public class CurrentSettings : MonoBehaviour
     {
         //move this to its own section later
         sett.cameraSensitivity = camSens.value;
+        sett.masterVolume = mVol.value;
         json = JsonUtility.ToJson(setti); 
     }
 
@@ -104,6 +108,21 @@ public class CurrentSettings : MonoBehaviour
     {
         setti = JsonUtility.FromJson<SettingsState>(json);
         
+    }
+
+    // Shitty form of manual toggle -bc used for start menu settings
+    public void ManualToggle()
+    {
+        _toggle = true;
+        if (!_toggle) return;
+        
+        isOpen = !isOpen;
+        obMenu.SetActive(isOpen);
+        saveButton.SetActive(isOpen);
+        lineButtons.SetActive(isOpen);
+        
+        
+        _toggle = false;
     }
 
     public void Menu()

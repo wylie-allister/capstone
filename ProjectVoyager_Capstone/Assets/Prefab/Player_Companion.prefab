@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4750455173239951917}
   - component: {fileID: 7041254549536509874}
   - component: {fileID: 5724226601281079610}
-  - component: {fileID: 2496317213491167038}
   m_Layer: 0
   m_Name: Player_Companion
   m_TagString: Untagged
@@ -95,6 +94,7 @@ MonoBehaviour:
   playerCamera: {fileID: 5660854742461657915}
   cameraSpring: {fileID: 7736628838616589862}
   cameraLean: {fileID: 3827362816988176733}
+  playerAnim: {fileID: 0}
   spawnLocation: {fileID: 0}
   disableMovement: 0
   cs: {fileID: 0}
@@ -121,24 +121,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &2496317213491167038
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 442246992196233080}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dc93f6cabc75194ca72184473d6bd28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CompanionLog
-  tComp: {fileID: 11400000, guid: cd522b8a64791dc4490a6a0ff9f0d559, type: 2}
-  canPickupCompanion: 0
-  tmp: {fileID: 0}
-  companionList:
-  - {fileID: 1931687646773890676}
-  - {fileID: 1612582536675565545}
 --- !u!1 &1269072786513703941
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,6 +634,7 @@ MonoBehaviour:
   maxY: 85
   minY: -85
   controllerSensitivityScalar: 10
+  wallrideAngle: 30
   isGamepadActive: 0
 --- !u!1 &5192020784803867801
 GameObject:
@@ -830,4 +813,9 @@ MonoBehaviour:
   spawnRelocationLayer:
     serializedVersion: 2
     m_Bits: 0
+  wallrideGravity: -15
+  wallrideJumpForce: 20
+  wallrideSpeed: 8
+  wallrideStickForce: 5
+  wallrideDuration: 2
   PlayerVelocity: {x: 0, y: 0, z: 0}

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{3d11276f-fd8a-40f2-a45a-92348126dab5}">
+		<property name="name">
+			<value>Checkpoint</value>
+		</property>
+		<relationship name="folder">
+			<destination>{f15d0aee-b5ec-459c-b838-789fdc4dc100}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{2b047246-dfc1-4d7c-80ea-cdbb33645cac}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{2b047246-dfc1-4d7c-80ea-cdbb33645cac}">
+		<property name="parameterType">
+			<value>1</value>
+		</property>
+		<property name="minimum">
+			<value>1</value>
+		</property>
+		<property name="maximum">
+			<value>9</value>
+		</property>
+		<property name="initialValue">
+			<value>1</value>
+		</property>
+	</object>
+</objects>

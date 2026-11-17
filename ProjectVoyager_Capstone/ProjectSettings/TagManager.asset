@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - Companion
+  - PlayerSpawn
+  - WarpBack
+  - Relocator
   layers:
   - Default
   - TransparentFX
@@ -14,11 +17,11 @@ TagManager:
   - UI
   - KillZone
   - SpawnRelocate
+  - InstructionPopup
   - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - bgmLayer
+  - Collectable
   - 
   - 
   - 

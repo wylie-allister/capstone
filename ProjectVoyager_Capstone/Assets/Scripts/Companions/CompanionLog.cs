@@ -5,6 +5,8 @@ using UnityEngine;
 public class CompanionLog : MonoBehaviour
 {
     public TestCompanion tComp;
+    public PlayerCharacter playerChar;
+    public PlayerCamera playerCam;
 
     bool isHoldingTestCompanion;
     //bool hasCompanion;
@@ -37,6 +39,11 @@ public class CompanionLog : MonoBehaviour
         tComp.skill = 20;
         tComp.will = 15;
 
+    }
+
+    void OnDestroy()
+    {
+        _inputActions.Dispose();
     }
 
     // Update is called once per frame
@@ -77,7 +84,9 @@ public class CompanionLog : MonoBehaviour
             tComp.luck = 15;
             tComp.skill = 25;
             tComp.will = 20;
-          
+
+            playerCam.fov = 90;
+            playerChar.debugspeedmod = 1.5f;
         }
         
         if (isHoldingTestCompanion == false)

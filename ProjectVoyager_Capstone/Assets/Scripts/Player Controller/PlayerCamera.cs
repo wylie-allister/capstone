@@ -18,10 +18,15 @@ public class PlayerCamera : MonoBehaviour
     private Vector3 _eulerAngles;
     private float _currentSensitivity;
     public bool isGamepadActive = false;
+    public float fov;
+    private Camera _camera;
     
     
     public void Initialize(Transform target)
     {
+        _camera = GetComponentInChildren<Camera>();
+        fov = _camera.fieldOfView;
+        
         settings = GameObject.Find("SettingsHandler").GetComponent<CurrentSettings>();
         // Set camera position and rotation to given camera target
         transform.position = target.position;
@@ -39,12 +44,25 @@ public class PlayerCamera : MonoBehaviour
         
     }
 
-    public void WallRideLean()
+    public void WallRideLean(bool leftWall, bool rightWall, Stance stance)
     {
+        float targetAngle = 0f;
+        
+        if (leftWall && stance == Stance.Wallride)
+            targetAngle = -wallrideAngle;
+        else if (rightWall && stance == Stance.Wallride)
+            targetAngle = wallrideAngle;
+        
+        _eulerAngles.z = Mathf.LerpAngle(_eulerAngles.z, targetAngle, Time.deltaTime * 5.0f);
+
+        transform.eulerAngles = _eulerAngles;
     }
 
     public void UpdateRotation(CameraInput input)
     {
+
+        _camera.fieldOfView = fov;
+        
         //added these here as well to update sensitivity if changed in settings :)
         sensitivity = settings.sett.cameraSensitivity;
         _currentSensitivity = sensitivity;

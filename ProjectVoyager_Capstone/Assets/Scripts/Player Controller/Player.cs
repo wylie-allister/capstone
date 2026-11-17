@@ -12,15 +12,20 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerCamera playerCamera;
     [SerializeField] private CameraSpring cameraSpring;
     [SerializeField] private CameraLean cameraLean;
+    [SerializeField] private PlayerAnimation playerAnim;
 
     [SerializeField] private Transform spawnLocation;
     [SerializeField] private bool disableMovement = false;
      // Input actions
     public PlayerInputActions _inputActions;
     public CurrentSettings cs;
+    public CharacterInput _exposedInput;
     
     void Start()
     {
+        GameObject settingsHandler = GameObject.Find("SettingsHandler");
+
+        cs = settingsHandler.GetComponent<CurrentSettings>();
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
         
@@ -66,55 +71,44 @@ public class Player : MonoBehaviour
         if (disableMovement)
             return;
         
+        
         var input = _inputActions.Gameplay;
         float deltaTime = Time.deltaTime;
         
         CameraInput cameraInput = new CameraInput { Look = input.Look.ReadValue<Vector2>() };
         playerCamera.UpdateRotation(cameraInput);
 
+        double InputTiming;
+        if (!AudioManagerRedux.isPlayingMusic)
+            InputTiming = 0.0f;
+        else
+            InputTiming = AudioManagerRedux.GetCurrentTimeInMilliseconds();
+        
         CharacterInput characterInput = new CharacterInput
         {
             Rotation     = playerCamera.transform.rotation,
             Move         = input.Move.ReadValue<Vector2>(),
-            Dash         = input.Dash.WasPressedThisFrame(),
-            Jump         = input.Jump.WasPressedThisFrame(),
+            Dash         = CheckForBeatTiming(input.Dash.WasPressedThisFrame(), InputTiming),
+            Jump         = CheckForBeatTiming(input.Jump.WasPressedThisFrame(), InputTiming),
             JumpSustain  = input.Jump.IsPressed(),
-            Crouch        = input.Crouch.WasPressedThisFrame()
+            Crouch        = CheckForBeatTiming(input.Crouch.WasPressedThisFrame(), InputTiming)
                 ? CrouchInput.Toggle
                 : CrouchInput.None,
             WallRide = input.Wallride.IsPressed()
         };
         playerCharacter.UpdateInput(characterInput);
         playerCharacter.UpdateBody(deltaTime);
+
+        CharacterState playerState = playerCharacter.GetState();
+
+        playerCamera.WallRideLean(playerState.TouchingLeftWall, playerState.TouchingRightWall, playerState.Stance);
         
-        // Teleport script for in editor purposes
-        // tap T to teleport to wherever you are looking, assuming there is a ray collision (e.g. sky nono work)
-        #if UNITY_EDITOR
-        /*
-        var moveAction = _inputActions.Gameplay.Move;
-        if (moveAction.IsPressed())
+        if (input.Crouch.WasPressedThisFrame() && playerState.Stance != Stance.Slide)
         {
-            foreach (var control in moveAction.controls)
-            {
-                if (control.IsPressed())
-                {
-                    Debug.Log($"control: {control} pressed");
-                }
-            }
+            playerAnim.TriggerSlide();
         }
-        */
-        if (Keyboard.current.tKey.wasPressedThisFrame)
-        {
-            Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
-            if (Physics.Raycast(ray, out var hit))
-            {
-                Teleport(hit.point);
-            }
-        }
-        if (Keyboard.current.yKey.wasPressedThisFrame)
-        {
-        }
-        #endif
+
+        _exposedInput = characterInput;
     }
 
     void LateUpdate()
@@ -144,6 +138,21 @@ public class Player : MonoBehaviour
     private void UpdateSpawnPosition(Vector3 position)
     {
         playerCharacter.spawnLocation.position = position;
+    }
+
+    // Beat script ----------------------------------------------------------------------------------------------
+    public bool CheckForBeatTiming(bool inputPressed, double inputTiming)
+    {
+        
+        //var res = AccuracyManager.instance.CheckInput(inputTiming);
+        
+        //Debug.Log($"{res.ToString()} | {inputTiming}");
+        return inputPressed;
+    }
+
+    public CharacterState GetCharacterState()
+    {
+        return playerCharacter.GetState();
     }
     
 }

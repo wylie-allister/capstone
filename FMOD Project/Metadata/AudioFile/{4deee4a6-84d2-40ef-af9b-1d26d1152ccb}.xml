@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.04.00">
+	<object class="AudioFile" id="{4deee4a6-84d2-40ef-af9b-1d26d1152ccb}">
+		<property name="assetPath">
+			<value>Movement/Jump/ESM_Ninja_Jump_2_Airy_Whoosh_Pass_By.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.100000000000001</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.21859410430839002</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{01bf758f-3ede-4cef-abf3-4e4fca61beb4}</destination>
+		</relationship>
+	</object>
+</objects>

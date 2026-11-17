@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.04.00">
+	<object class="Bank" id="{92ffb396-3ba6-4140-ba2b-043755386c9a}">
+		<property name="color">
+			<value>Purple</value>
+		</property>
+		<property name="name">
+			<value>Music</value>
+		</property>
+		<relationship name="folder">
+			<destination>{fda6befb-472f-4692-9edb-904fa8cd6555}</destination>
+		</relationship>
+	</object>
+</objects>

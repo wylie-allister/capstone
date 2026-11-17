@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.04.00">
+	<object class="AudioFile" id="{78974d81-dabc-428d-a109-9891901abce7}">
+		<property name="assetPath">
+			<value>Movement/Dash/ESM_SG_fx_combat_whoosh_swing_wind_throw_03.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>96</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.16652083333333334</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{01bf758f-3ede-4cef-abf3-4e4fca61beb4}</destination>
+		</relationship>
+	</object>
+</objects>
