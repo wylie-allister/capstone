@@ -37,6 +37,12 @@ public struct CharacterInput
     public bool WallRide;
 }
 
+public struct RaycastCheck<T>
+{
+    public T Component;
+    public bool HasCollided;
+}
+
 // Player character, Inherits from ICharacterController, requires overloaded methods to be created
 public class PlayerCharacter : MonoBehaviour, ICharacterController
 {
@@ -90,12 +96,14 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     [Header("Spawn")]
     public Transform spawnLocation;
     [SerializeField] private LayerMask spawnRelocationLayer;
+    [SerializeField] private LayerMask warpLayer;
 
     [Header("BGM")]
     [SerializeField] private LayerMask bgmLayer;
     
     [Header("Collectables")]
     [SerializeField] private LayerMask spaceshipPartLayer;
+    
     
     [Header("Wallride Settings")]
     [SerializeField] private float wallrideGravity = -15.0f;
@@ -675,10 +683,12 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             _canWallJump = false;
         }
         
+        // Trigger checks
         HandleKillzone();
         HandleSpawnRelocators();
         HandleBGM();
         HandleSpaceshipParts();
+        HandleSpawnWarp();
         
         // update last state to store char state snapshot at beginning of this update cycle
         _lastState = _tempState;
@@ -773,10 +783,37 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
     private void HandleSpawnRelocators()
     {
-        if (Physics.Raycast(transform.position, motor.CharacterForward, 1.5f, spawnRelocationLayer, QueryTriggerInteraction.Collide))
+        Vector3 raycastOrigin = transform.position;
+        raycastOrigin.y += (standHeight * 0.5f);
+        if (Physics.Raycast(raycastOrigin, motor.CharacterForward, out var hit, 1.5f, spawnRelocationLayer, QueryTriggerInteraction.Collide))
         {
+            
+            SpawnZone spawnZone;
+            if (!hit.transform.gameObject.TryGetComponent<SpawnZone>(out spawnZone))
+                return;
+            
+            
             //Debug.Log("Spawn Updated");
-            spawnLocation.position = transform.position;
+            spawnLocation.position = spawnZone.spawnPosition;
+
+        }
+    }
+    
+    private void HandleSpawnWarp()
+    {
+        Vector3 raycastOrigin = transform.position;
+        raycastOrigin.y += (standHeight * 0.5f);
+        if (Physics.Raycast(raycastOrigin, motor.CharacterForward, out var hit, 1.5f, warpLayer, QueryTriggerInteraction.Collide))
+        {
+            
+            WarpToStart startWarp;
+            if (!hit.transform.gameObject.TryGetComponent<WarpToStart>(out startWarp))
+                return;
+            
+            
+            //Debug.Log("Spawn Updated");
+            spawnLocation.position = startWarp.startSpawn.position;
+            SetPosition(spawnLocation.position);
 
         }
     }
@@ -819,6 +856,29 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             
         }
     }
+
+    // Get this working to remove redundant code checks -bc
+    /*
+    private RaycastCheck<T> RaycastTriggerCheck<T>(Vector3 originOffset, Vector3 dir, T componentToGet, float maxDist,
+        LayerMask layerToCheck)
+    {
+        if (Physics.Raycast(transform.position + originOffset, dir, out var hit, maxDist, layerToCheck))
+        {
+            RaycastCheck<T> rayCheck = new RaycastCheck<T>();
+
+            if (!hit.transform.gameObject.TryGetComponent<T>(out var comp))
+            {
+                rayCheck.Component = default(T);
+
+                return rayCheck;
+            }
+
+            rayCheck.Component = comp;
+            return rayCheck;
+
+        }
+    }
+    */
 
     private void HandleWallRideRayCasts()
     {

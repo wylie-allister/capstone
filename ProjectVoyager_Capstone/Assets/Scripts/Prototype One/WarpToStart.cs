@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class WarpToStart : MonoBehaviour
 {
-    public GameObject player;
-    public GameObject spawn;
+    public Transform startSpawn;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -16,12 +16,4 @@ public class WarpToStart : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("WarpBack"))
-        {
-            Debug.Log("AAAA");
-            player.transform.position = spawn.transform.position;
-        }
-    }
 }
