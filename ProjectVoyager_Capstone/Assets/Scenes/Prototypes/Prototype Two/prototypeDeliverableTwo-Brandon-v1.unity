@@ -490,7 +490,7 @@ GameObject:
   - component: {fileID: 100599083}
   - component: {fileID: 100599085}
   - component: {fileID: 100599084}
-  m_Layer: 7
+  m_Layer: 20
   m_Name: Spawn Relocator (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5631,7 +5631,7 @@ GameObject:
   - component: {fileID: 152629839}
   - component: {fileID: 152629838}
   - component: {fileID: 152629840}
-  m_Layer: 7
+  m_Layer: 20
   m_Name: Spawn Relocator (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7076,7 +7076,7 @@ GameObject:
   - component: {fileID: 307889644}
   - component: {fileID: 307889643}
   - component: {fileID: 307889645}
-  m_Layer: 13
+  m_Layer: 20
   m_Name: Warp Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7183,6 +7183,10 @@ PrefabInstance:
     - target: {fileID: 4489488723089788672, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
       propertyPath: m_Name
       value: InstructionPopup (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4489488723089788672, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
+      propertyPath: m_Layer
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8138002437252919324, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
       propertyPath: popupParent
@@ -12133,7 +12137,7 @@ GameObject:
   - component: {fileID: 350080126}
   - component: {fileID: 350080128}
   - component: {fileID: 350080127}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12891,7 +12895,7 @@ GameObject:
   - component: {fileID: 506746841}
   - component: {fileID: 506746843}
   - component: {fileID: 506746842}
-  m_Layer: 7
+  m_Layer: 20
   m_Name: Spawn Relocator (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13276,7 +13280,7 @@ GameObject:
   - component: {fileID: 721025745}
   - component: {fileID: 721025744}
   - component: {fileID: 721025746}
-  m_Layer: 7
+  m_Layer: 20
   m_Name: Spawn Relocator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13541,7 +13545,7 @@ GameObject:
   - component: {fileID: 809794405}
   - component: {fileID: 809794407}
   - component: {fileID: 809794406}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13675,9 +13679,9 @@ GameObject:
   - component: {fileID: 821905153}
   - component: {fileID: 821905156}
   - component: {fileID: 821905157}
-  m_Layer: 12
+  m_Layer: 20
   m_Name: Spaceship Part
-  m_TagString: Untagged
+  m_TagString: ShipParts
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18561,7 +18565,7 @@ GameObject:
   - component: {fileID: 835793189}
   - component: {fileID: 835793190}
   - component: {fileID: 835793191}
-  m_Layer: 11
+  m_Layer: 20
   m_Name: Ch4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18822,6 +18826,10 @@ PrefabInstance:
     - target: {fileID: 5834244066087921406, guid: 150e26ea854129849b4d94419ee44e3a, type: 3}
       propertyPath: wallrideJumpForce
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5834244066087921406, guid: 150e26ea854129849b4d94419ee44e3a, type: 3}
+      propertyPath: triggerLayer.m_Bits
+      value: 1048576
       objectReference: {fileID: 0}
     - target: {fileID: 5834244066087921406, guid: 150e26ea854129849b4d94419ee44e3a, type: 3}
       propertyPath: instructionLayer.m_Bits
@@ -19197,7 +19205,7 @@ GameObject:
   - component: {fileID: 893429197}
   - component: {fileID: 893429199}
   - component: {fileID: 893429198}
-  m_Layer: 7
+  m_Layer: 20
   m_Name: Spawn Relocator (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19305,6 +19313,10 @@ PrefabInstance:
     - target: {fileID: 4489488723089788672, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
       propertyPath: m_Name
       value: InstructionPopup (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4489488723089788672, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
+      propertyPath: m_Layer
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8138002437252919324, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
       propertyPath: popupParent
@@ -19817,6 +19829,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InstructionPopup (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4489488723089788672, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 8138002437252919324, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
       propertyPath: popupParent
       value: 
@@ -19912,7 +19928,7 @@ GameObject:
   - component: {fileID: 1152342144}
   - component: {fileID: 1152342143}
   - component: {fileID: 1152342145}
-  m_Layer: 7
+  m_Layer: 20
   m_Name: Spawn Relocator (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20002,7 +20018,7 @@ GameObject:
   - component: {fileID: 1171214872}
   - component: {fileID: 1171214873}
   - component: {fileID: 1171214874}
-  m_Layer: 11
+  m_Layer: 20
   m_Name: Ch5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20071,7 +20087,7 @@ GameObject:
   - component: {fileID: 1173818384}
   - component: {fileID: 1173818385}
   - component: {fileID: 1173818386}
-  m_Layer: 11
+  m_Layer: 20
   m_Name: Ch7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20340,7 +20356,7 @@ GameObject:
   - component: {fileID: 1259161025}
   - component: {fileID: 1259161026}
   - component: {fileID: 1259161027}
-  m_Layer: 11
+  m_Layer: 20
   m_Name: Ch2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20623,7 +20639,7 @@ GameObject:
   - component: {fileID: 1287217420}
   - component: {fileID: 1287217421}
   - component: {fileID: 1287217422}
-  m_Layer: 11
+  m_Layer: 20
   m_Name: Ch6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20692,7 +20708,7 @@ GameObject:
   - component: {fileID: 1287373926}
   - component: {fileID: 1287373927}
   - component: {fileID: 1287373928}
-  m_Layer: 11
+  m_Layer: 20
   m_Name: Ch3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20953,7 +20969,7 @@ GameObject:
   - component: {fileID: 1334853658}
   - component: {fileID: 1334853657}
   - component: {fileID: 1334853659}
-  m_Layer: 7
+  m_Layer: 20
   m_Name: Spawn Relocator (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26611,7 +26627,7 @@ GameObject:
   - component: {fileID: 1583890371}
   m_Layer: 0
   m_Name: Starting Spawn
-  m_TagString: PlayerSpawn
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26852,7 +26868,7 @@ GameObject:
   - component: {fileID: 1678057320}
   - component: {fileID: 1678057322}
   - component: {fileID: 1678057321}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27019,6 +27035,10 @@ PrefabInstance:
     - target: {fileID: 4489488723089788672, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
       propertyPath: m_Name
       value: InstructionPopup
+      objectReference: {fileID: 0}
+    - target: {fileID: 4489488723089788672, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
+      propertyPath: m_Layer
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8138002437252919324, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
       propertyPath: popupParent
@@ -27551,6 +27571,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InstructionPopup (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4489488723089788672, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 8138002437252919324, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
       propertyPath: popupParent
       value: 
@@ -27650,6 +27674,10 @@ PrefabInstance:
     - target: {fileID: 4489488723089788672, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
       propertyPath: m_Name
       value: InstructionPopup (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4489488723089788672, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
+      propertyPath: m_Layer
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6923289609283665850, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
       propertyPath: m_Size.z
@@ -28253,7 +28281,7 @@ GameObject:
   - component: {fileID: 1961752925}
   - component: {fileID: 1961752926}
   - component: {fileID: 1961752927}
-  m_Layer: 11
+  m_Layer: 20
   m_Name: Ch1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28440,9 +28468,9 @@ GameObject:
   - component: {fileID: 2015630553}
   - component: {fileID: 2015630556}
   - component: {fileID: 2015630557}
-  m_Layer: 12
+  m_Layer: 20
   m_Name: Spaceship Part
-  m_TagString: Untagged
+  m_TagString: ShipParts
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33491,9 +33519,9 @@ GameObject:
   - component: {fileID: 2088869554}
   - component: {fileID: 2088869557}
   - component: {fileID: 2088869558}
-  m_Layer: 12
+  m_Layer: 20
   m_Name: Spaceship Part
-  m_TagString: Untagged
+  m_TagString: ShipParts
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
