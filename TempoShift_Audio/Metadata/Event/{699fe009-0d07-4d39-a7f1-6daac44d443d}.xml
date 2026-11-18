@@ -62,7 +62,14 @@
 			<destination>{ef03825a-a81e-4ad3-9a07-9f00f3e8099c}</destination>
 		</relationship>
 	</object>
-	<object class="EventAutomatableProperties" id="{f3099351-f587-49e3-8530-81467e588786}" />
+	<object class="EventAutomatableProperties" id="{f3099351-f587-49e3-8530-81467e588786}">
+		<property name="maxVoices">
+			<value>63</value>
+		</property>
+		<property name="maximumDistance">
+			<value>40</value>
+		</property>
+	</object>
 	<object class="MarkerTrack" id="{9c558b16-00f8-40f8-bbe2-d31c55e04962}" />
 	<object class="Timeline" id="{2046b9dd-ef1b-49d1-845c-f912cc399ee2}">
 		<property name="isProxyEnabled">
@@ -76,7 +83,7 @@
 	</object>
 	<object class="EventMixerMaster" id="{6f7babe6-8bdc-4668-986e-be7d7a5e39ad}">
 		<property name="volume">
-			<value>-5</value>
+			<value>-11</value>
 		</property>
 		<relationship name="effectChain">
 			<destination>{83294fdc-a147-4d36-9688-db09fbd2a4b6}</destination>
@@ -112,6 +119,9 @@
 		</property>
 		<property name="volume">
 			<value>-6</value>
+		</property>
+		<property name="pitch">
+			<value>-0.100000001</value>
 		</property>
 		<property name="looping">
 			<value>true</value>

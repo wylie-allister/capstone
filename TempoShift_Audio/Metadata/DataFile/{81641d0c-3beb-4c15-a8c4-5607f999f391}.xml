@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="DataFile" id="{81641d0c-3beb-4c15-a8c4-5607f999f391}">
+		<property name="assetPath">
+			<value>Ambience/._UnkownThreatAmbience.wav</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{d52c93da-94fe-4de3-a815-d7bf78141fff}</destination>
+		</relationship>
+	</object>
+</objects>
