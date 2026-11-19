@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="DataFile" id="{5f2204c5-a1ca-4f6b-8edc-656677b725e3}">
+		<property name="assetPath">
+			<value>Ambience/._ForebodingAmbience.wav</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{d52c93da-94fe-4de3-a815-d7bf78141fff}</destination>
+		</relationship>
+	</object>
+</objects>

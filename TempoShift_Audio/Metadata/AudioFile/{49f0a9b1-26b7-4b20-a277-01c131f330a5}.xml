@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{49f0a9b1-26b7-4b20-a277-01c131f330a5}">
+		<property name="assetPath">
+			<value>Ability/BatBlink/BatBlink_3.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.5151041666666667</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{d52c93da-94fe-4de3-a815-d7bf78141fff}</destination>
+		</relationship>
+	</object>
+</objects>
