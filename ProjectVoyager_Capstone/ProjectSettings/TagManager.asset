@@ -9,6 +9,9 @@ TagManager:
   - WarpBack
   - Relocator
   - ShipParts
+  - Playstation
+  - XBOX
+  - PC
   layers:
   - Default
   - TransparentFX

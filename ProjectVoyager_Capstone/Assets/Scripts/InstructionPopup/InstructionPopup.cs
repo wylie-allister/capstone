@@ -7,6 +7,10 @@ public class InstructionPopup : MonoBehaviour
 
     [SerializeField] 
     private GameObject popupPrefab;
+
+    [SerializeField]
+    private GameObject pcPopupPrefab;
+
     [SerializeField] 
     private GameObject popupParent;
 
@@ -22,11 +26,16 @@ public class InstructionPopup : MonoBehaviour
 
     private bool distroyObject = false;
 
+    [SerializeField]
+    private PlayerCamera pc;
+
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        GameObject playerCam = GameObject.Find("Player Camera");
+
+        pc = playerCam.GetComponent<PlayerCamera>();
     }
 
     // Update is called once per frame
@@ -60,7 +69,16 @@ public class InstructionPopup : MonoBehaviour
         // Set display, instantiate popup, get final pos at instantiation point, move popup to side
         distroyObject = destroyGameObject;
         isDisplayed = true;
-        popupObject = Instantiate(popupPrefab, popupParent.transform);
+
+        //swaps from pc to ps instructions (CURRENTLY PC USES TEXT INSTEAD OF BUTTONS. PLEASE GET NICK TO MAKE BUTTONS.)
+        if (pc.isGamepadActive == true)
+        {
+            popupObject = Instantiate(popupPrefab, popupParent.transform);
+        }
+        else
+        {
+            popupObject = Instantiate(pcPopupPrefab, popupParent.transform);
+        }
         _finalPosition = popupObject.transform.position;
         popupObject.transform.position = new Vector3(_finalPosition.x - 300, _finalPosition.y, _finalPosition.z);
         popupObject.SetActive(true);

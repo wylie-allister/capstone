@@ -7188,6 +7188,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 4489488723089788672, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 8138002437252919324, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
       propertyPath: popupParent
       value: 
@@ -7196,6 +7200,10 @@ PrefabInstance:
       propertyPath: popupPrefab
       value: 
       objectReference: {fileID: 6847491298054699618, guid: 828d4a7216623704d85fdb014babb8e9, type: 3}
+    - target: {fileID: 8138002437252919324, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
+      propertyPath: pcPopupPrefab
+      value: 
+      objectReference: {fileID: 6847491298054699618, guid: 67f54cf0f1bde324bbaea8c0fbf90680, type: 3}
     - target: {fileID: 8138002437252919324, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
       propertyPath: maxDisplayTime
       value: 2
@@ -18552,8 +18560,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InstructionPopup
   isDisplayed: 0
   popupPrefab: {fileID: 6847491298054699618, guid: c6d9911eb3d177747b6c98c2d6ac15da, type: 3}
+  pcPopupPrefab: {fileID: 6847491298054699618, guid: c6d9911eb3d177747b6c98c2d6ac15da, type: 3}
   popupParent: {fileID: 2040721995}
   maxDisplayTime: 3
+  pc: {fileID: 0}
 --- !u!1 &835793188
 GameObject:
   m_ObjectHideFlags: 0
@@ -19342,6 +19352,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 4489488723089788672, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 8138002437252919324, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
       propertyPath: popupParent
       value: 
@@ -19350,6 +19364,10 @@ PrefabInstance:
       propertyPath: popupPrefab
       value: 
       objectReference: {fileID: 6847491298054699618, guid: 71b07dbec7794384da18936e332dfbf6, type: 3}
+    - target: {fileID: 8138002437252919324, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
+      propertyPath: pcPopupPrefab
+      value: 
+      objectReference: {fileID: 6847491298054699618, guid: 2a85d82d444d668409137310bd5d6dae, type: 3}
     - target: {fileID: 8138002437252919324, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
       propertyPath: maxDisplayTime
       value: 2
@@ -19857,6 +19875,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 4489488723089788672, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 8138002437252919324, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
       propertyPath: popupParent
       value: 
@@ -19865,6 +19887,10 @@ PrefabInstance:
       propertyPath: popupPrefab
       value: 
       objectReference: {fileID: 6847491298054699618, guid: 814924e7aa66dcc48aa3478130cf3bf3, type: 3}
+    - target: {fileID: 8138002437252919324, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
+      propertyPath: pcPopupPrefab
+      value: 
+      objectReference: {fileID: 6847491298054699618, guid: 52b8dd087ce97864189288528cc96259, type: 3}
     - target: {fileID: 8138002437252919324, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
       propertyPath: maxDisplayTime
       value: 2
@@ -27064,10 +27090,22 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 4489488723089788672, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 8138002437252919324, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
       propertyPath: popupParent
       value: 
       objectReference: {fileID: 2040721995}
+    - target: {fileID: 8138002437252919324, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
+      propertyPath: popupPrefab
+      value: 
+      objectReference: {fileID: 6847491298054699618, guid: d36637486cea3774e923e064679b8c91, type: 3}
+    - target: {fileID: 8138002437252919324, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
+      propertyPath: pcPopupPrefab
+      value: 
+      objectReference: {fileID: 6847491298054699618, guid: 56cf67d2bb1454b489419fc06a6ae10b, type: 3}
     - target: {fileID: 8138002437252919324, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
       propertyPath: maxDisplayTime
       value: 2
@@ -27599,6 +27637,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 4489488723089788672, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 8138002437252919324, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
       propertyPath: popupParent
       value: 
@@ -27607,6 +27649,10 @@ PrefabInstance:
       propertyPath: popupPrefab
       value: 
       objectReference: {fileID: 6847491298054699618, guid: 6c5c6d6a7cda917478acfe0985a0e1d4, type: 3}
+    - target: {fileID: 8138002437252919324, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
+      propertyPath: pcPopupPrefab
+      value: 
+      objectReference: {fileID: 6847491298054699618, guid: 83d12c51d1fbdfd40a50f3413360baf7, type: 3}
     - target: {fileID: 8138002437252919324, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
       propertyPath: maxDisplayTime
       value: 2
@@ -27703,6 +27749,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 4489488723089788672, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 6923289609283665850, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
       propertyPath: m_Size.z
       value: 6.3442006
@@ -27719,6 +27769,10 @@ PrefabInstance:
       propertyPath: popupPrefab
       value: 
       objectReference: {fileID: 6847491298054699618, guid: 80c8d865a687a8f4f97a15a0562e3f39, type: 3}
+    - target: {fileID: 8138002437252919324, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
+      propertyPath: pcPopupPrefab
+      value: 
+      objectReference: {fileID: 6847491298054699618, guid: 030bb2f082dc19d49b6e960c629bc3d3, type: 3}
     - target: {fileID: 8138002437252919324, guid: e7e03f41fc4bd55419658ca1f747628a, type: 3}
       propertyPath: maxDisplayTime
       value: 2
@@ -33365,8 +33419,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InstructionPopup
   isDisplayed: 0
   popupPrefab: {fileID: 6847491298054699618, guid: c6d9911eb3d177747b6c98c2d6ac15da, type: 3}
+  pcPopupPrefab: {fileID: 6847491298054699618, guid: c6d9911eb3d177747b6c98c2d6ac15da, type: 3}
   popupParent: {fileID: 2040721995}
   maxDisplayTime: 3
+  pc: {fileID: 0}
 --- !u!1 &2040721995
 GameObject:
   m_ObjectHideFlags: 0
@@ -38416,8 +38472,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InstructionPopup
   isDisplayed: 0
   popupPrefab: {fileID: 6847491298054699618, guid: c6d9911eb3d177747b6c98c2d6ac15da, type: 3}
+  pcPopupPrefab: {fileID: 6847491298054699618, guid: c6d9911eb3d177747b6c98c2d6ac15da, type: 3}
   popupParent: {fileID: 2040721995}
   maxDisplayTime: 3
+  pc: {fileID: 0}
 --- !u!64 &2111328628
 MeshCollider:
   m_ObjectHideFlags: 0
