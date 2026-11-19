@@ -8,7 +8,7 @@
 			<value>Interactables</value>
 		</property>
 		<relationship name="folder">
-			<destination>{1c457359-f16a-49d7-a579-b6524682a2d8}</destination>
+			<destination>{cad56990-cd34-4e8e-98f2-74a8bd6e5501}</destination>
 		</relationship>
 	</object>
 </objects>

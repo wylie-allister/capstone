@@ -1,5 +1,32 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7358530798638934032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Movement/Slide
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Movement/Slide
+  Guid:
+    Data1: 1994598567
+    Data2: 1156474885
+    Data3: 1289459870
+    Data4: 1184266981
+  Banks:
+  - {fileID: -3253210836773058783}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-6371946884964540230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27,6 +54,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-5167194321519770422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambience/UnknownThreatAmbience 3
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Ambience/UnknownThreatAmbience 3
+  Guid:
+    Data1: -445841251
+    Data2: 1325739486
+    Data3: -1699848569
+    Data4: 1555725637
+  Banks:
+  - {fileID: 8197460846705351510}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 136000
 --- !u!114 &-5164425103646673855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,6 +161,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-3529674301879733530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Companion.bank
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorBankRef
+  Path: ../TempoShift_Audio/Build/Desktop/Companion.bank
+  Name: Companion
+  StudioPath: bank:/Companion
+  lastModified: 639307040887959503
+  FileSizes:
+  - Name: Desktop
+    Value: 26656
+  Exists: 1
 --- !u!114 &-3253210836773058783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,11 +196,38 @@ MonoBehaviour:
   Path: ../TempoShift_Audio/Build/Desktop/Movement.bank
   Name: Movement
   StudioPath: bank:/Movement
-  lastModified: 639305164257997340
+  lastModified: 639307046993899234
   FileSizes:
   - Name: Desktop
-    Value: 73888
+    Value: 170144
   Exists: 1
+--- !u!114 &-2957271916592858052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Companions/BatCompanion
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Companions/BatCompanion
+  Guid:
+    Data1: 945536460
+    Data2: 1231587995
+    Data3: 658628509
+    Data4: -1272901993
+  Banks:
+  - {fileID: -3529674301879733530}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-2766926420500131301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,10 +243,10 @@ MonoBehaviour:
   Path: ../TempoShift_Audio/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639305164257966360
+  lastModified: 639307046993559658
   FileSizes:
   - Name: Desktop
-    Value: 1362
+    Value: 1710
   Exists: 1
 --- !u!114 &-2684713128198848978
 MonoBehaviour:
@@ -162,10 +263,10 @@ MonoBehaviour:
   Path: ../TempoShift_Audio/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 639305164258198368
+  lastModified: 639307040888434403
   FileSizes:
   - Name: Desktop
-    Value: 1774784
+    Value: 1775072
   Exists: 1
 --- !u!114 &-2154878380057236955
 MonoBehaviour:
@@ -216,7 +317,7 @@ MonoBehaviour:
   IsOneShot: 0
   Parameters: []
   MinDistance: 1
-  MaxDistance: 20
+  MaxDistance: 40
   Length: 0
 --- !u!114 &11400000
 MonoBehaviour:
@@ -236,6 +337,7 @@ MonoBehaviour:
   - {fileID: 6400235779900495909}
   - {fileID: -3253210836773058783}
   - {fileID: -2684713128198848978}
+  - {fileID: -3529674301879733530}
   EditorEvents:
   - {fileID: -5164425103646673855}
   - {fileID: -1172029767412857296}
@@ -243,14 +345,20 @@ MonoBehaviour:
   - {fileID: -6371946884964540230}
   - {fileID: -3761458050393720343}
   - {fileID: 1601641266023657378}
-  - {fileID: 2587158257801408471}
+  - {fileID: 7935724578525369713}
+  - {fileID: -5167194321519770422}
+  - {fileID: -2957271916592858052}
+  - {fileID: 8139905166633795624}
+  - {fileID: -7358530798638934032}
+  - {fileID: 1252305900900126560}
+  - {fileID: 5103827969260800742}
   EditorParameters: []
   MasterBanks:
   - {fileID: 6400235779900495909}
   StringsBanks:
   - {fileID: -2766926420500131301}
   cacheVersion: 131861
-  cacheTime: 639305164258198368
+  cacheTime: 639307046993899234
   SerializableEventsDict:
   - key: event:/Ambience/UnknownThreatAmbience
     index: 0
@@ -264,8 +372,47 @@ MonoBehaviour:
     index: 4
   - key: event:/Music/BackgroundMusic_Level1_120bpm
     index: 5
-  - key: event:/Interactables/Pickup
+  - key: event:/Ambience/UnknownThreatAmbience 2
     index: 6
+  - key: event:/Ambience/UnknownThreatAmbience 3
+    index: 7
+  - key: event:/Companions/BatCompanion
+    index: 8
+  - key: event:/Movement/BatBlink
+    index: 9
+  - key: event:/Movement/Slide
+    index: 10
+  - key: event:/Companions/Interactables/Pickup
+    index: 11
+  - key: event:/Movement/LizardLatch
+    index: 12
+--- !u!114 &1252305900900126560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Companions/Interactables/Pickup
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Companions/Interactables/Pickup
+  Guid:
+    Data1: 1872714244
+    Data2: 1110436433
+    Data3: 482527137
+    Data4: -1585965052
+  Banks:
+  - {fileID: -3253210836773058783}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &1601641266023657378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,7 +442,31 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 82000
---- !u!114 &2587158257801408471
+--- !u!114 &3221674157713045341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/LizardLatch/Impact
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorParamRef
+  Name: Impact
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2711220585
+    data2: 664288682
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &5103827969260800742
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -305,23 +476,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Interactables/Pickup
+  m_Name: event:/Movement/LizardLatch
   m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
-  Path: event:/Interactables/Pickup
+  Path: event:/Movement/LizardLatch
   Guid:
-    Data1: 1872714244
-    Data2: 1110436433
-    Data3: 482527137
-    Data4: -1585965052
+    Data1: -15626406
+    Data2: 1099547308
+    Data3: -753373050
+    Data4: -1796067966
   Banks:
   - {fileID: -3253210836773058783}
   IsStream: 0
   Is3D: 0
-  IsOneShot: 1
-  Parameters: []
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 3221674157713045341}
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
+  Length: 4000
 --- !u!114 &6400235779900495909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,11 +509,65 @@ MonoBehaviour:
   Path: ../TempoShift_Audio/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639300205266612356
+  lastModified: 639307046993549678
   FileSizes:
   - Name: Desktop
     Value: 1074
   Exists: 1
+--- !u!114 &7935724578525369713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambience/UnknownThreatAmbience 2
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Ambience/UnknownThreatAmbience 2
+  Guid:
+    Data1: -1261830825
+    Data2: 1283282551
+    Data3: -1050035548
+    Data4: 663978867
+  Banks:
+  - {fileID: 8197460846705351510}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 50000
+--- !u!114 &8139905166633795624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Movement/BatBlink
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Movement/BatBlink
+  Guid:
+    Data1: -590111622
+    Data2: 1090735905
+    Data3: 1632252039
+    Data4: 285611016
+  Banks:
+  - {fileID: -3253210836773058783}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &8197460846705351510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,10 +583,10 @@ MonoBehaviour:
   Path: ../TempoShift_Audio/Build/Desktop/Ambience.bank
   Name: Ambience
   StudioPath: bank:/Ambience
-  lastModified: 639305164257944759
+  lastModified: 639307040887797120
   FileSizes:
   - Name: Desktop
-    Value: 512512
+    Value: 1943968
   Exists: 1
 --- !u!114 &8827002495534570688
 MonoBehaviour:
