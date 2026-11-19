@@ -8,6 +8,7 @@ TagManager:
   - PlayerSpawn
   - WarpBack
   - Relocator
+  - ShipParts
   layers:
   - Default
   - TransparentFX
@@ -22,14 +23,14 @@ TagManager:
   - Player
   - bgmLayer
   - Collectable
+  - StartWarp
   - 
   - 
   - 
   - 
   - 
   - 
-  - 
-  - 
+  - TriggerLayer
   - 
   - 
   - 

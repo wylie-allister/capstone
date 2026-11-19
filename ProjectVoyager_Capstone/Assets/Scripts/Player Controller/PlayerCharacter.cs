@@ -37,6 +37,12 @@ public struct CharacterInput
     public bool WallRide;
 }
 
+public struct RaycastCheck<T>
+{
+    public T Component;
+    public bool HasCollided;
+}
+
 // Player character, Inherits from ICharacterController, requires overloaded methods to be created
 public class PlayerCharacter : MonoBehaviour, ICharacterController
 {
@@ -81,6 +87,9 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     [SerializeField] private float dashForce = 7.0f;
     //[SerializeField] private float dashDelay = 2.0f;
 
+    [Header("Trigger Layer")]
+    [SerializeField] private LayerMask triggerLayer;
+    
     [Header("Killzone")] 
     [SerializeField] private LayerMask killzoneLayer;
 
@@ -90,12 +99,14 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     [Header("Spawn")]
     public Transform spawnLocation;
     [SerializeField] private LayerMask spawnRelocationLayer;
+    [SerializeField] private LayerMask warpLayer;
 
     [Header("BGM")]
     [SerializeField] private LayerMask bgmLayer;
     
     [Header("Collectables")]
     [SerializeField] private LayerMask spaceshipPartLayer;
+    
     
     [Header("Wallride Settings")]
     [SerializeField] private float wallrideGravity = -15.0f;
@@ -142,9 +153,11 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     private bool _ungroundedDueToJump;
 
     private Collider[] _uncrouchOverlapResults;
+    private Collider[] _overlapResults = new Collider[16];
 
     private CharacterInput _debuginput;
-
+    public float debugspeedmod = 1.0f;
+    
     public PlayerNoises pn;
     public int collectablesCount = 0;
     
@@ -295,7 +308,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         
         HandleDashRequest(ref currentVelocity, deltaTime);
         
-        PlayerVelocity = currentVelocity;
+        PlayerVelocity = currentVelocity * debugspeedmod;
 
     }
 
@@ -485,7 +498,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
                 float currentVerticalSpeed = Vector3.Dot(currentVel, motor.CharacterUp);
                 float targetVerticalSpeed = Mathf.Max(currentVerticalSpeed, jumpSpeed);
-                currentVel += motor.CharacterUp * (targetVerticalSpeed - currentVerticalSpeed);
+                currentVel += motor.CharacterUp * (targetVerticalSpeed - currentVerticalSpeed) * debugspeedmod;
             }
             else
             {
@@ -674,10 +687,14 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             _canWallJump = false;
         }
         
+        // Trigger checks
         HandleKillzone();
-        HandleSpawnRelocators();
-        HandleBGM();
-        HandleSpaceshipParts();
+        //HandleSpawnRelocators();
+        //HandleBGM();
+        //HandleSpaceshipParts();
+        //HandleSpawnWarp();
+
+        HandleTriggerOverlaps();
         
         // update last state to store char state snapshot at beginning of this update cycle
         _lastState = _tempState;
@@ -743,7 +760,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     
     private void HandleKillzone()
     {
-        HandleInstructionPopUp();
+        //HandleInstructionPopUp();
         //Debug.DrawRay(transform.position, motor.CharacterUp * -1, Color.red);
         if (Physics.Raycast(transform.position, motor.CharacterUp * -1, 0.4f, killzoneLayer))
         {
@@ -751,7 +768,87 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             SetPosition(spawnLocation.position);
         }
     }
+    
+    // Generic raycast check for components (SPECIFICALLY TRIGGER ZONES)
+    private bool TryRaycastForComponent<T>(out T component, Vector3? originOffset = null, Vector3? dir = null, float maxDist = 1.5f, LayerMask layerMask = default) where T : Component
+    {
+        Vector3 origin = transform.position + (originOffset ?? Vector3.zero);
+        Vector3 rayDir = dir ?? motor.CharacterForward;
 
+        component = null;
+
+        if (!Physics.Raycast(origin, rayDir, out RaycastHit hit, maxDist, layerMask, QueryTriggerInteraction.Collide))
+        {
+            return false;
+        }
+
+        return hit.transform.TryGetComponent(out component);
+    }
+
+    
+    private void HandleInstructionPopUp()
+    {
+        if (TryRaycastForComponent<InstructionPopup>(out InstructionPopup popup, new Vector3(0.0f, standHeight * 0.5f, 0.0f), motor.CharacterForward, 1.5f, layerMask:instructionLayer))
+        {
+            if (!popup.isDisplayed)
+            {
+                popup.Display();
+            }
+        }
+    }
+
+    private void HandleTriggerOverlaps()
+    {
+        int hitCount = motor.CharacterOverlap(motor.TransientPosition, motor.TransientRotation, _overlapResults,
+            triggerLayer, QueryTriggerInteraction.Collide);
+
+        for (int i = 0; i < hitCount; i++)
+        {
+            Collider hit = _overlapResults[i];
+
+            // Instructional Popups
+            if (hit.TryGetComponent<InstructionPopup>(out InstructionPopup popup))
+            {
+                // Ship parts popup
+                if (hit.CompareTag("ShipParts"))
+                {
+                    MeshRenderer partRenderer = hit.GetComponentInChildren<MeshRenderer>();
+
+                    if (partRenderer.enabled)
+                        collectablesCount++;
+
+                    partRenderer.enabled = false;
+                }
+                
+                // Instructional popup 
+                if (!popup.isDisplayed)
+                    popup.Display();
+            }
+
+            // Spawn relocators
+            if (hit.TryGetComponent<SpawnZone>(out SpawnZone spawnZone))
+            {
+                spawnLocation.position = spawnZone.spawnPosition;
+            }
+
+            // Warp to Start
+            if (hit.TryGetComponent<WarpToStart>(out WarpToStart startWarp))
+            {
+                spawnLocation.position = startWarp.startSpawn.position;
+                SetPosition(spawnLocation.position);
+            }
+            
+            // Background music
+            if (hit.TryGetComponent<BGMParams>(out BGMParams bgmp))
+            {
+                //couldn't think of a good name for this so its just "this shit makes me want to kill myself" fyi
+                // this comment was too funny to delete ^ -bc :D
+                bgmp.TSMMWKMS();
+            }
+        }
+    }
+    
+    /*
     private void HandleInstructionPopUp()
     {
         if (Physics.Raycast(transform.position, motor.CharacterForward, out var hit, 0.5f, instructionLayer, QueryTriggerInteraction.Collide))
@@ -769,17 +866,47 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             
         }
     }
+    */
 
+    /*
     private void HandleSpawnRelocators()
     {
-        if (Physics.Raycast(transform.position, motor.CharacterForward, 1.5f, spawnRelocationLayer, QueryTriggerInteraction.Collide))
+        Vector3 raycastOrigin = transform.position;
+        raycastOrigin.y += (standHeight * 0.5f);
+        if (Physics.Raycast(raycastOrigin, motor.CharacterForward, out var hit, 1.5f, spawnRelocationLayer, QueryTriggerInteraction.Collide))
         {
+            
+            SpawnZone spawnZone;
+            if (!hit.transform.gameObject.TryGetComponent<SpawnZone>(out spawnZone))
+                return;
+            
+            
             //Debug.Log("Spawn Updated");
-            spawnLocation.position = transform.position;
+            spawnLocation.position = spawnZone.spawnPosition;
 
         }
-    }
+    }*/
+    
+    /*
+    private void HandleSpawnWarp()
+    {
+        Vector3 raycastOrigin = transform.position;
+        raycastOrigin.y += (standHeight * 0.5f);
+        if (Physics.Raycast(raycastOrigin, motor.CharacterForward, out var hit, 1.5f, warpLayer, QueryTriggerInteraction.Collide))
+        {
+            
+            WarpToStart startWarp;
+            if (!hit.transform.gameObject.TryGetComponent<WarpToStart>(out startWarp))
+                return;
+            
+            
+            //Debug.Log("Spawn Updated");
+            spawnLocation.position = startWarp.startSpawn.position;
+            SetPosition(spawnLocation.position);
 
+        }
+    }*/
+    /*
     private void HandleBGM()
     {
         if (Physics.Raycast(transform.position, motor.CharacterForward, out var hit, 1.5f, bgmLayer, QueryTriggerInteraction.Collide))
@@ -793,8 +920,9 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             //couldn't think of a good name for this so its just "this shit makes me want to kill myself" fyi
             bgmp.TSMMWKMS();
         }
-    }
+    }*/
 
+    /*
     // Debug - delete this as soon as possible :-D bc
     private void HandleSpaceshipParts()
     {
@@ -802,7 +930,9 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                 QueryTriggerInteraction.Collide))
         {
             InstructionPopup popup;
-            collectablesCount++;
+            
+            if (hit.transform.gameObject.GetComponentInChildren<MeshRenderer>().enabled)
+                collectablesCount++;
             
             if (!hit.transform.gameObject.TryGetComponent<InstructionPopup>(out popup))
             {
@@ -817,7 +947,30 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             hit.transform.gameObject.GetComponentInChildren<MeshRenderer>().enabled = false;
             
         }
+    }*/
+
+    // Get this working to remove redundant code checks -bc
+    /*
+    private RaycastCheck<T> RaycastTriggerCheck<T>(Vector3 originOffset, Vector3 dir, T componentToGet, float maxDist,
+        LayerMask layerToCheck)
+    {
+        if (Physics.Raycast(transform.position + originOffset, dir, out var hit, maxDist, layerToCheck))
+        {
+            RaycastCheck<T> rayCheck = new RaycastCheck<T>();
+
+            if (!hit.transform.gameObject.TryGetComponent<T>(out var comp))
+            {
+                rayCheck.Component = default(T);
+
+                return rayCheck;
+            }
+
+            rayCheck.Component = comp;
+            return rayCheck;
+
+        }
     }
+    */
 
     private void HandleWallRideRayCasts()
     {
