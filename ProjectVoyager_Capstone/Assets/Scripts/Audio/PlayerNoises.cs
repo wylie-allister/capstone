@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Playables;
 using UnityEngine.UIElements;
-using static UnityEditor.Profiling.RawFrameDataView;
 
 public class PlayerNoises : MonoBehaviour
 {

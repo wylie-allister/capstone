@@ -1,6 +1,6 @@
 using UnityEngine;
 using KinematicCharacterController;
-using UnityEditor.PackageManager;
+//using UnityEditor.PackageManager;
 
 // Types of chrouch input
 public enum CrouchInput
