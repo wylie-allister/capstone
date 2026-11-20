@@ -30,11 +30,15 @@ public class CurrentSettings : MonoBehaviour
     {
         save = InputSystem.actions.FindAction("Save JSON");
         toggleMenu = InputSystem.actions.FindAction("Toggle Menu");
-        sett.cameraSensitivity = 0.1f;
+        sett.cameraSensitivity = 0.2f;
         
         obMenu.SetActive(false);
         saveButton.SetActive(false);
         lineButtons.SetActive(false);
+
+        sett.masterVolume = 1.0f;
+        mVol.value = 1.0f;
+        camSens.value = 0.2f;
 
     }
 

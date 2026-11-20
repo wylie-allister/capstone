@@ -16105,6 +16105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CurrentSettings
   camSens: {fileID: 8083428878642236308}
+  mVol: {fileID: 572659348825906062}
   json: 
   obMenu: {fileID: 7190215097365037262}
   auMenu: {fileID: 5419455071120827303}
@@ -16115,6 +16116,7 @@ MonoBehaviour:
   lineButtons: {fileID: 6982016528046534580}
   sett:
     cameraSensitivity: 0
+    masterVolume: 0
 --- !u!1 &8774625691875356678
 GameObject:
   m_ObjectHideFlags: 0

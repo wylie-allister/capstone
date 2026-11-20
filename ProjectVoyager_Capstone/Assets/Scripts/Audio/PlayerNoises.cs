@@ -118,8 +118,6 @@ public class PlayerNoises : MonoBehaviour
 
     public void JankAssBGMusicChanger()
     {
-       
-
         instance.setParameterByName("Checkpoint", checkNum);
     }
 
