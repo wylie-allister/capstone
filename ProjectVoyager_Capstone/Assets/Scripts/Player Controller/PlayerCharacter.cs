@@ -815,7 +815,10 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                     MeshRenderer partRenderer = hit.GetComponentInChildren<MeshRenderer>();
 
                     if (partRenderer.enabled)
+                    {
                         collectablesCount++;
+                        pn.Spaceship();
+                    }
 
                     partRenderer.enabled = false;
                 }

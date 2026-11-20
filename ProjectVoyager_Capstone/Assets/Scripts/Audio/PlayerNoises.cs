@@ -11,6 +11,7 @@ public class PlayerNoises : MonoBehaviour
     InputAction jump;
     InputAction dash;
     InputAction interact;
+    InputAction slide;
 
     public CompanionLog cl;
 
@@ -22,6 +23,8 @@ public class PlayerNoises : MonoBehaviour
     public FMODUnity.EventReference jumping;
     public FMODUnity.EventReference dashing;
     public FMODUnity.EventReference interacting;
+    public FMODUnity.EventReference spaceshipPart;
+    public FMODUnity.EventReference sliding;
 
     public int checkNum = 0;
 
@@ -33,6 +36,7 @@ public class PlayerNoises : MonoBehaviour
         jump = InputSystem.actions.FindAction("Jump");
         dash = InputSystem.actions.FindAction("Dash");
         interact = InputSystem.actions.FindAction("Interact");
+        slide = InputSystem.actions.FindAction("Crouch");
         playerState = FMODUnity.RuntimeManager.CreateInstance(footsteps);
         instance = FMODUnity.RuntimeManager.CreateInstance(bgMusic);
         instance.start();
@@ -50,11 +54,12 @@ public class PlayerNoises : MonoBehaviour
         Dash();
         Interact();
         JankAssBGMusicChanger();
+        Slide();
     }
 
     public void Dash()
     {
-        if (dash.WasPressedThisFrame() && cl.canPickupCompanion == true)
+        if (dash.WasPressedThisFrame())
         {
             FMODUnity.RuntimeManager.PlayOneShot(dashing, transform.position);
         }
@@ -67,7 +72,7 @@ public class PlayerNoises : MonoBehaviour
 
     public void Interact()
     {
-        if (interact.WasPressedThisFrame())
+        if (interact.WasPressedThisFrame() && cl.canPickupCompanion == true)
         {
             FMODUnity.RuntimeManager.PlayOneShot(interacting, transform.position);
         }
@@ -77,6 +82,12 @@ public class PlayerNoises : MonoBehaviour
             playerState.release();
         }
     }
+
+    public void Spaceship()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(spaceshipPart, transform.position);
+    }
+
     public void Jump()
     {
         if (jump.WasPressedThisFrame())
@@ -86,6 +97,20 @@ public class PlayerNoises : MonoBehaviour
                 FMODUnity.RuntimeManager.PlayOneShot(jumping, transform.position);
         }
         else if (jump.WasReleasedThisFrame())
+        {
+            playerState.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            playerState.release();
+        }
+    }
+
+    public void Slide()
+    {
+        //this has to be fixed to not trigger on stand up I just haven't yet
+        if (slide.WasPressedThisFrame())
+        {
+            FMODUnity.RuntimeManager.PlayOneShot(sliding, transform.position);
+        }
+        else if (slide.WasReleasedThisFrame())
         {
             playerState.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             playerState.release();
