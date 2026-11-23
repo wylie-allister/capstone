@@ -591,6 +591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68983361941bf6040affb7e176ceb21b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  playerReference: {fileID: 0}
 --- !u!1 &139895982
 GameObject:
   m_ObjectHideFlags: 0
@@ -6358,18 +6359,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 174614768}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b2df54f9cd6cec4684c221584ebf5dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManagerRedux
   eventToPlay:
     Guid:
-      Data1: -1320766688
-      Data2: 1187457511
-      Data3: 143102848
-      Data4: -25137766
-    Path: event:/ParameterScene/Goop
+      Data1: 1621933430
+      Data2: 1314443901
+      Data3: 1924628623
+      Data4: 1070132941
+    Path: event:/Music/Goop_Level1_120bpm
   doDebugSounds: 0
   downBeatEvent: {fileID: 0}
   upBeatEvent: {fileID: 0}
@@ -6410,15 +6411,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 174614768}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22b9f7f6ad0858942a8eb80f856d17aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AccuracyManager
-  player: {fileID: 1618308237}
-  beatInterval: 0
-  referenceDownbeatTime: 0
-  timingWindow: 100
 --- !u!1 &200194761 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 508443887317945833, guid: 150e26ea854129849b4d94419ee44e3a, type: 3}
@@ -18707,6 +18704,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2352197509027201466, guid: 150e26ea854129849b4d94419ee44e3a, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 2530990079401183339, guid: 150e26ea854129849b4d94419ee44e3a, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -26658,17 +26659,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2282ea6736d97c44fb515185db01b66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCharacter
---- !u!114 &1618308237 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1973140051912109418, guid: 150e26ea854129849b4d94419ee44e3a, type: 3}
-  m_PrefabInstance: {fileID: 848466135}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 95471786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07428d3ac60fbd24f8790e6179a3c067, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Player
 --- !u!114 &1618308243 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4185830654818918266, guid: 150e26ea854129849b4d94419ee44e3a, type: 3}

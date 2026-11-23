@@ -37,12 +37,6 @@ public struct CharacterInput
     public bool WallRide;
 }
 
-public struct RaycastCheck<T>
-{
-    public T Component;
-    public bool HasCollided;
-}
-
 // Player character, Inherits from ICharacterController, requires overloaded methods to be created
 public class PlayerCharacter : MonoBehaviour, ICharacterController
 {

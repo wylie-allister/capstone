@@ -2,6 +2,13 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+public struct InputTiming
+{
+    public double DashTiming;
+    public double CrouchTiming;
+    public double JumpTiming;
+}
+
 /// <summary>
 /// Handles input as well as Camera connections
 /// </summary>
@@ -20,6 +27,7 @@ public class Player : MonoBehaviour
     public PlayerInputActions _inputActions;
     public CurrentSettings cs;
     public CharacterInput _exposedInput;
+    public InputTiming InputTimings;
     
     void Start()
     {
@@ -43,7 +51,15 @@ public class Player : MonoBehaviour
 
         // Toggle gameplayactive var on camera to adjust joystick sens for camera
         playerCamera.isGamepadActive = Gamepad.current != null;
-        
+
+        // Initialize timings at default negative
+        InputTimings = new InputTiming()
+        {
+            DashTiming = -1.0f,
+            CrouchTiming = -1.0f,
+            JumpTiming = -1.0f
+        };
+
         // This throws an null ref - should automatically swap the sensitivity modifier in PlayerCamera.cs
         // Figure out why and fix it, cause this inside the update loop would work much better than one check at start
         //playerCamera.isGamepadActive = input.Look.activeControl.device is not Mouse;
@@ -72,30 +88,30 @@ public class Player : MonoBehaviour
             return;
         
         
-        var input = _inputActions.Gameplay;
+        PlayerInputActions.GameplayActions input = _inputActions.Gameplay;
         float deltaTime = Time.deltaTime;
         
         CameraInput cameraInput = new CameraInput { Look = input.Look.ReadValue<Vector2>() };
         playerCamera.UpdateRotation(cameraInput);
-
-        double InputTiming;
-        if (!AudioManagerRedux.isPlayingMusic)
-            InputTiming = 0.0f;
-        else
-            InputTiming = AudioManagerRedux.GetCurrentTimeInMilliseconds();
         
+        /*
         CharacterInput characterInput = new CharacterInput
         {
             Rotation     = playerCamera.transform.rotation,
             Move         = input.Move.ReadValue<Vector2>(),
-            Dash         = CheckForBeatTiming(input.Dash.WasPressedThisFrame(), InputTiming),
-            Jump         = CheckForBeatTiming(input.Jump.WasPressedThisFrame(), InputTiming),
+            Dash         = input.Dash.WasPressedThisFrame(),
+            Jump         = input.Jump.WasPressedThisFrame(),
             JumpSustain  = input.Jump.IsPressed(),
-            Crouch        = CheckForBeatTiming(input.Crouch.WasPressedThisFrame(), InputTiming)
+            Crouch        = input.Crouch.WasPressedThisFrame()
                 ? CrouchInput.Toggle
                 : CrouchInput.None,
             WallRide = input.Wallride.IsPressed()
-        };
+        };*/
+
+        CharacterInput characterInput = HandleCharacterInput(input, ref InputTimings);
+
+        
+        
         playerCharacter.UpdateInput(characterInput);
         playerCharacter.UpdateBody(deltaTime);
 
@@ -154,5 +170,56 @@ public class Player : MonoBehaviour
     {
         return playerCharacter.GetState();
     }
-    
+
+    private (bool wasActionPressed, double actionPressTiming) CheckInput(InputAction action)
+    {
+        bool input = action.WasPressedThisFrame();
+        double timing = 0.0f;
+        
+        if (input) 
+            timing = AudioManagerRedux.GetCurrentTimeInMilliseconds();
+        
+        
+        
+        return (input, timing);
+    }
+
+    private CharacterInput HandleCharacterInput(PlayerInputActions.GameplayActions input, ref InputTiming timings)
+    {
+        // Declare timestamp var
+        double currentTimestamp = -1.0f;
+        
+        // Get inputs
+        bool DashAction = input.Dash.WasPressedThisFrame();
+        bool CrouchAction = input.Crouch.WasPressedThisFrame();
+        bool JumpAction = input.Jump.WasPressedThisFrame();
+
+        // Dont get timestamp if no actions were pressed
+        if (DashAction || CrouchAction || JumpAction)
+            if (AudioManagerRedux.isPlayingMusic)
+                currentTimestamp = AudioManagerRedux.GetCurrentTimeInMilliseconds();
+
+        // Set timings (this stops every action as counting as fired unless pressed
+        // on the same frame)
+        timings.DashTiming = DashAction ? currentTimestamp : -1.0f;
+        timings.CrouchTiming = CrouchAction ? currentTimestamp : -1.0f;
+        timings.JumpTiming = JumpAction ? currentTimestamp : -1.0f;
+
+        // Create new charinput truct with alr checked inputs (removes double checks)
+        CharacterInput tempInput = new CharacterInput()
+        {
+            Rotation     = playerCamera.transform.rotation,
+            Move         = input.Move.ReadValue<Vector2>(),
+            Dash         = DashAction,
+            Jump         = JumpAction,
+            JumpSustain  = input.Jump.IsPressed(),
+            Crouch        = CrouchAction
+                ? CrouchInput.Toggle
+                : CrouchInput.None,
+            WallRide = input.Wallride.IsPressed()
+        };
+
+        // return the inputs only
+        return tempInput;
+    }
 }
