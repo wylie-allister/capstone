@@ -80,7 +80,7 @@
 	</object>
 	<object class="EventMixerMaster" id="{d0945ea9-eb46-4cdd-8c39-feb9e09a395a}">
 		<property name="volume">
-			<value>10</value>
+			<value>7</value>
 		</property>
 		<relationship name="effectChain">
 			<destination>{8fd563c9-c8a6-4dcf-b035-ac0c152e7af0}</destination>
@@ -108,7 +108,7 @@
 	<object class="MixerBusPanner" id="{856694bd-8090-4917-8ffd-570d1b11570b}" />
 	<object class="NamedMarker" id="{5d51f42d-ab86-4b07-947d-c10e6c5bcc85}">
 		<property name="position">
-			<value>2.25</value>
+			<value>2.3161870503597122</value>
 		</property>
 		<property name="name">
 			<value>Impact</value>
