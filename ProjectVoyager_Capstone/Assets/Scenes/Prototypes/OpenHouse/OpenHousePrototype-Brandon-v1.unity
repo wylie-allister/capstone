@@ -5371,6 +5371,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CompanionLog
   tComp: {fileID: 11400000, guid: cd522b8a64791dc4490a6a0ff9f0d559, type: 2}
+  playerChar: {fileID: 0}
+  playerCam: {fileID: 0}
   canPickupCompanion: 0
   tmp: {fileID: 1000904160}
   companionList: []
@@ -5422,6 +5424,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f37b5405844f0e419e9b6a365c9eb5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerNoises
+  cl: {fileID: 0}
+  bgMusic:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   footsteps:
     Guid:
       Data1: 1772085257
@@ -5443,6 +5453,28 @@ MonoBehaviour:
       Data3: -520733797
       Data4: 1398223528
     Path: event:/Movement/Dash
+  interacting:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  spaceshipPart:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  sliding:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  checkNum: 0
 --- !u!64 &1647679809
 MeshCollider:
   m_ObjectHideFlags: 0
