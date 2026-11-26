@@ -7,19 +7,24 @@ public class CurrentSettings : MonoBehaviour
 {
     InputAction save;
     InputAction toggleMenu;
+    InputAction esc;
+
     public Slider camSens;
     public Slider mVol;
-    public string json;
+    public string json; 
     public GameObject obMenu;
+
+    public GameObject genMenu;
     public GameObject auMenu;
     public GameObject viMenu;
     public GameObject HUDMenu;
+    public GameObject rbMenu;
     
 
     public bool isOpen = false;
     public GameObject saveButton;
 
-    public GameObject lineButtons;
+    //public GameObject lineButtons;
 
     private bool _toggle = false;
  
@@ -30,11 +35,12 @@ public class CurrentSettings : MonoBehaviour
     {
         save = InputSystem.actions.FindAction("Save JSON");
         toggleMenu = InputSystem.actions.FindAction("Toggle Menu");
+        esc = InputSystem.actions.FindAction("Escape");
         sett.cameraSensitivity = 0.2f;
         
         obMenu.SetActive(false);
-        saveButton.SetActive(false);
-        lineButtons.SetActive(false);
+       // saveButton.SetActive(false);
+        //lineButtons.SetActive(false);
 
         sett.masterVolume = 1.0f;
         mVol.value = 1.0f;
@@ -45,18 +51,46 @@ public class CurrentSettings : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-            //sett.cameraSensitivity = 0.2f;
+        //sett.cameraSensitivity = 0.2f;
 
+       
         if (save.IsPressed())
         {
             SaveJSON(sett);
         }
         LoadJSON(sett);
         Menu();
+        EscapeMenu();
+
+    }
+
+    public void ToggleIsOpen()
+    {
+        isOpen = false;
+    }
+    public void EscapeMenu()
+    {
+
+        if (esc.WasPressedThisFrame() && !rbMenu.activeSelf && isOpen)
+        {
+            genMenu.SetActive(false);
+            auMenu.SetActive(false); 
+            viMenu.SetActive(false);
+            HUDMenu.SetActive(false);
+            obMenu.SetActive(true);
+        }
+
+
+
+        if (esc.WasPressedThisFrame() && rbMenu.activeSelf)
+        {
+            genMenu.SetActive(true);
+            rbMenu.SetActive(false);
+        }
     }
 
     //this should be done with enums tbh
-    public void Controls()
+  /*  public void Controls()
     {
         obMenu.SetActive(true);
         auMenu.SetActive(false);
@@ -86,18 +120,21 @@ public class CurrentSettings : MonoBehaviour
         auMenu.SetActive(false);
         viMenu.SetActive(false);
         HUDMenu.SetActive(true);
-    }
+    } */
 
     public void SaveButton()
     {
         SaveJSON(sett);
         isOpen = false;
+        
         obMenu.SetActive(isOpen);
+        /*
         auMenu.SetActive(isOpen);
         viMenu.SetActive(isOpen);
         HUDMenu.SetActive(isOpen);
-        saveButton.SetActive(isOpen);
-        lineButtons.SetActive(isOpen);
+        */
+        //saveButton.SetActive(isOpen);
+        //lineButtons.SetActive(isOpen);
     }
 
     public void SaveJSON(SettingsState setti)
@@ -122,8 +159,8 @@ public class CurrentSettings : MonoBehaviour
         
         isOpen = !isOpen;
         obMenu.SetActive(isOpen);
-        saveButton.SetActive(isOpen);
-        lineButtons.SetActive(isOpen);
+        //saveButton.SetActive(isOpen);
+        //lineButtons.SetActive(isOpen);
         
         
         _toggle = false;
@@ -135,8 +172,8 @@ public class CurrentSettings : MonoBehaviour
         {
             isOpen = !isOpen;
             obMenu.SetActive(isOpen);
-            saveButton.SetActive(isOpen);
-            lineButtons.SetActive(isOpen);
+            //saveButton.SetActive(isOpen);
+            //lineButtons.SetActive(isOpen);
         }
     }
 }
