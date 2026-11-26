@@ -37,12 +37,6 @@ public struct CharacterInput
     public bool WallRide;
 }
 
-public struct RaycastCheck<T>
-{
-    public T Component;
-    public bool HasCollided;
-}
-
 // Player character, Inherits from ICharacterController, requires overloaded methods to be created
 public class PlayerCharacter : MonoBehaviour, ICharacterController
 {
@@ -131,7 +125,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     private bool _requestedCrouch;
     private bool _requestedCrouchInAir;
     private bool _requestedWallride;
-    private bool _crouchPressed;
+    private bool _canSlide;
     
     // Dash
     private bool _requestedDash;
@@ -221,7 +215,6 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             CrouchInput.UnCrouch => false
         };
 
-        _crouchPressed = _requestedCrouch && !wasRequestingCrouch;
 
         // if we havent crouched and want to, toggle based on air state
         if (_requestedCrouch && !wasRequestingCrouch)
@@ -430,9 +423,9 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         Vector3 groundedMovement = motor.GetDirectionTangentToSurface(direction: _requestedMovement,
             surfaceNormal: motor.GroundingStatus.GroundNormal) * _requestedMovement.magnitude;
 
-            
-        // Handle slide velocity if we are request slide while on ground
-        HandleSlideVelocity(ref currentVelocity, groundedMovement, deltaTime);
+        if (_canSlide)
+            // Handle slide velocity if we are request slide while on ground
+            HandleSlideVelocity(ref currentVelocity, groundedMovement, deltaTime);
         
         // Standing / Crouching movement
         if (_state.Stance is Stance.Stand or Stance.Crouch)
@@ -459,7 +452,6 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         }
     }
 
-    // TODO: readd timer for dashing / stamina system - latter of which is unpreferred
     public void HandleDashRequest(ref Vector3 currentVelocity, float deltaTime)
     {
         if (_requestedDash)
@@ -592,33 +584,34 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     {
         bool moving = movement.sqrMagnitude > 0.0f;
         bool crouching = _state.Stance is Stance.Crouch;
-
-        if (moving && crouching && _crouchPressed)
+        bool wasStanding = _lastState.Stance is Stance.Stand;
+        bool wasInAir = _lastState.Grounded;
+                
+        if (moving && crouching && (wasStanding || wasInAir) && _canSlide)
         {
             _state.Stance = Stance.Slide;
 
-            if (_lastState.Grounded)
+            if (wasInAir)
             {
-                currentVel = Vector3.ProjectOnPlane(
-                    _lastState.Velocity,
-                    motor.GroundingStatus.GroundNormal);
+                currentVel =
+                    Vector3.ProjectOnPlane(_lastState.Velocity, motor.GroundingStatus.GroundNormal);
             }
 
-            float effectiveSlideStartSpeed = slideStartSpeed;
 
+            float effectiveSlideStartSpeed = slideStartSpeed;
+            
             if (!_lastState.Grounded && !_requestedCrouchInAir)
             {
                 effectiveSlideStartSpeed = 0.0f;
                 _requestedCrouchInAir = false;
             }
-
+                    
             float slideSpeed = Mathf.Max(effectiveSlideStartSpeed, currentVel.magnitude);
-
             currentVel = motor.GetDirectionTangentToSurface(
                 direction: currentVel,
                 surfaceNormal: motor.GroundingStatus.GroundNormal) * slideSpeed;
-            
-            _crouchPressed = false;
+
+            _canSlide = false;
         }
     }
     
@@ -629,7 +622,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         // Crouch
         if (_requestedCrouch && _state.Stance is Stance.Stand)
         {
-            //Debug.Log("BEFORECHARUPDATE STANCE TO CROUCH");
+            _canSlide = true;
             _state.Stance = Stance.Crouch;
             motor.SetCapsuleDimensions(radius: motor.Capsule.radius, height: crouchHeight,
                 yOffset: crouchHeight * 0.5f);
@@ -640,7 +633,6 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     {
         if (!motor.GroundingStatus.IsStableOnGround && _state.Stance is Stance.Slide)
         {
-            //Debug.Log("POSTGROUNDUPDATE STANCE TO CROUCH");
             _state.Stance = Stance.Stand;
         }
     }
@@ -769,33 +761,6 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         }
     }
     
-    // Generic raycast check for components (SPECIFICALLY TRIGGER ZONES)
-    private bool TryRaycastForComponent<T>(out T component, Vector3? originOffset = null, Vector3? dir = null, float maxDist = 1.5f, LayerMask layerMask = default) where T : Component
-    {
-        Vector3 origin = transform.position + (originOffset ?? Vector3.zero);
-        Vector3 rayDir = dir ?? motor.CharacterForward;
-
-        component = null;
-
-        if (!Physics.Raycast(origin, rayDir, out RaycastHit hit, maxDist, layerMask, QueryTriggerInteraction.Collide))
-        {
-            return false;
-        }
-
-        return hit.transform.TryGetComponent(out component);
-    }
-
-    
-    private void HandleInstructionPopUp()
-    {
-        if (TryRaycastForComponent<InstructionPopup>(out InstructionPopup popup, new Vector3(0.0f, standHeight * 0.5f, 0.0f), motor.CharacterForward, 1.5f, layerMask:instructionLayer))
-        {
-            if (!popup.isDisplayed)
-            {
-                popup.Display();
-            }
-        }
-    }
 
     private void HandleTriggerOverlaps()
     {
@@ -847,130 +812,6 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             }
         }
     }
-    
-    /*
-    private void HandleInstructionPopUp()
-    {
-        if (Physics.Raycast(transform.position, motor.CharacterForward, out var hit, 0.5f, instructionLayer, QueryTriggerInteraction.Collide))
-        {
-            InstructionPopup popup;
-            if (!hit.transform.gameObject.TryGetComponent<InstructionPopup>(out popup))
-            {
-                return;
-            }
-        
-            if (!popup.isDisplayed)
-            {
-                popup.Display();
-            }
-            
-        }
-    }
-    */
-
-    /*
-    private void HandleSpawnRelocators()
-    {
-        Vector3 raycastOrigin = transform.position;
-        raycastOrigin.y += (standHeight * 0.5f);
-        if (Physics.Raycast(raycastOrigin, motor.CharacterForward, out var hit, 1.5f, spawnRelocationLayer, QueryTriggerInteraction.Collide))
-        {
-            
-            SpawnZone spawnZone;
-            if (!hit.transform.gameObject.TryGetComponent<SpawnZone>(out spawnZone))
-                return;
-            
-            
-            //Debug.Log("Spawn Updated");
-            spawnLocation.position = spawnZone.spawnPosition;
-
-        }
-    }*/
-    
-    /*
-    private void HandleSpawnWarp()
-    {
-        Vector3 raycastOrigin = transform.position;
-        raycastOrigin.y += (standHeight * 0.5f);
-        if (Physics.Raycast(raycastOrigin, motor.CharacterForward, out var hit, 1.5f, warpLayer, QueryTriggerInteraction.Collide))
-        {
-            
-            WarpToStart startWarp;
-            if (!hit.transform.gameObject.TryGetComponent<WarpToStart>(out startWarp))
-                return;
-            
-            
-            //Debug.Log("Spawn Updated");
-            spawnLocation.position = startWarp.startSpawn.position;
-            SetPosition(spawnLocation.position);
-
-        }
-    }*/
-    /*
-    private void HandleBGM()
-    {
-        if (Physics.Raycast(transform.position, motor.CharacterForward, out var hit, 1.5f, bgmLayer, QueryTriggerInteraction.Collide))
-        {
-            BGMParams bgmp;
-            if (!hit.transform.gameObject.TryGetComponent<BGMParams>(out bgmp))
-            {
-                return;
-            }
-
-            //couldn't think of a good name for this so its just "this shit makes me want to kill myself" fyi
-            bgmp.TSMMWKMS();
-        }
-    }*/
-
-    /*
-    // Debug - delete this as soon as possible :-D bc
-    private void HandleSpaceshipParts()
-    {
-        if (Physics.Raycast(transform.position, motor.CharacterForward, out var hit, 1.5f, spaceshipPartLayer,
-                QueryTriggerInteraction.Collide))
-        {
-            InstructionPopup popup;
-            
-            if (hit.transform.gameObject.GetComponentInChildren<MeshRenderer>().enabled)
-                collectablesCount++;
-            
-            if (!hit.transform.gameObject.TryGetComponent<InstructionPopup>(out popup))
-            {
-                return;
-            }
-
-            if (!popup.isDisplayed)
-            {
-                popup.Display(destroyGameObject: true);
-            }
-            
-            hit.transform.gameObject.GetComponentInChildren<MeshRenderer>().enabled = false;
-            
-        }
-    }*/
-
-    // Get this working to remove redundant code checks -bc
-    /*
-    private RaycastCheck<T> RaycastTriggerCheck<T>(Vector3 originOffset, Vector3 dir, T componentToGet, float maxDist,
-        LayerMask layerToCheck)
-    {
-        if (Physics.Raycast(transform.position + originOffset, dir, out var hit, maxDist, layerToCheck))
-        {
-            RaycastCheck<T> rayCheck = new RaycastCheck<T>();
-
-            if (!hit.transform.gameObject.TryGetComponent<T>(out var comp))
-            {
-                rayCheck.Component = default(T);
-
-                return rayCheck;
-            }
-
-            rayCheck.Component = comp;
-            return rayCheck;
-
-        }
-    }
-    */
 
     private void HandleWallRideRayCasts()
     {
@@ -1005,6 +846,8 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     {
         if (!_toggleDebugBoxes)
             return;
+        GUILayout.Box($"canSlide: {_canSlide}");
+        
         GUILayout.Box($"Wallride Debug\n" +
                       $"requestedWallride: {_requestedWallride}\n" +
                       $"requestedWallJump: {_requestedWallJump}\n" +
