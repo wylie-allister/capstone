@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,124 +15,38 @@ public enum Timing
 
 public class AccuracyManager : MonoBehaviour
 {
-   public static AccuracyManager instance;
-   
-   [SerializeField]
-   private Player player;
 
-   public double beatInterval;
-   public double referenceDownbeatTime;
-   public double timingWindow = 100;
-   
-   // SINGLETON AHAHA
-   void Awake()
+   private double beatTimestampMS = 0.0f;
+   private double inputTimestampMS = 0.0f;
+   private float inputWindowMS = 100.0f;
+   private float playerInputDelay = 0.0f;
+
+
+   private void Start()
    {
-      // Singleton instance pattern
-      if (instance != null && instance != this)
+      // Subscribe methods to onbeat
+      AudioManagerRedux.onFixedBeat += GetBeatTimestamp;
+   }
+
+   private void Update()
+   {/*
+      if (GameManager.instance.playerReference != null)
       {
-         Destroy(this.gameObject);
-      }
-      else
-      {
-         instance = this;
-      }
+         // Placeholder, only registers jump rn
+         inputTimestampMS = GameManager.instance.playerReference.InputTimings.JumpTiming;
+      }*/
    }
-   
-   void Start()
+
+   private void OnDestroy()
    {
-      // Subscribe to beat delegates  
-      AudioManagerRedux.onFixedBeat += OnDownBeat;
-      AudioManagerRedux.onUpBeat += OnUpBeat;
+      // Unsubscribe methods
+      AudioManagerRedux.onFixedBeat -= GetBeatTimestamp;
    }
 
-   void OnDestroy()
+   private void GetBeatTimestamp()
    {
-      // Unsubscribe to beat delagates
-      AudioManagerRedux.onFixedBeat -= OnDownBeat;
-      AudioManagerRedux.onUpBeat -= OnUpBeat;
+      beatTimestampMS =  AudioManagerRedux.GetCurrentTimeInMilliseconds();
+      playerInputDelay = (float)beatTimestampMS - (float)inputTimestampMS;
    }
 
-   void Update()
-   {
-   }
-
-   private void OnDownBeat()
-   {
-      // if nothings playing return
-      if (!AudioManagerRedux.isPlayingMusic)
-         return;
-      
-      // Else get the reference beat time as soon as the downbeat procs
-      referenceDownbeatTime = AudioManagerRedux.GetCurrentTimeInMilliseconds();
-      
-      // Get beat interval * 1000 for ms
-      beatInterval = AudioManagerRedux.GetBeatInterval() * 1000;
-   }
-
-   private void OnUpBeat()
-   {
-      
-   }
-
-   public Timing CheckInput(double inputTime)
-   {
-      // If not playing anything, return Timing.None
-      if (!AudioManagerRedux.isPlayingMusic)
-         return Timing.None;
-      
-      // If playing, get elapsed time and where the current beat is
-      double elapsed = inputTime - referenceDownbeatTime;
-      double beatPos = elapsed / beatInterval;
-
-      // Find the nearest beat by rounding
-      long nearestBeat = (long)Mathf.Round((float)beatPos);
-
-      // Get target time
-      double targBeatTime = referenceDownbeatTime + nearestBeat * beatInterval;
-
-      // Get the difference between target time and when the player presses a key
-      double diff = inputTime - targBeatTime;
-
-      // Accuracy as the abs of diff
-      double accuracy = Mathf.Abs((float)diff);
-
-      /*
-      Debug.Log(
-         $"Target: {targBeatTime:F2} | " +
-         $"Difference: {diff:F2} | " +
-         $"Beat Index: {nearestBeat}" +
-         $"Reference: {referenceDownbeatTime:F4}, " +
-         $"Input: {inputTime:F4}"
-      );*/
-
-      // If accuracy is within 25, return perfect
-      if (accuracy <= 25)
-      {
-         return Timing.Perfect;
-      }
-
-      // If accuracy is within 60, return great
-      if (accuracy <= 60)
-      {
-         return Timing.Great;
-      }
-
-      // If accuracy is outside the timing window, return miss
-      if (accuracy <= timingWindow)
-         return Timing.Miss;
-      
-      // 
-      return diff < 0 ? Timing.Early : Timing.Late;
-
-   }
-
-   public void OnInput()
-   {
-      double inputTiming = AudioManagerRedux.GetCurrentTimeInMilliseconds();
-
-      var res = CheckInput(inputTiming);
-
-      Debug.Log(res.ToString());
-   }
-   
 }
