@@ -28736,6 +28736,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5572031905183846677, guid: e5895e41837ac59439096db3e4d09be7, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5572031905183846677, guid: e5895e41837ac59439096db3e4d09be7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5667958007178116203, guid: e5895e41837ac59439096db3e4d09be7, type: 3}
       propertyPath: m_Name
       value: SettingsRedux
