@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.UIElements.Experimental;
 
 public class CurrentSettings : MonoBehaviour
 {
@@ -19,7 +20,8 @@ public class CurrentSettings : MonoBehaviour
     public GameObject viMenu;
     public GameObject HUDMenu;
     public GameObject rbMenu;
-    
+
+    public FMODUnity.EventReference escape;
 
     public bool isOpen = false;
     public GameObject saveButton;
@@ -73,6 +75,7 @@ public class CurrentSettings : MonoBehaviour
 
         if (esc.WasPressedThisFrame() && !rbMenu.activeSelf && isOpen)
         {
+            FMODUnity.RuntimeManager.PlayOneShot(escape);
             genMenu.SetActive(false);
             auMenu.SetActive(false); 
             viMenu.SetActive(false);
@@ -84,6 +87,7 @@ public class CurrentSettings : MonoBehaviour
 
         if (esc.WasPressedThisFrame() && rbMenu.activeSelf)
         {
+            FMODUnity.RuntimeManager.PlayOneShot(escape);
             genMenu.SetActive(true);
             rbMenu.SetActive(false);
         }

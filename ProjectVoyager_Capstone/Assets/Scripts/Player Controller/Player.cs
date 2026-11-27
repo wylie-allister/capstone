@@ -28,7 +28,8 @@ public class Player : MonoBehaviour
         cs = settingsHandler.GetComponent<CurrentSettings>();
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
-        
+
+
         // Create and enable input actions
         _inputActions = new PlayerInputActions();
         _inputActions.Enable();
@@ -43,10 +44,15 @@ public class Player : MonoBehaviour
 
         // Toggle gameplayactive var on camera to adjust joystick sens for camera
         playerCamera.isGamepadActive = Gamepad.current != null;
-        
+
         // This throws an null ref - should automatically swap the sensitivity modifier in PlayerCamera.cs
         // Figure out why and fix it, cause this inside the update loop would work much better than one check at start
         //playerCamera.isGamepadActive = input.Look.activeControl.device is not Mouse;
+
+        var rebinds = PlayerPrefs.GetString("rebinds");
+        if (!string.IsNullOrEmpty(rebinds))
+            _inputActions.LoadBindingOverridesFromJson(rebinds);
+
     }
 
     // Destroy input actions on destroy call
@@ -58,6 +64,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+ 
         if (cs.isOpen == false)
         {
             Cursor.lockState = CursorLockMode.Locked;
@@ -70,11 +77,12 @@ public class Player : MonoBehaviour
 
         if (disableMovement)
             return;
-        
-        
+
+
         var input = _inputActions.Gameplay;
         float deltaTime = Time.deltaTime;
-        
+
+
         CameraInput cameraInput = new CameraInput { Look = input.Look.ReadValue<Vector2>() };
         playerCamera.UpdateRotation(cameraInput);
 

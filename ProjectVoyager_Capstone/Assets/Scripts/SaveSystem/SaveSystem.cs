@@ -6,7 +6,8 @@ using UnityEngine;
 public enum JsonSavePath
 {
     Subtitles,
-    Options
+    Options,
+    Defaults
 };
 
 // Wrapper for list objects, generic so we can use it for anything
@@ -101,6 +102,9 @@ public static class SaveSystem
                 break;
             case JsonSavePath.Options:
                 savePath = "Options";
+                break;
+            case JsonSavePath.Defaults:
+                savePath = "Defaults";
                 break;
         }
         

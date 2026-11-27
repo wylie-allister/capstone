@@ -222,7 +222,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3904676361176398393}
   m_Layer: 5
-  m_Name: Vibration Intensity (2)
+  m_Name: slide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -848,6 +848,7 @@ GameObject:
   - component: {fileID: 6853217126631552969}
   - component: {fileID: 2765949947645804510}
   - component: {fileID: 2075533113878145905}
+  - component: {fileID: 1356053618407819845}
   m_Layer: 5
   m_Name: Controls (2)
   m_TagString: Untagged
@@ -870,9 +871,9 @@ RectTransform:
   - {fileID: 796625453063787347}
   m_Father: {fileID: 8702673515038021065}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 300, y: -320}
   m_SizeDelta: {x: 600, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2765949947645804510
@@ -905,9 +906,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.9685534, g: 0.70966333, b: 0.70966333, a: 1}
+    m_PressedColor: {r: 0.49242502, g: 0.74213827, b: 0.5243068, a: 1}
+    m_SelectedColor: {r: 0.37395662, g: 0.5871984, b: 0.72955966, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -939,6 +940,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 5815777499208658932}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 4741356478658977582}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -951,6 +964,37 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1356053618407819845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 582076232941187184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1076269841
+      Data2: 1326599511
+      Data3: 1788696743
+      Data4: -336973113
+    Path: event:/UI/Tab
+  Event: 
+  EventPlayTrigger: 17
+  EventStopTrigger: 18
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &612722699293129188
 GameObject:
   m_ObjectHideFlags: 0
@@ -1367,6 +1411,7 @@ GameObject:
   - component: {fileID: 6483043602611765212}
   - component: {fileID: 5186768428923319151}
   - component: {fileID: 5828689196685285422}
+  - component: {fileID: 2513192192417043968}
   m_Layer: 5
   m_Name: Controls (4)
   m_TagString: Untagged
@@ -1389,9 +1434,9 @@ RectTransform:
   - {fileID: 3586691239097534099}
   m_Father: {fileID: 8702673515038021065}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 300, y: -640}
   m_SizeDelta: {x: 600, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5186768428923319151
@@ -1424,9 +1469,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.9685534, g: 0.70966333, b: 0.70966333, a: 1}
+    m_PressedColor: {r: 0.49242502, g: 0.74213827, b: 0.5243068, a: 1}
+    m_SelectedColor: {r: 0.37395662, g: 0.5871984, b: 0.72955966, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1458,6 +1503,49 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5815777499208658932}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2513192192417043968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 829555164260814943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1076269841
+      Data2: 1326599511
+      Data3: 1788696743
+      Data4: -336973113
+    Path: event:/UI/Tab
+  Event: 
+  EventPlayTrigger: 17
+  EventStopTrigger: 18
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &841643282876158997
 GameObject:
   m_ObjectHideFlags: 0
@@ -1779,7 +1867,7 @@ GameObject:
   - component: {fileID: 4666597914349065131}
   - component: {fileID: 4606958366431770578}
   m_Layer: 5
-  m_Name: Rebind Button
+  m_Name: dRB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1886,7 +1974,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4666597914349065131}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8408995766854271041}
+        m_TargetAssemblyTypeName: Rebind, Assembly-CSharp
+        m_MethodName: Rebinds
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1168019089619444521
 GameObject:
   m_ObjectHideFlags: 0
@@ -2159,7 +2259,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 462.4}
+  m_AnchoredPosition: {x: 0, y: 690}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7052254442777127154
@@ -2688,7 +2788,7 @@ GameObject:
   - component: {fileID: 5821070542026052939}
   - component: {fileID: 4369825979873098291}
   m_Layer: 5
-  m_Name: Rebind Button
+  m_Name: wrRebind
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2795,7 +2895,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5821070542026052939}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8408995766854271041}
+        m_TargetAssemblyTypeName: Rebind, Assembly-CSharp
+        m_MethodName: Rebinds
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1608168423285311231
 GameObject:
   m_ObjectHideFlags: 0
@@ -2943,7 +3055,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4279235834360739657}
   m_Layer: 5
-  m_Name: Keyboard Sensitivity
+  m_Name: up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3446,7 +3558,7 @@ GameObject:
   - component: {fileID: 3952797891160746468}
   - component: {fileID: 7258679074157777343}
   m_Layer: 5
-  m_Name: Rebind Button
+  m_Name: iRB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3553,7 +3665,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3952797891160746468}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8408995766854271041}
+        m_TargetAssemblyTypeName: Rebind, Assembly-CSharp
+        m_MethodName: Rebinds
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1989261099165420083
 GameObject:
   m_ObjectHideFlags: 0
@@ -3909,7 +4033,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 462.4}
+  m_AnchoredPosition: {x: 0, y: 706}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &605929160372590190
@@ -4183,7 +4307,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -57.106476}
+  m_AnchoredPosition: {x: 0, y: 170.4935}
   m_SizeDelta: {x: 870, y: 936.9054}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4361728516566555084
@@ -4949,7 +5073,7 @@ GameObject:
   - component: {fileID: 5912817153005511242}
   - component: {fileID: 1784005522637318874}
   m_Layer: 5
-  m_Name: Rebind Button
+  m_Name: sRB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5056,7 +5180,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5912817153005511242}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8408995766854271041}
+        m_TargetAssemblyTypeName: Rebind, Assembly-CSharp
+        m_MethodName: Rebinds
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2599618304979358091
 GameObject:
   m_ObjectHideFlags: 0
@@ -6592,6 +6728,69 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &3242674640593552743
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6943711071878621864}
+  - component: {fileID: 5815777499208658932}
+  m_Layer: 0
+  m_Name: Audio Storage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6943711071878621864
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3242674640593552743}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 376.28287, y: 1125.8821, z: -358.61746}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5471974563986376842}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5815777499208658932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3242674640593552743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1023042714
+      Data2: 1217292433
+      Data3: 1134765750
+      Data4: 2031346741
+    Path: event:/UI/Accept
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &3249124916007300001
 GameObject:
   m_ObjectHideFlags: 0
@@ -6819,7 +7018,7 @@ GameObject:
   - component: {fileID: 3037654927415545573}
   - component: {fileID: 304945031571318999}
   m_Layer: 5
-  m_Name: Current Button
+  m_Name: JumpRBLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8068,7 +8267,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 462.4}
+  m_AnchoredPosition: {x: 0, y: 690}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5242601961743107537
@@ -9129,6 +9328,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5815777499208658932}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4484155044742450822
 GameObject:
   m_ObjectHideFlags: 0
@@ -9312,7 +9523,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7154011232301741058}
   m_Layer: 5
-  m_Name: Vibration Intensity (5)
+  m_Name: swap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9687,7 +9898,7 @@ GameObject:
   - component: {fileID: 8369708381338400268}
   - component: {fileID: 2675908943882281135}
   m_Layer: 5
-  m_Name: Current Button
+  m_Name: dCur
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9827,7 +10038,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &9083906325778495036
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10245,7 +10456,7 @@ GameObject:
   m_Component:
   - component: {fileID: 682557608239849848}
   m_Layer: 5
-  m_Name: Invert Y
+  m_Name: right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10433,7 +10644,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6234382500847884046}
   m_Layer: 5
-  m_Name: Controller Sensitivity
+  m_Name: down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10744,7 +10955,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -57.106476}
+  m_AnchoredPosition: {x: 0, y: 170.4935}
   m_SizeDelta: {x: 870, y: 936.9054}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8025384586525941759
@@ -11153,7 +11364,7 @@ GameObject:
   - component: {fileID: 1345218210729504334}
   - component: {fileID: 260625859753484063}
   m_Layer: 5
-  m_Name: Current Button
+  m_Name: sCur
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11331,6 +11542,13 @@ MonoBehaviour:
   viMenu: {fileID: 8834089246523402886}
   HUDMenu: {fileID: 3249124916007300001}
   rbMenu: {fileID: 9102022426231178328}
+  escape:
+    Guid:
+      Data1: 1482090161
+      Data2: 1281078169
+      Data3: -1806921570
+      Data4: -2088306243
+    Path: event:/UI/Decline
   isOpen: 0
   saveButton: {fileID: 6436600120537118008}
   sett:
@@ -11796,7 +12014,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 424}
+  m_AnchoredPosition: {x: 0, y: 667.6}
   m_SizeDelta: {x: 870, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7475310681548929770
@@ -11998,6 +12216,7 @@ GameObject:
   - component: {fileID: 4532816238416130478}
   - component: {fileID: 6991625068054376908}
   - component: {fileID: 5232463178552774197}
+  - component: {fileID: 3171620658059814874}
   m_Layer: 5
   m_Name: Controls (3)
   m_TagString: Untagged
@@ -12020,9 +12239,9 @@ RectTransform:
   - {fileID: 3848411078383071042}
   m_Father: {fileID: 8702673515038021065}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 300, y: -480}
   m_SizeDelta: {x: 600, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6991625068054376908
@@ -12055,9 +12274,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.9685534, g: 0.70966333, b: 0.70966333, a: 1}
+    m_PressedColor: {r: 0.49242502, g: 0.74213827, b: 0.5243068, a: 1}
+    m_SelectedColor: {r: 0.37395662, g: 0.5871984, b: 0.72955966, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -12089,6 +12308,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 5815777499208658932}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 4741356478658977582}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -12101,6 +12332,37 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3171620658059814874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5647128099192641278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1076269841
+      Data2: 1326599511
+      Data3: 1788696743
+      Data4: -336973113
+    Path: event:/UI/Tab
+  Event: 
+  EventPlayTrigger: 17
+  EventStopTrigger: 18
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &5667958007178116203
 GameObject:
   m_ObjectHideFlags: 0
@@ -12132,6 +12394,8 @@ Transform:
   m_Children:
   - {fileID: 31739387582465351}
   - {fileID: 2199810821216606570}
+  - {fileID: 6943711071878621864}
+  - {fileID: 5450723685660552806}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5694444350811556585
@@ -13179,7 +13443,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1690198150288011174}
   m_Layer: 5
-  m_Name: Vibration Intensity (4)
+  m_Name: interact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13292,7 +13556,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6946616384888487677}
   m_Layer: 5
-  m_Name: Vibration Intensity
+  m_Name: jump
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13331,6 +13595,7 @@ GameObject:
   - component: {fileID: 5964798785295699114}
   - component: {fileID: 3497029260046606984}
   - component: {fileID: 1572519001335326143}
+  - component: {fileID: 8907497337106853372}
   m_Layer: 5
   m_Name: Controls (5)
   m_TagString: Untagged
@@ -13353,9 +13618,9 @@ RectTransform:
   - {fileID: 90418682765914074}
   m_Father: {fileID: 8702673515038021065}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 300, y: -800}
   m_SizeDelta: {x: 600, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3497029260046606984
@@ -13388,9 +13653,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.9685534, g: 0.70966333, b: 0.70966333, a: 1}
+    m_PressedColor: {r: 0.49242502, g: 0.74213827, b: 0.5243068, a: 1}
+    m_SelectedColor: {r: 0.37395662, g: 0.5871984, b: 0.72955966, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -13422,6 +13687,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5815777499208658932}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 8231031035860955442}
         m_TargetAssemblyTypeName: CurrentSettings, Assembly-CSharp
         m_MethodName: SaveButton
@@ -13434,6 +13711,37 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &8907497337106853372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6436600120537118008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1076269841
+      Data2: 1326599511
+      Data3: 1788696743
+      Data4: -336973113
+    Path: event:/UI/Tab
+  Event: 
+  EventPlayTrigger: 17
+  EventStopTrigger: 18
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &6447518229599083000
 GameObject:
   m_ObjectHideFlags: 0
@@ -13617,7 +13925,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -57.106476}
+  m_AnchoredPosition: {x: 0, y: 186.4935}
   m_SizeDelta: {x: 870, y: 936.9054}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3154594950499733778
@@ -14682,6 +14990,71 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 1
+--- !u!1 &7030761617795423407
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5450723685660552806}
+  - component: {fileID: 8408995766854271041}
+  m_Layer: 0
+  m_Name: RebindHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5450723685660552806
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7030761617795423407}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 376.28287, y: 1125.8821, z: -358.61746}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5471974563986376842}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8408995766854271041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7030761617795423407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b5ce695b0c85ad47b5150d0207c7511, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Rebind
+  buttons:
+  - {fileID: 7604584679841851370}
+  - {fileID: 4369825979873098291}
+  - {fileID: 1784005522637318874}
+  - {fileID: 4606958366431770578}
+  - {fileID: 7258679074157777343}
+  - {fileID: 2150542305971392137}
+  labels:
+  - {fileID: 304945031571318999}
+  - {fileID: 3419319602059698406}
+  - {fileID: 7169428545576019649}
+  - {fileID: 2675908943882281135}
+  - {fileID: 113273315414472847}
+  - {fileID: 260625859753484063}
+  inputActions: {fileID: -944628639613478452, guid: 49175b4d38383674a93cd6be90a448e5, type: 3}
+  iMap:
+    m_Name: I Map
+    m_Id: 28e7dcbc-6e17-40b3-b073-1eda57066746
+    m_Asset: {fileID: 0}
+    m_Actions: []
+    m_Bindings: []
 --- !u!1 &7075396976873564525
 GameObject:
   m_ObjectHideFlags: 0
@@ -15128,7 +15501,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7386108510555493041}
   m_Layer: 5
-  m_Name: Vibration Intensity (3)
+  m_Name: dash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15566,7 +15939,7 @@ GameObject:
   - component: {fileID: 6946633466101742624}
   - component: {fileID: 2150542305971392137}
   m_Layer: 5
-  m_Name: Rebind Button
+  m_Name: sRB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15673,7 +16046,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6946633466101742624}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8408995766854271041}
+        m_TargetAssemblyTypeName: Rebind, Assembly-CSharp
+        m_MethodName: Rebinds
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7427321012536211688
 GameObject:
   m_ObjectHideFlags: 0
@@ -16070,7 +16455,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 424}
+  m_AnchoredPosition: {x: 0, y: 651.6}
   m_SizeDelta: {x: 870, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7282134370228350658
@@ -16198,7 +16583,7 @@ GameObject:
   - component: {fileID: 7697731751748819565}
   - component: {fileID: 113273315414472847}
   m_Layer: 5
-  m_Name: Current Button
+  m_Name: iCur
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16333,7 +16718,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5743526708089430300}
   m_Layer: 5
-  m_Name: Vibration Intensity (1)
+  m_Name: wallride
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16463,7 +16848,7 @@ GameObject:
   - component: {fileID: 2958231894955188084}
   - component: {fileID: 7169428545576019649}
   m_Layer: 5
-  m_Name: Current Button
+  m_Name: sCur
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16982,7 +17367,7 @@ GameObject:
   - component: {fileID: 695886169351205826}
   - component: {fileID: 7604584679841851370}
   m_Layer: 5
-  m_Name: Rebind Button
+  m_Name: JumpRB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17089,7 +17474,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 695886169351205826}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8408995766854271041}
+        m_TargetAssemblyTypeName: Rebind, Assembly-CSharp
+        m_MethodName: Rebinds
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8067202118913172160
 GameObject:
   m_ObjectHideFlags: 0
@@ -17561,6 +17958,7 @@ GameObject:
   - component: {fileID: 4206325906395118478}
   - component: {fileID: 6873440989823496111}
   - component: {fileID: 246447498000215321}
+  - component: {fileID: 4189605367330728306}
   m_Layer: 5
   m_Name: Controls
   m_TagString: Untagged
@@ -17583,9 +17981,9 @@ RectTransform:
   - {fileID: 359251631686408727}
   m_Father: {fileID: 8702673515038021065}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 300, y: 0}
   m_SizeDelta: {x: 600, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6873440989823496111
@@ -17618,9 +18016,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.9685534, g: 0.70966333, b: 0.70966333, a: 1}
+    m_PressedColor: {r: 0.49242502, g: 0.74213827, b: 0.5243068, a: 1}
+    m_SelectedColor: {r: 0.37395662, g: 0.5871984, b: 0.72955966, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -17652,6 +18050,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 5815777499208658932}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 4741356478658977582}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -17664,6 +18074,37 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4189605367330728306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8269506111472093362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1076269841
+      Data2: 1326599511
+      Data3: 1788696743
+      Data4: -336973113
+    Path: event:/UI/Tab
+  Event: 
+  EventPlayTrigger: 17
+  EventStopTrigger: 18
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &8281082668624908668
 GameObject:
   m_ObjectHideFlags: 0
@@ -17811,7 +18252,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6316357689566370026}
   m_Layer: 5
-  m_Name: Invert X
+  m_Name: left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18288,6 +18729,7 @@ GameObject:
   - component: {fileID: 2195683216620788216}
   - component: {fileID: 4441659531102058151}
   - component: {fileID: 6854811608959666962}
+  - component: {fileID: 4250115612003747435}
   m_Layer: 5
   m_Name: Controls (1)
   m_TagString: Untagged
@@ -18310,9 +18752,9 @@ RectTransform:
   - {fileID: 9073420988580109220}
   m_Father: {fileID: 8702673515038021065}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 300, y: -160}
   m_SizeDelta: {x: 600, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4441659531102058151
@@ -18345,9 +18787,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.9685534, g: 0.70966333, b: 0.70966333, a: 1}
+    m_PressedColor: {r: 0.49242502, g: 0.74213827, b: 0.5243068, a: 1}
+    m_SelectedColor: {r: 0.37395662, g: 0.5871984, b: 0.72955966, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -18379,6 +18821,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 5815777499208658932}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 4741356478658977582}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -18391,6 +18845,37 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4250115612003747435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8393444175459920582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1076269841
+      Data2: 1326599511
+      Data3: 1788696743
+      Data4: -336973113
+    Path: event:/UI/Tab
+  Event: 
+  EventPlayTrigger: 17
+  EventStopTrigger: 18
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &8446187436666990228
 GameObject:
   m_ObjectHideFlags: 0
@@ -19248,7 +19733,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 424}
+  m_AnchoredPosition: {x: 0, y: 651.6}
   m_SizeDelta: {x: 870, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2085545654860019663
@@ -19376,7 +19861,7 @@ GameObject:
   - component: {fileID: 6955639944671047796}
   - component: {fileID: 3419319602059698406}
   m_Layer: 5
-  m_Name: Current Button
+  m_Name: wrCurrent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -556,12 +556,14 @@ MonoBehaviour:
   - Companion
   - Movement
   - Music
+  - UI
   BanksToLoad:
   - Master
   - Master.strings
   - Music
   - Movement
   - Companion
+  - UI
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0
   AndroidUseOBB: 0
