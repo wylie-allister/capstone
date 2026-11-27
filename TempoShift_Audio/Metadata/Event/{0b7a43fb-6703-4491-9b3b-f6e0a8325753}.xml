@@ -76,7 +76,7 @@
 	</object>
 	<object class="EventMixerMaster" id="{9af72d8c-be2c-41d8-b8a8-40620d6598c2}">
 		<property name="volume">
-			<value>-19</value>
+			<value>-6.5</value>
 		</property>
 		<relationship name="effectChain">
 			<destination>{1fa5bd09-e7db-4375-925b-b20fc32eb823}</destination>
@@ -109,6 +109,9 @@
 	<object class="MultiSound" id="{13e20d05-2889-4846-a893-b4804446b463}">
 		<property name="color">
 			<value>Red Light 1</value>
+		</property>
+		<property name="name">
+			<value>Dash</value>
 		</property>
 		<property name="pitch">
 			<value>-3.20000005</value>

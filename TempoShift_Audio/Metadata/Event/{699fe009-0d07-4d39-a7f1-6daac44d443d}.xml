@@ -83,7 +83,7 @@
 	</object>
 	<object class="EventMixerMaster" id="{6f7babe6-8bdc-4668-986e-be7d7a5e39ad}">
 		<property name="volume">
-			<value>-5.5</value>
+			<value>-6</value>
 		</property>
 		<relationship name="effectChain">
 			<destination>{83294fdc-a147-4d36-9688-db09fbd2a4b6}</destination>
@@ -117,6 +117,9 @@
 		<property name="color">
 			<value>Red Light 1</value>
 		</property>
+		<property name="name">
+			<value>Footsteps</value>
+		</property>
 		<property name="volume">
 			<value>-6</value>
 		</property>
@@ -126,6 +129,9 @@
 		<property name="looping">
 			<value>true</value>
 		</property>
+		<relationship name="modulators">
+			<destination>{f4e6f17a-ab4b-4ce4-98ab-0dc2d0060038}</destination>
+		</relationship>
 		<relationship name="sounds">
 			<destination>{62b6e881-2c8c-4e5e-9332-35b7a4505807}</destination>
 			<destination>{4c2fd5cf-6caf-45d1-92c5-aa90846892b0}</destination>
@@ -138,6 +144,14 @@
 	<object class="MixerBusFader" id="{b337ca86-9509-45ac-89f0-8d900243d216}" />
 	<object class="MixerBusFader" id="{844f5394-a04e-44c1-9e33-e10e1044c730}" />
 	<object class="SpatialiserEffect" id="{53112f29-a8b6-44eb-87d1-9277c80e69b7}" />
+	<object class="RandomizerModulator" id="{f4e6f17a-ab4b-4ce4-98ab-0dc2d0060038}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>pitch</value>
+		</property>
+		<property name="amount">
+			<value>13.5</value>
+		</property>
+	</object>
 	<object class="SingleSound" id="{62b6e881-2c8c-4e5e-9332-35b7a4505807}">
 		<relationship name="audioFile">
 			<destination>{1e57f173-c0d1-495c-a491-bdeadb8e05a4}</destination>
